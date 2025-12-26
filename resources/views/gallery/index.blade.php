@@ -110,14 +110,15 @@
         /* Content Overlay */
         .slide-content {
             position: absolute;
-            bottom: 0;
+            bottom: 180px;
             left: 0;
             right: 0;
-            padding: 80px 40px 60px;
-            z-index: 10;
+            padding: 0 40px;
+            z-index: 15;
             transform: translateY(0);
             opacity: 1;
             transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
         }
         
         .slide:not(.active) .slide-content {
@@ -131,8 +132,10 @@
             font-weight: 900;
             color: white;
             margin-bottom: 20px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8);
             display: block;
+            position: relative;
+            z-index: 16;
         }
         
         /* Subtitle Animation */
@@ -140,6 +143,9 @@
             font-size: clamp(1rem, 2vw, 1.5rem);
             color: rgba(255, 255, 255, 0.95);
             display: block;
+            position: relative;
+            z-index: 16;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
         }
         
         /* Navigation Arrows */
@@ -147,7 +153,7 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            z-index: 10;
+            z-index: 11;
             width: 60px;
             height: 60px;
             background: rgba(255, 255, 255, 0.1);
@@ -189,7 +195,7 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
+            z-index: 11;
             display: flex;
             gap: 12px;
             padding: 10px 20px;
@@ -241,7 +247,7 @@
             position: absolute;
             top: 40px;
             right: 40px;
-            z-index: 10;
+            z-index: 11;
             color: white;
             font-size: 1.2rem;
             font-weight: 600;
@@ -259,7 +265,7 @@
             left: 0;
             height: 4px;
             background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
-            z-index: 10;
+            z-index: 12;
             transition: width 0.1s linear;
             box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
         }
@@ -270,7 +276,7 @@
             bottom: 100px;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
+            z-index: 11;
             display: flex;
             gap: 10px;
             padding: 10px;
@@ -404,7 +410,8 @@
             }
             
             .slide-content {
-                padding: 40px 20px 40px;
+                bottom: 140px;
+                padding: 0 20px;
             }
             
             .slide-counter {
@@ -481,10 +488,6 @@
                 <div class="slide {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
                     <img src="{{ $image['path'] }}" alt="{{ $image['name'] }}" class="slide-image">
                     <div class="slide-overlay"></div>
-                    <div class="slide-content">
-                        <h2 class="slide-title gradient-text">{{ $image['name'] }}</h2>
-                        <p class="slide-subtitle">Ảnh {{ $index + 1 }} / {{ count($images) }}</p>
-                    </div>
                 </div>
             @endforeach
             
@@ -501,12 +504,12 @@
             </button>
             
             <!-- Slide Counter -->
-            <div class="slide-counter">
+            <div class="slide-counter" style="z-index: 11;">
                 <span id="currentSlide">1</span> / <span id="totalSlides">{{ count($images) }}</span>
             </div>
             
             <!-- Fullscreen Button -->
-            <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullscreen()">
+            <button class="fullscreen-btn" id="fullscreenBtn" onclick="toggleFullscreen()" style="z-index: 11;">
                 <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"></path>
                 </svg>
