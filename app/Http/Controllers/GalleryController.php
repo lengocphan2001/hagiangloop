@@ -20,7 +20,8 @@ class GalleryController extends Controller
             
             foreach ($files as $file) {
                 $extension = strtolower($file->getExtension());
-                if (in_array($extension, ['jpg', 'jpeg', 'png', 'webp', 'heic', 'HEIC', 'JPG', 'PNG'])) {
+                // Chỉ hiển thị các định dạng được trình duyệt hỗ trợ
+                if (in_array($extension, ['jpg', 'jpeg', 'png', 'webp'])) {
                     $images[] = [
                         'name' => $file->getFilename(),
                         'path' => asset('thuhong/' . $file->getFilename()),
