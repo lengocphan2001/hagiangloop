@@ -54,7 +54,7 @@ Trong MySQL console:
 
 ```sql
 CREATE DATABASE hagiangloop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-CREATE USER 'hagiangloop_user'@'localhost' IDENTIFIED BY 'your_strong_password_here';
+CREATE USER 'hagiangloop_user'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL PRIVILEGES ON hagiangloop.* TO 'hagiangloop_user'@'localhost';
 FLUSH PRIVILEGES;
 EXIT;

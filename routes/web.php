@@ -23,6 +23,9 @@ Route::get('/tours/{slug}', [App\Http\Controllers\TourController::class, 'show']
 Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 
+// Gallery routes
+Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
+
 // Auth routes (sẽ được implement sau)
 Route::get('/login', function () {
     return view('auth.login');
