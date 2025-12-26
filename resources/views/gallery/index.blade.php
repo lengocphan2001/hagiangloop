@@ -73,13 +73,19 @@
         .slide-image {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: contain;
+            object-position: center;
             filter: brightness(0.7);
             transition: filter 1.2s ease;
         }
         
         .slide.active .slide-image {
             filter: brightness(1);
+        }
+        
+        /* Slide background để fill khoảng trống */
+        .slide {
+            background: #000;
         }
         
         /* Overlay Gradient */
