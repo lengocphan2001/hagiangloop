@@ -6,9 +6,9 @@
 <!-- Hero Section with Tour Info -->
 <section class="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-hidden tour-detail-hero-section">
     <div class="absolute inset-0 tour-detail-hero-decorative">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse tour-detail-hero-blob"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl animate-pulse tour-detail-hero-blob" style="animation-delay: 1s;"></div>
-        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl animate-pulse tour-detail-hero-blob" style="animation-delay: 0.5s;"></div>
+        <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl tour-detail-hero-blob"></div>
+        <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl tour-detail-hero-blob"></div>
+        <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl tour-detail-hero-blob"></div>
     </div>
     <div class="container mx-auto px-4 lg:px-6 relative z-10 py-10 lg:py-16">
         <div class="max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
@@ -49,185 +49,183 @@
 <!-- Tour Itinerary Timeline -->
 <section id="itinerary" class="bg-white relative overflow-hidden mt-4">
     <div class="container mx-auto px-4 lg:px-6">
-        <div class="text-center mb-16">
+        <div class="text-center mb-8">
             <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Tour Itinerary</h2>
             <p class="text-xl text-gray-600">Follow the journey day by day</p>
         </div>
 
-        <div class="max-w-5xl mx-auto">
-            @foreach($tour->tourDays as $dayIndex => $day)
-                <div class="timeline-day mb-16 lg:mb-24" data-day="{{ $day->day_number }}">
-                    <!-- Day Header -->
-                    <div class="flex items-center mb-8 day-header-animate">
-                        <div class="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg z-10 relative">
-                            {{ $day->day_number }}
-                        </div>
-                        <div class="ml-6 flex-grow">
-                            <h3 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-2">{{ $day->title }}</h3>
-                            @if($day->route)
-                                <p class="text-lg text-gray-600 flex items-center">
-                                    <svg class="w-5 h-5 mr-2 text-amber-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    </svg>
-                                    {{ $day->route }}
-                                </p>
-                            @endif
-                        </div>
-                    </div>
-
-                    <!-- Day Info -->
-                    @if($day->breakfast_time || $day->departure_time || $day->notes)
-                        <div class="bg-gradient-to-r from-amber-50 to-green-50 rounded-xl p-6 mb-8 day-info-animate">
-                            <div class="space-y-4 md:grid md:grid-cols-3 md:gap-4 md:space-y-0">
-                                @if($day->breakfast_time)
-                                    <div class="flex items-start md:items-center">
-                                        <svg class="w-6 h-6 mr-3 text-amber-500 flex-shrink-0 mt-1 md:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-sm text-gray-500 mb-1">Breakfast</p>
-                                            <p class="font-semibold text-gray-900">{{ $day->breakfast_time->format('H:i') }}</p>
-                                        </div>
-                                    </div>
-                                @endif
-                                @if($day->departure_time)
-                                    <div class="flex items-start md:items-center">
-                                        <svg class="w-6 h-6 mr-3 text-green-500 flex-shrink-0 mt-1 md:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
-                                        </svg>
-                                        <div class="flex-1 min-w-0">
-                                            <p class="text-sm text-gray-500 mb-1">Departure</p>
-                                            <p class="font-semibold text-gray-900">{{ $day->departure_time->format('H:i') }}</p>
-                                        </div>
-                                    </div>
-                                @endif
-                                @if($day->notes)
-                                    <div class="flex items-start md:col-span-3 pt-2 md:pt-0">
-                                        <svg class="w-6 h-6 mr-3 text-blue-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                        </svg>
-                                        <p class="text-gray-700 flex-1 break-words leading-relaxed">{{ $day->notes }}</p>
-                                    </div>
-                                @endif
+        <!-- Main Content -->
+        <div class="mx-auto">
+                @foreach($tour->tourDays as $dayIndex => $day)
+                    <div id="day-{{ $day->day_number }}" 
+                         class="day-accordion-item mb-2 bg-white rounded-lg border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200" 
+                         data-day="{{ $day->day_number }}">
+                        <!-- Day Accordion Header -->
+                        <button onclick="toggleDayAccordion({{ $day->day_number }})" 
+                                class="day-accordion-header w-full flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 transition-colors duration-200 text-left"
+                                data-day="{{ $day->day_number }}">
+                            <div class="flex items-center gap-3 flex-1 min-w-0">
+                                <div class="flex-shrink-0 w-8 h-8 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center text-white font-bold text-sm shadow-sm">
+                                    {{ $day->day_number }}
+                                </div>
+                                <div class="flex-grow min-w-0">
+                                    <h3 class="text-base lg:text-lg font-bold text-gray-900 truncate">{{ $day->title }}</h3>
+                                    @if($day->route)
+                                        <p class="text-xs lg:text-sm text-gray-600 flex items-center truncate mt-0.5">
+                                            <svg class="w-3 h-3 lg:w-4 lg:h-4 mr-1.5 text-amber-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                            </svg>
+                                            <span class="truncate">{{ $day->route }}</span>
+                                        </p>
+                                    @endif
+                                </div>
                             </div>
-                        </div>
-                    @endif
+                            <svg class="day-chevron flex-shrink-0 w-5 h-5 text-gray-600 transition-transform duration-300 ml-3" 
+                                 id="chevron-{{ $day->day_number }}"
+                                 fill="none" 
+                                 stroke="currentColor" 
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
 
-                    <!-- Locations Timeline -->
-                    <div class="relative">
-                        <!-- Timeline Line -->
-                        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-amber-400 via-green-400 to-amber-400 timeline-line hidden lg:block" 
-                             style="display: {{ $dayIndex === 0 ? 'block' : 'none' }};"></div>
-                        
-                        <div class="space-y-8">
-                            @foreach($day->locations as $locationIndex => $location)
-                                <div class="location-item flex items-start location-animate" 
-                                     data-location-index="{{ $locationIndex }}"
-                                     style="animation-delay: {{ $locationIndex * 0.1 }}s;">
-                                    <!-- Location Marker -->
-                                    <div class="flex-shrink-0 relative z-10">
-                                        <div class="w-12 h-12 lg:w-16 lg:h-16 rounded-full flex items-center justify-center shadow-lg location-marker 
-                                            {{ $location->type === 'meal' ? 'bg-green-500' : ($location->type === 'accommodation' ? 'bg-blue-500' : 'bg-amber-500') }}">
-                                            @if($location->type === 'meal')
-                                                <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                                                </svg>
-                                            @elseif($location->type === 'accommodation')
-                                                <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                                </svg>
-                                            @else
-                                                <svg class="w-6 h-6 lg:w-8 lg:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                                </svg>
+                        <!-- Day Content - Collapsible -->
+                        <div class="day-accordion-content hidden" 
+                             id="content-{{ $day->day_number }}"
+                             data-day="{{ $day->day_number }}">
+                            <div class="px-4 lg:px-6">
+                                <!-- Day Content -->
+                                <div class="day-content">
+                            <!-- Day Info -->
+                                @if($day->breakfast_time || $day->departure_time || $day->notes)
+                                    <div class="bg-white rounded-lg p-4 mb-4 border border-gray-200">
+                                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            @if($day->breakfast_time)
+                                                <div class="flex items-start md:items-center gap-2 min-w-0">
+                                                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5 md:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                    <div class="min-w-0 flex-1">
+                                                        <p class="text-xs text-gray-500 mb-0.5">Breakfast</p>
+                                                        <p class="font-semibold text-gray-900 text-sm md:text-base">{{ $day->breakfast_time->format('H:i') }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if($day->departure_time)
+                                                <div class="flex items-start md:items-center gap-2 min-w-0">
+                                                    <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5 md:mt-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                                    </svg>
+                                                    <div class="min-w-0 flex-1">
+                                                        <p class="text-xs text-gray-500 mb-0.5">Departure</p>
+                                                        <p class="font-semibold text-gray-900 text-sm md:text-base">{{ $day->departure_time->format('H:i') }}</p>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                            @if($day->notes)
+                                                <div class="md:col-span-3 flex items-start gap-2 pt-2 md:pt-0">
+                                                    <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                    </svg>
+                                                    <p class="text-sm text-gray-700 flex-1 break-words">{{ $day->notes }}</p>
+                                                </div>
                                             @endif
                                         </div>
-                                        <!-- Connection Line -->
-                                        @if($locationIndex < $day->locations->count() - 1)
-                                            <div class="absolute left-1/2 top-12 lg:top-16 w-0.5 h-8 bg-gradient-to-b from-amber-400 to-green-400 transform -translate-x-1/2 connection-line hidden lg:block"></div>
-                                        @endif
                                     </div>
+                                @endif
 
-                                    <!-- Location Content -->
-                                    <div class="lg:ml-6 flex-grow location-content-card">
-                                        <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
-                                            <div class="flex items-start justify-between mb-4">
-                                                <div class="flex-grow">
-                                                    <h4 class="text-2xl font-bold text-gray-900 mb-2">{{ $location->name }}</h4>
-                                                    <div class="flex items-center gap-3 flex-wrap">
-                                                        <span class="px-3 py-1 rounded-full text-sm font-semibold 
-                                                            {{ $location->type === 'meal' ? 'bg-green-100 text-green-700' : ($location->type === 'accommodation' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700') }}">
-                                                            {{ ucfirst($location->type) }}
-                                                        </span>
-                                                        @if($location->arrival_time)
-                                                            <span class="text-gray-500 text-sm flex items-center">
-                                                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                <!-- Locations Timeline -->
+                                <div class="space-y-4">
+                                    @foreach($day->locations as $locationIndex => $location)
+                                        <div class="location-item bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+                                            <div class="p-4">
+                                                <div class="flex items-start gap-4">
+                                                    <!-- Location Marker -->
+                                                    <div class="flex-shrink-0">
+                                                        <div class="w-10 h-10 rounded-full flex items-center justify-center shadow-md location-marker 
+                                                            {{ $location->type === 'meal' ? 'bg-green-500' : ($location->type === 'accommodation' ? 'bg-blue-500' : 'bg-amber-500') }}">
+                                                            @if($location->type === 'meal')
+                                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
                                                                 </svg>
-                                                                {{ $location->arrival_time->format('H:i') }}
-                                                            </span>
+                                                            @elseif($location->type === 'accommodation')
+                                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                                                                </svg>
+                                                            @else
+                                                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                                </svg>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <!-- Location Content -->
+                                                    <div class="flex-grow min-w-0">
+                                                        <div class="flex items-start justify-between mb-2">
+                                                            <div class="flex-grow min-w-0">
+                                                                <h4 class="text-lg font-bold text-gray-900 mb-1 truncate">{{ $location->name }}</h4>
+                                                                <div class="flex items-center gap-2 flex-wrap">
+                                                                    <span class="px-2 py-0.5 rounded-full text-xs font-semibold 
+                                                                        {{ $location->type === 'meal' ? 'bg-green-100 text-green-700' : ($location->type === 'accommodation' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700') }}">
+                                                                        {{ ucfirst($location->type) }}
+                                                                    </span>
+                                                                    @if($location->arrival_time)
+                                                                        <span class="text-gray-500 text-xs flex items-center">
+                                                                            <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                                            </svg>
+                                                                            {{ $location->arrival_time->format('H:i') }}
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        @if($location->description)
+                                                            <p class="text-sm text-gray-700 mb-3 line-clamp-2">{{ $location->description }}</p>
+                                                        @endif
+
+                                                        <!-- Compact Images Gallery -->
+                                                        @if($location->thumbnail_image || ($location->detail_images && count($location->detail_images) > 0))
+                                                            <div class="flex gap-2 overflow-x-auto pb-2">
+                                                                @if($location->thumbnail_image)
+                                                                    <div class="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden cursor-pointer group" onclick="openImageModal('{{ asset('storage/' . $location->thumbnail_image) }}')">
+                                                                        <img src="{{ asset('storage/' . $location->thumbnail_image) }}" 
+                                                                             alt="{{ $location->name }}" 
+                                                                             class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                                                    </div>
+                                                                @endif
+                                                                @if($location->detail_images && count($location->detail_images) > 0)
+                                                                    @foreach(array_slice($location->detail_images, 0, 3) as $detailImage)
+                                                                        <div class="flex-shrink-0 w-24 h-24 rounded-lg overflow-hidden cursor-pointer group" onclick="openImageModal('{{ asset('storage/' . $detailImage) }}')">
+                                                                            <img src="{{ asset('storage/' . $detailImage) }}" 
+                                                                                 alt="{{ $location->name }}" 
+                                                                                 class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300">
+                                                                        </div>
+                                                                    @endforeach
+                                                                    @if($location->detail_images && count($location->detail_images) > 3)
+                                                                        <div class="flex-shrink-0 w-24 h-24 rounded-lg bg-gradient-to-br from-amber-400 to-green-400 flex items-center justify-center cursor-pointer text-white text-xs font-bold"
+                                                                             onclick="openImageGallery({{ json_encode(array_map(function($img) { return asset('storage/' . $img); }, $location->detail_images)) }})">
+                                                                            +{{ count($location->detail_images) - 3 }}
+                                                                        </div>
+                                                                    @endif
+                                                                @endif
+                                                            </div>
                                                         @endif
                                                     </div>
                                                 </div>
                                             </div>
-
-                                            @if($location->description)
-                                                <p class="text-gray-700 mb-4">{{ $location->description }}</p>
-                                            @endif
-
-                                            <!-- Images Gallery -->
-                                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                @if($location->thumbnail_image)
-                                                    <div class="relative group overflow-hidden rounded-lg">
-                                                        <img src="{{ asset('storage/' . $location->thumbnail_image) }}" 
-                                                             alt="{{ $location->name }}" 
-                                                             class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                                             onclick="openImageModal('{{ asset('storage/' . $location->thumbnail_image) }}')">
-                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                                            </svg>
-                                                        </div>
-                                                    </div>
-                                                @endif
-
-                                                @if($location->detail_images && count($location->detail_images) > 0)
-                                                    @foreach(array_slice($location->detail_images, 0, 2) as $detailImage)
-                                                        <div class="relative group overflow-hidden rounded-lg">
-                                                            <img src="{{ asset('storage/' . $detailImage) }}" 
-                                                                 alt="{{ $location->name }}" 
-                                                                 class="w-full h-48 object-cover transform group-hover:scale-110 transition-transform duration-500 cursor-pointer"
-                                                                 onclick="openImageModal('{{ asset('storage/' . $detailImage) }}')">
-                                                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300 flex items-center justify-center">
-                                                                <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
-                                                                </svg>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                    @if($location->detail_images && count($location->detail_images) > 2)
-                                                        <div class="relative group overflow-hidden rounded-lg bg-gradient-to-br from-amber-400 to-green-400 flex items-center justify-center cursor-pointer h-48"
-                                                             onclick="openImageGallery({{ json_encode(array_map(function($img) { return asset('storage/' . $img); }, $location->detail_images)) }})">
-                                                            <div class="text-center text-white">
-                                                                <svg class="w-12 h-12 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                                                                </svg>
-                                                                <p class="font-bold">+{{ count($location->detail_images) - 2 }} More</p>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endif
-                                            </div>
                                         </div>
-                                    </div>
+                                    @endforeach
                                 </div>
-                            @endforeach
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
         </div>
     </div>
 </section>
@@ -310,31 +308,6 @@
 @push('styles')
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <style>
-    /* Floating Animation for Decorative Elements - Tour Detail Hero Section */
-    @keyframes float {
-        0%, 100% {
-            transform: translateY(0px) translateX(0px);
-        }
-        33% {
-            transform: translateY(-20px) translateX(10px);
-        }
-        66% {
-            transform: translateY(10px) translateX(-10px);
-        }
-    }
-
-    /* Only apply to tour detail hero section decorative elements */
-    .tour-detail-hero-section .tour-detail-hero-blob {
-        animation: float 20s ease-in-out infinite;
-    }
-
-    .tour-detail-hero-section .tour-detail-hero-blob:nth-child(2) {
-        animation-delay: 2s;
-    }
-
-    .tour-detail-hero-section .tour-detail-hero-blob:nth-child(3) {
-        animation-delay: 1s;
-    }
 </style>
 <style>
     .tour-title-animate {
@@ -460,6 +433,153 @@
     #imageModal.hidden {
         display: none;
     }
+
+     /* Day Accordion Styles */
+     .day-accordion-item {
+         animation: slideInUp 0.5s ease-out backwards;
+         transition: all 0.3s ease;
+     }
+
+     .day-accordion-item:nth-child(1) { animation-delay: 0.1s; }
+     .day-accordion-item:nth-child(2) { animation-delay: 0.2s; }
+     .day-accordion-item:nth-child(3) { animation-delay: 0.3s; }
+     .day-accordion-item:nth-child(4) { animation-delay: 0.4s; }
+     .day-accordion-item:nth-child(5) { animation-delay: 0.5s; }
+     .day-accordion-item:nth-child(6) { animation-delay: 0.6s; }
+
+     @keyframes slideInUp {
+         from {
+             opacity: 0;
+             transform: translateY(20px);
+         }
+         to {
+             opacity: 1;
+             transform: translateY(0);
+         }
+     }
+
+     .day-accordion-header {
+         cursor: pointer;
+         transition: all 0.2s ease;
+     }
+
+     .day-accordion-header:hover {
+         transform: translateX(4px);
+     }
+
+     .day-accordion-content {
+         max-height: 0;
+         overflow: hidden;
+         transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1), 
+                     opacity 0.4s ease-out;
+         opacity: 0;
+     }
+
+     .day-accordion-content:not(.hidden) {
+         max-height: 5000px;
+         opacity: 1;
+         animation: fadeInContent 0.4s ease-out 0.2s backwards;
+     }
+
+     .day-accordion-content.hidden {
+         max-height: 0;
+         opacity: 0;
+     }
+
+     .day-accordion-content > div {
+         padding-top: 0;
+         padding-bottom: 0;
+         transition: padding 0.4s ease-out;
+     }
+
+     .day-accordion-content:not(.hidden) > div {
+         padding-top: 1rem;
+         padding-bottom: 1rem;
+     }
+
+     @keyframes fadeInContent {
+         from {
+             opacity: 0;
+             transform: translateY(-10px);
+         }
+         to {
+             opacity: 1;
+             transform: translateY(0);
+         }
+     }
+
+     .day-chevron {
+         transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+     }
+
+     .day-chevron.rotate-180 {
+         transform: rotate(180deg);
+     }
+
+     /* Location items animation */
+     .location-item {
+         animation: fadeInSlide 0.5s ease-out backwards;
+         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+     }
+
+     .location-item:nth-child(1) { animation-delay: 0.1s; }
+     .location-item:nth-child(2) { animation-delay: 0.2s; }
+     .location-item:nth-child(3) { animation-delay: 0.3s; }
+     .location-item:nth-child(4) { animation-delay: 0.4s; }
+     .location-item:nth-child(5) { animation-delay: 0.5s; }
+
+     @keyframes fadeInSlide {
+         from {
+             opacity: 0;
+             transform: translateX(-15px);
+         }
+         to {
+             opacity: 1;
+             transform: translateX(0);
+         }
+     }
+
+     .location-item:hover {
+         transform: translateY(-2px) scale(1.01);
+         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+     }
+
+     .location-marker {
+         transition: all 0.3s ease;
+     }
+
+     .location-item:hover .location-marker {
+         transform: scale(1.1);
+     }
+
+
+    /* Line clamp for description */
+    .line-clamp-2 {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    /* Compact scrollbar */
+    .overflow-x-auto::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .overflow-x-auto::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 2px;
+    }
+
+    .overflow-x-auto::-webkit-scrollbar-thumb {
+        background: #f59e0b;
+        border-radius: 2px;
+    }
+
+    .overflow-x-auto::-webkit-scrollbar-thumb:hover {
+        background: #d97706;
+    }
+
 </style>
 @endpush
 
@@ -477,44 +597,53 @@
             });
         }
 
-        // Intersection Observer for timeline animations
-        const observerOptions = {
-            threshold: 0.2,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    // Animate timeline line
-                    const line = entry.target.querySelector('.timeline-line');
-                    if (line) {
-                        line.style.display = 'block';
-                        line.style.animation = 'drawLine 1s ease-out';
-                    }
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.timeline-day').forEach(day => {
-            timelineObserver.observe(day);
-        });
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+         // Make toggleDayAccordion globally available
+         window.toggleDayAccordion = toggleDayAccordion;
     });
+
+     function toggleDayAccordion(dayNumber) {
+         const content = document.getElementById(`content-${dayNumber}`);
+         const chevron = document.getElementById(`chevron-${dayNumber}`);
+         const header = document.querySelector(`[data-day="${dayNumber}"].day-accordion-header`);
+         
+         if (!content || !chevron) return;
+         
+         const isHidden = content.classList.contains('hidden');
+         
+         // Close all other open days first
+         document.querySelectorAll('.day-accordion-content:not(.hidden)').forEach(otherContent => {
+             if (otherContent.id !== `content-${dayNumber}`) {
+                 const otherDayNumber = otherContent.dataset.day;
+                 const otherChevron = document.getElementById(`chevron-${otherDayNumber}`);
+                 const otherHeader = document.querySelector(`[data-day="${otherDayNumber}"].day-accordion-header`);
+                 
+                 otherContent.classList.add('hidden');
+                 if (otherChevron) {
+                     otherChevron.classList.remove('rotate-180');
+                 }
+                 if (otherHeader) {
+                     otherHeader.classList.remove('bg-gray-50');
+                 }
+             }
+         });
+         
+         if (isHidden) {
+             // Open this day
+             content.classList.remove('hidden');
+             chevron.classList.add('rotate-180');
+             if (header) {
+                 header.classList.add('bg-gray-50');
+             }
+         } else {
+             // Close this day (if clicking on already open day)
+             content.classList.add('hidden');
+             chevron.classList.remove('rotate-180');
+             if (header) {
+                 header.classList.remove('bg-gray-50');
+             }
+         }
+     }
+
 
     function openImageModal(imageSrc) {
         const modal = document.getElementById('imageModal');
