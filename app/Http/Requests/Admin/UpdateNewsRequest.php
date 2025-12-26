@@ -1,0 +1,51 @@
+<?php
+
+namespace App\Http\Requests\Admin;
+
+use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Str;
+
+class UpdateNewsRequest extends FormRequest
+{
+    /**
+     * Determine if the user is authorized to make this request.
+     */
+    public function authorize(): bool
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     */
+    public function rules(): array
+    {
+        $newsId = $this->route('news')->id ?? null;
+        
+        return [
+            'title' => 'required|string|max:255',
+            'slug' => 'nullable|string|unique:news,slug,' . $newsId . '|max:255',
+            'content' => 'nullable|string',
+            'excerpt' => 'nullable|string|max:500',
+            'featured_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+            'published_at' => 'nullable|date',
+            'is_published' => 'boolean',
+            'sort_order' => 'nullable|integer',
+        ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'slug' => $this->slug ?? Str::slug($this->title),
+            'is_published' => $this->has('is_published'),
+        ]);
+    }
+}
