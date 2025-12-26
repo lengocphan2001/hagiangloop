@@ -119,6 +119,9 @@
             opacity: 1;
             transition: opacity 0.6s ease, transform 0.6s ease;
             pointer-events: none;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .slide:not(.active) .slide-content {
@@ -128,24 +131,87 @@
         
         /* Title Animation */
         .slide-title {
-            font-size: clamp(2rem, 5vw, 5rem);
-            font-weight: 900;
-            color: white;
-            margin-bottom: 20px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 10px rgba(0, 0, 0, 0.8);
+            font-size: clamp(1.5rem, 4vw, 3.5rem);
+            font-weight: 700;
+            color: #ff6b9d;
+            margin-bottom: 15px;
+            text-shadow: 0 4px 20px rgba(255, 107, 157, 0.6), 0 2px 10px rgba(255, 107, 157, 0.4), 0 0 30px rgba(255, 107, 157, 0.3);
             display: block;
             position: relative;
             z-index: 16;
+            line-height: 1.4;
+            font-style: italic;
+            animation: textFadeInUp 1s ease-out, textGlow 3s ease-in-out infinite;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .slide:not(.active) .slide-title {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: none;
         }
         
         /* Subtitle Animation */
         .slide-subtitle {
-            font-size: clamp(1rem, 2vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.95);
+            font-size: clamp(0.9rem, 1.5vw, 1.2rem);
+            color: #ffb3d1;
             display: block;
             position: relative;
             z-index: 16;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+            text-shadow: 0 2px 10px rgba(255, 179, 209, 0.5), 0 0 20px rgba(255, 179, 209, 0.3);
+            font-weight: 500;
+            letter-spacing: 1px;
+            animation: textFadeInUp 1s ease-out 0.2s both, textPulse 2s ease-in-out infinite 1s;
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .slide:not(.active) .slide-subtitle {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: none;
+        }
+        
+        /* Text Animations */
+        @keyframes textFadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes textGlow {
+            0%, 100% {
+                text-shadow: 0 4px 20px rgba(255, 107, 157, 0.6), 0 2px 10px rgba(255, 107, 157, 0.4), 0 0 30px rgba(255, 107, 157, 0.3);
+            }
+            50% {
+                text-shadow: 0 4px 30px rgba(255, 107, 157, 0.8), 0 2px 15px rgba(255, 107, 157, 0.6), 0 0 40px rgba(255, 107, 157, 0.5);
+            }
+        }
+        
+        @keyframes textPulse {
+            0%, 100% {
+                opacity: 0.9;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes textShimmer {
+            0% {
+                background-position: -200% center;
+            }
+            100% {
+                background-position: 200% center;
+            }
         }
         
         /* Navigation Arrows */
@@ -326,10 +392,12 @@
         
         /* Gradient Text */
         .gradient-text {
-            background: linear-gradient(135deg, #fff 0%, #e0e7ff 50%, #fff 100%);
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 25%, #ffb3d1 50%, #ff8fab 75%, #ff6b9d 100%);
+            background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            animation: textShimmer 3s linear infinite;
         }
         
         /* Particles Background */
@@ -414,6 +482,15 @@
                 padding: 0 20px;
             }
             
+            .slide-title {
+                font-size: clamp(1.2rem, 5vw, 2rem);
+                line-height: 1.3;
+            }
+            
+            .slide-subtitle {
+                font-size: clamp(0.8rem, 2vw, 1rem);
+            }
+            
             .slide-counter {
                 top: 20px;
                 right: 20px;
@@ -488,6 +565,9 @@
                 <div class="slide {{ $index === 0 ? 'active' : '' }}" data-index="{{ $index }}">
                     <img src="{{ $image['path'] }}" alt="{{ $image['name'] }}" class="slide-image">
                     <div class="slide-overlay"></div>
+                    <div class="slide-content">
+                        <h2 class="slide-title gradient-text">{{ $image['message'] ?? 'Em là tất cả đối với anh' }}</h2>
+                    </div>
                 </div>
             @endforeach
             
