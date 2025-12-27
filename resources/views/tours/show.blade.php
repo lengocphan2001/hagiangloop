@@ -798,33 +798,11 @@
             }
 
             .day-accordion-content {
-                max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.3s ease-out,
-                    padding 0.3s ease-out;
-                opacity: 0;
-                will-change: max-height, opacity;
-            }
-
-            .day-accordion-content:not(.hidden) {
-                max-height: 5000px;
-                opacity: 1;
             }
 
             .day-accordion-content.hidden {
-                max-height: 0;
-                opacity: 0;
-            }
-
-            .day-accordion-content>div {
-                padding-top: 0;
-                padding-bottom: 0;
-            }
-
-            .day-accordion-content:not(.hidden)>div {
-                padding-top: 1rem;
-                padding-bottom: 1rem;
+                display: none;
             }
 
             .day-chevron {
@@ -954,16 +932,7 @@
                         const otherHeader = document.querySelector(
                             `[data-day="${otherDayNumber}"].day-accordion-header`);
 
-                        // Smooth close animation
-                        otherContent.style.maxHeight = otherContent.scrollHeight + 'px';
-                        requestAnimationFrame(() => {
-                            otherContent.style.maxHeight = '0px';
-                            setTimeout(() => {
-                                otherContent.classList.add('hidden');
-                                otherContent.style.maxHeight = '';
-                            }, 400);
-                        });
-                        
+                        otherContent.classList.add('hidden');
                         if (otherChevron) {
                             otherChevron.classList.remove('rotate-180');
                         }
@@ -974,38 +943,15 @@
                 });
 
                 if (isHidden) {
-                    // Open this day with smooth animation
+                    // Open this day - no animation
                     content.classList.remove('hidden');
-                    content.style.maxHeight = '0px';
-                    content.style.opacity = '0';
-                    
-                    requestAnimationFrame(() => {
-                        const scrollHeight = content.scrollHeight;
-                        content.style.maxHeight = scrollHeight + 'px';
-                        content.style.opacity = '1';
-                        
-                        setTimeout(() => {
-                            content.style.maxHeight = '';
-                        }, 400);
-                    });
-                    
                     chevron.classList.add('rotate-180');
                     if (header) {
                         header.classList.add('bg-gray-50');
                     }
                 } else {
-                    // Close this day with smooth animation
-                    content.style.maxHeight = content.scrollHeight + 'px';
-                    requestAnimationFrame(() => {
-                        content.style.maxHeight = '0px';
-                        content.style.opacity = '0';
-                        setTimeout(() => {
-                            content.classList.add('hidden');
-                            content.style.maxHeight = '';
-                            content.style.opacity = '';
-                        }, 400);
-                    });
-                    
+                    // Close this day - no animation
+                    content.classList.add('hidden');
                     chevron.classList.remove('rotate-180');
                     if (header) {
                         header.classList.remove('bg-gray-50');
