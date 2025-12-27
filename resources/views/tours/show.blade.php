@@ -800,15 +800,16 @@
             .day-accordion-content {
                 max-height: 0;
                 overflow: hidden;
-                transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity 0.4s ease-out;
+                transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity 0.3s ease-out,
+                    padding 0.3s ease-out;
                 opacity: 0;
+                will-change: max-height, opacity;
             }
 
             .day-accordion-content:not(.hidden) {
                 max-height: 5000px;
                 opacity: 1;
-                animation: fadeInContent 0.4s ease-out 0.2s backwards;
             }
 
             .day-accordion-content.hidden {
@@ -819,24 +820,11 @@
             .day-accordion-content>div {
                 padding-top: 0;
                 padding-bottom: 0;
-                transition: padding 0.4s ease-out;
             }
 
             .day-accordion-content:not(.hidden)>div {
                 padding-top: 1rem;
                 padding-bottom: 1rem;
-            }
-
-            @keyframes fadeInContent {
-                from {
-                    opacity: 0;
-                    transform: translateY(-10px);
-                }
-
-                to {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
             }
 
             .day-chevron {
@@ -850,7 +838,7 @@
             /* Location items animation */
             .location-item {
                 animation: fadeInSlide 0.5s ease-out backwards;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
             .location-item:nth-child(1) {
@@ -887,7 +875,10 @@
 
             .location-item:hover {
                 transform: translateY(-2px) scale(1.01);
-                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            }
+            
+            .location-item:active {
+                transform: translateY(-2px) scale(1.01);
             }
 
             .location-marker {
@@ -963,7 +954,16 @@
                         const otherHeader = document.querySelector(
                             `[data-day="${otherDayNumber}"].day-accordion-header`);
 
-                        otherContent.classList.add('hidden');
+                        // Smooth close animation
+                        otherContent.style.maxHeight = otherContent.scrollHeight + 'px';
+                        requestAnimationFrame(() => {
+                            otherContent.style.maxHeight = '0px';
+                            setTimeout(() => {
+                                otherContent.classList.add('hidden');
+                                otherContent.style.maxHeight = '';
+                            }, 400);
+                        });
+                        
                         if (otherChevron) {
                             otherChevron.classList.remove('rotate-180');
                         }
@@ -974,15 +974,38 @@
                 });
 
                 if (isHidden) {
-                    // Open this day
+                    // Open this day with smooth animation
                     content.classList.remove('hidden');
+                    content.style.maxHeight = '0px';
+                    content.style.opacity = '0';
+                    
+                    requestAnimationFrame(() => {
+                        const scrollHeight = content.scrollHeight;
+                        content.style.maxHeight = scrollHeight + 'px';
+                        content.style.opacity = '1';
+                        
+                        setTimeout(() => {
+                            content.style.maxHeight = '';
+                        }, 400);
+                    });
+                    
                     chevron.classList.add('rotate-180');
                     if (header) {
                         header.classList.add('bg-gray-50');
                     }
                 } else {
-                    // Close this day (if clicking on already open day)
-                    content.classList.add('hidden');
+                    // Close this day with smooth animation
+                    content.style.maxHeight = content.scrollHeight + 'px';
+                    requestAnimationFrame(() => {
+                        content.style.maxHeight = '0px';
+                        content.style.opacity = '0';
+                        setTimeout(() => {
+                            content.classList.add('hidden');
+                            content.style.maxHeight = '';
+                            content.style.opacity = '';
+                        }, 400);
+                    });
+                    
                     chevron.classList.remove('rotate-180');
                     if (header) {
                         header.classList.remove('bg-gray-50');
