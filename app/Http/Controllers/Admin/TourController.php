@@ -39,7 +39,25 @@ class TourController extends Controller
     public function store(StoreTourRequest $request)
     {
         DB::transaction(function () use ($request) {
-            $tour = Tour::create($request->validated());
+            $validated = $request->validated();
+            
+            // Handle thumbnail image upload
+            if ($request->hasFile('thumbnail_image')) {
+                $validated['thumbnail_image'] = $request->file('thumbnail_image')->store('tours/thumbnails', 'public');
+            }
+            
+            // Handle detail images upload
+            $detailImages = [];
+            if ($request->hasFile('detail_images')) {
+                foreach ($request->file('detail_images') as $image) {
+                    if ($image && $image->isValid()) {
+                        $detailImages[] = $image->store('tours/details', 'public');
+                    }
+                }
+            }
+            $validated['detail_images'] = !empty($detailImages) ? $detailImages : null;
+            
+            $tour = Tour::create($validated);
 
             // Create tour days and locations
             foreach ($request->days_data as $dayData) {
@@ -103,7 +121,40 @@ class TourController extends Controller
     public function edit(Tour $tour)
     {
         $tour->load('tourDays.locations');
-        return view('admin.tours.edit', compact('tour'));
+        
+        // Prepare tour days data for JavaScript
+        $tourDaysData = $tour->tourDays->map(function($day) {
+            $locations = $day->locations->map(function($location) {
+                $detailImages = [];
+                if ($location->detail_images) {
+                    if (is_string($location->detail_images)) {
+                        $detailImages = json_decode($location->detail_images, true) ?: [];
+                    } else {
+                        $detailImages = $location->detail_images;
+                    }
+                }
+                return [
+                    'name' => $location->name,
+                    'description' => $location->description ?? '',
+                    'type' => $location->type ?? 'location',
+                    'arrival_time' => $location->arrival_time ? $location->arrival_time->format('H:i:s') : null,
+                    'thumbnail_image' => $location->thumbnail_image,
+                    'detail_images' => $detailImages,
+                ];
+            })->toArray();
+            
+            return [
+                'day_number' => $day->day_number,
+                'title' => $day->title,
+                'route' => $day->route ?? '',
+                'breakfast_time' => $day->breakfast_time ? $day->breakfast_time->format('H:i:s') : null,
+                'departure_time' => $day->departure_time ? $day->departure_time->format('H:i:s') : null,
+                'notes' => $day->notes ?? '',
+                'locations' => $locations,
+            ];
+        })->toArray();
+        
+        return view('admin.tours.edit', compact('tour', 'tourDaysData'));
     }
 
     /**
@@ -112,7 +163,41 @@ class TourController extends Controller
     public function update(UpdateTourRequest $request, Tour $tour)
     {
         DB::transaction(function () use ($request, $tour) {
-            $tour->update($request->validated());
+            $validated = $request->validated();
+            
+            // Handle thumbnail image upload
+            if ($request->hasFile('thumbnail_image')) {
+                // Delete old thumbnail if exists
+                if ($tour->thumbnail_image && Storage::disk('public')->exists($tour->thumbnail_image)) {
+                    Storage::disk('public')->delete($tour->thumbnail_image);
+                }
+                $validated['thumbnail_image'] = $request->file('thumbnail_image')->store('tours/thumbnails', 'public');
+            } elseif (isset($request->existing_thumbnail_image)) {
+                // Keep existing thumbnail
+                $validated['thumbnail_image'] = $request->existing_thumbnail_image;
+            }
+            
+            // Handle detail images upload
+            $detailImages = [];
+            if ($request->hasFile('detail_images')) {
+                foreach ($request->file('detail_images') as $image) {
+                    if ($image && $image->isValid()) {
+                        $detailImages[] = $image->store('tours/details', 'public');
+                    }
+                }
+            }
+            
+            // Keep existing detail images if provided
+            if (isset($request->existing_detail_images) && is_array($request->existing_detail_images)) {
+                $existingImages = array_filter($request->existing_detail_images, function($img) {
+                    return !empty($img);
+                });
+                $detailImages = array_merge($detailImages, $existingImages);
+            }
+            
+            $validated['detail_images'] = !empty($detailImages) ? $detailImages : null;
+            
+            $tour->update($validated);
 
             // Delete existing days and locations
             $tour->tourDays()->delete();

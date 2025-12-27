@@ -79,6 +79,7 @@
                     $isAbout = request()->routeIs('page.show') && request()->route('slug') == 'about';
                     $isTours = request()->routeIs('tours.*');
                     $isNews = request()->routeIs('news.*');
+                    $isContact = request()->routeIs('contact.*');
                 @endphp
                 <a href="{{ route('home') }}"
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group"
@@ -116,13 +117,6 @@
                             class="absolute bottom-[-4px] left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-current"></span>
                     @endif
                 </a>
-                <a href="#homestay"
-                    class="font-medium uppercase text-sm transition-colors duration-200 relative group"
-                    :class="scrolled ? 'text-white' : 'text-white'">
-                    HOMESTAY
-                    <span
-                        class="absolute bottom-[-4px] left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-current"></span>
-                </a>
                 <a href="{{ route('news.index') }}" 
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isNews ? 'text-amber-300' : 'text-white' }}"
                     :class="scrolled && !{{ $isNews ? 'true' : 'false' }} ? 'text-white' : ''">
@@ -135,11 +129,17 @@
                             class="absolute bottom-[-4px] left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-current"></span>
                     @endif
                 </a>
-                <a href="#contact" class="font-medium uppercase text-sm transition-colors duration-200 relative group"
-                    :class="scrolled ? 'text-white' : 'text-white'">
+                <a href="{{ route('contact.index') }}"
+                    class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isContact ? 'text-amber-300' : 'text-white' }}"
+                    :class="scrolled && !{{ $isContact ? 'true' : 'false' }} ? 'text-white' : ''">
                     CONTACT
-                    <span
-                        class="absolute bottom-[-4px] left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-current"></span>
+                    @if($isContact)
+                        <span
+                            class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
+                    @else
+                        <span
+                            class="absolute bottom-[-4px] left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full bg-current"></span>
+                    @endif
                 </a>
 
                 <!-- Search Icon -->
@@ -224,19 +224,14 @@
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('tours.*') ? 'text-amber-300' : '' }}">
                         TOURS
                     </a>
-                    <a href="#homestay" 
-                        @click="open = false"
-                        class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors">
-                        HOMESTAY
-                    </a>
                     <a href="{{ route('news.index') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('news.*') ? 'text-amber-300' : '' }}">
                         NEWS
                     </a>
-                    <a href="#contact" 
+                    <a href="{{ route('contact.index') }}" 
                         @click="open = false"
-                        class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors">
+                        class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('contact.*') ? 'text-amber-300' : '' }}">
                         CONTACT
                     </a>
                     <a href="#booking" 

@@ -1,5 +1,9 @@
 @extends('adminlte::page')
 
+@php
+    use Illuminate\Support\Facades\Storage;
+@endphp
+
 @section('title', 'Tour Details')
 
 @section('content_header')
@@ -45,6 +49,35 @@
                 <div class="mb-4">
                     <strong>Description:</strong>
                     <p>{{ $tour->description }}</p>
+                </div>
+            @endif
+
+            @if($tour->thumbnail_image)
+                <div class="mb-4">
+                    <strong>Thumbnail Image:</strong>
+                    <div class="mt-2">
+                        <img src="{{ Storage::url($tour->thumbnail_image) }}" alt="Tour thumbnail" style="max-width: 300px; max-height: 300px; object-fit: cover;" class="img-thumbnail">
+                    </div>
+                </div>
+            @endif
+
+            @if($tour->detail_images && count($tour->detail_images) > 0)
+                <div class="mb-4">
+                    <strong>Detail Images:</strong>
+                    <div class="d-flex flex-wrap gap-2 mt-2">
+                        @foreach($tour->detail_images as $image)
+                            <img src="{{ Storage::url($image) }}" alt="Detail image" style="max-width: 200px; max-height: 200px; object-fit: cover;" class="img-thumbnail">
+                        @endforeach
+                    </div>
+                </div>
+            @endif
+
+            @if($tour->note)
+                <div class="mb-4">
+                    <strong>Note:</strong>
+                    <div class="mt-2">
+                        {!! $tour->note !!}
+                    </div>
                 </div>
             @endif
 

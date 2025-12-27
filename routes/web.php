@@ -26,6 +26,10 @@ Route::get('/news/{slug}', [App\Http\Controllers\NewsController::class, 'show'])
 // Gallery routes
 Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])->name('gallery.index');
 
+// Contact routes
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+
 // Auth routes (sẽ được implement sau)
 Route::get('/login', function () {
     return view('auth.login');

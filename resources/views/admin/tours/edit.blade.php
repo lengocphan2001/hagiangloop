@@ -91,6 +91,42 @@
                     <textarea name="description" id="description" class="form-control" rows="3">{{ old('description', $tour->description) }}</textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <x-forms.tinymce-editor name="note" id="note" :value="old('note', $tour->note)" />
+                </div>
+
+                <div class="form-group">
+                    <label for="thumbnail_image">Thumbnail Image</label>
+                    @if($tour->thumbnail_image)
+                        <div class="mb-2">
+                            <img src="{{ Storage::url($tour->thumbnail_image) }}" alt="Current thumbnail" style="max-width: 200px; max-height: 200px; object-fit: cover;" class="img-thumbnail">
+                        </div>
+                        <input type="hidden" name="existing_thumbnail_image" value="{{ $tour->thumbnail_image }}">
+                    @endif
+                    <input type="file" name="thumbnail_image" id="thumbnail_image" class="form-control" accept="image/*">
+                    <small class="form-text text-muted">Upload a new thumbnail image to replace the current one (max 2MB)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="detail_images">Detail Images</label>
+                    @if($tour->detail_images && count($tour->detail_images) > 0)
+                        <div class="mb-2">
+                            <p>Current detail images:</p>
+                            <div class="d-flex flex-wrap gap-2">
+                                @foreach($tour->detail_images as $image)
+                                    <div class="position-relative" style="display: inline-block;">
+                                        <img src="{{ Storage::url($image) }}" alt="Detail image" style="max-width: 150px; max-height: 150px; object-fit: cover;" class="img-thumbnail">
+                                        <input type="hidden" name="existing_detail_images[]" value="{{ $image }}">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    @endif
+                    <input type="file" name="detail_images[]" id="detail_images" class="form-control" accept="image/*" multiple>
+                    <small class="form-text text-muted">Upload new detail images to add to existing ones (max 2MB each). To remove images, leave them unchecked.</small>
+                </div>
+
                 <hr>
                 <h4>Tour Days & Locations</h4>
                 <div id="daysContainer">
@@ -110,6 +146,7 @@
 @stop
 
 @section('js')
+<x-head.tinymce-config selector="#note" upload-url="{{ route('admin.upload-image') }}" api-key="xhvi99zf95ueinybzalp9vwc7yaolsr1rxibrza2dzwb9c8e" />
 @php
     $tourDaysData = $tour->tourDays->map(function($day) {
         return [

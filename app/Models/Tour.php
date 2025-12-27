@@ -18,6 +18,9 @@ class Tour extends Model
         'nights',
         'days',
         'description',
+        'note',
+        'thumbnail_image',
+        'detail_images',
         'price',
         'is_active',
         'sort_order',
@@ -26,6 +29,7 @@ class Tour extends Model
     protected $casts = [
         'is_active' => 'boolean',
         'price' => 'decimal:2',
+        'detail_images' => 'array',
     ];
 
     /**

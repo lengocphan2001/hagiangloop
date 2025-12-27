@@ -392,7 +392,7 @@
 
     <!-- About / Tour Highlight Section -->
     <section id="about" class="py-16 lg:py-20 bg-white">
-        <div class="w-full max-w-[1500px] mx-auto lg:px-8"
+        <div class="w-5/7 max-w-[1500px] ml-auto lg:w-full lg:mx-auto lg:px-8"
             x-data="{
                 slides: [
                     {
@@ -562,84 +562,6 @@
             </div>
         </div>
     </section>
-
-    <section id="homestay" class="pb-16 bg-white">
-        <div class="w-full max-w-[1500px] mx-auto lg:px-8"
-            x-data="{
-                slides: [
-                    {
-                        title: 'Comfortable and modern design',
-                        desc: 'Welcome to Mama\'s House - 20 beds. Mama\'s Homestay offers one free night in the dormitory the day before the tour begins, and you can check in after 2 pm. Our reception is open 24/7. The free night is random and we don\'t charge any fee for it. If you want a more proper place to stay before the loop starts, you can arrange yourself and inform us of your hostel address so we can pick you up for the 1st morning day tour.',
-                        image: '{{ asset('images/homestays/homestaybg1.webp') }}'
-                    },
-                    {
-                        title: 'Comfortable and modern design',
-                        desc: 'Welcome to Mama\'s House - 20 beds. Mama\'s Homestay offers one free night in the dormitory the day before the tour begins, and you can check in after 2 pm. Our reception is open 24/7. The free night is random and we don\'t charge any fee for it. If you want a more proper place to stay before the loop starts, you can arrange yourself and inform us of your hostel address so we can pick you up for the 1st morning day tour.',
-                        image: '{{ asset('images/homestays/homestaybg2.webp') }}'
-                    }
-                ],
-                current: 0,
-                timer: null,
-                next() { this.current = (this.current + 1) % this.slides.length; },
-                prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length; },
-                startAuto() { this.stopAuto(); this.timer = setInterval(() => this.next(), 4500); },
-                stopAuto() { if (this.timer) { clearInterval(this.timer); this.timer = null; } }
-            }"
-            x-init="startAuto()"
-            @mouseenter="stopAuto()"
-            @mouseleave="startAuto()">
-            <div class="relative min-h-[600px] lg:min-h-[700px] overflow-hidden shadow-2xl">
-                <!-- Image panel - Full width -->
-                <div class="relative w-full h-full min-h-[600px] lg:min-h-[700px] homestay-image-animate">
-                    <template x-for="(slide, index) in slides" :key="`img-${index}`">
-                        <div x-show="current === index"
-                            x-transition.opacity.duration.800ms
-                            class="absolute inset-0">
-                            <img :src="slide.image" :alt="slide.title" class="w-full h-full object-cover">
-                        </div>
-                    </template>
-
-                    <!-- Dots indicator -->
-                    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-2 z-20">
-                        <template x-for="(slide, index) in slides" :key="`dot-${index}`">
-                            <button @click="current = index"
-                                class="w-2 h-2 rounded-full transition-all"
-                                :class="current === index ? 'bg-white w-8' : 'bg-white/50'"></button>
-                        </template>
-                    </div>
-                </div>
-
-                <!-- Text panel - Overlay on image (1/2 width) -->
-                <div class="absolute inset-y-0 left-0 w-full lg:w-1/3 p-8 lg:p-12 flex flex-col justify-center z-10 bg-black/80 gap-4 homestay-text-animate">
-                    <template x-for="(slide, index) in slides" :key="`text-${index}`">
-                        <div x-show="current === index"
-                            x-transition.opacity.duration.700ms
-                            class="space-y-6 absolute top-0 left-0 right-0 bottom-24 flex flex-col items-center justify-center px-8 lg:px-12">
-                            <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight text-start" x-text="slide.title"></h2>
-                            <p class="text-base md:text-lg text-gray-300 leading-relaxed text-start" x-text="slide.desc"></p>
-                        </div>
-                    </template>
-
-                    <!-- Navigation arrows -->
-                    <div class="absolute bottom-8 left-0 right-0 flex items-center px-8 lg:px-12 space-x-4 z-20">
-                        <button @click="prev"
-                            class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                        </button>
-                        <button @click="next"
-                            class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition text-white">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
     <section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50">
@@ -721,47 +643,7 @@
                 </a>
             </div>
         </div>
-    </section>
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-gradient-to-br from-blue-600 to-green-500 text-white">
-        <div class="container mx-auto px-4 lg:px-6">
-            <div class="text-center mb-12" data-aos="zoom-in" data-aos-once="false">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Liên hệ với chúng tôi</h2>
-                <p class="text-xl text-blue-100 max-w-2xl mx-auto">
-                    Bạn có câu hỏi? Chúng tôi luôn sẵn sàng hỗ trợ bạn!
-                </p>
-            </div>
-
-            <div class="max-w-2xl mx-auto" data-aos="zoom-in" data-aos-delay="100" data-aos-once="false">
-                <form class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Họ và tên</label>
-                            <input type="text" class="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Nhập họ tên">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium mb-2">Email</label>
-                            <input type="email" class="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="your@email.com">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Tiêu đề</label>
-                        <input type="text" class="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Tiêu đề tin nhắn">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium mb-2">Nội dung</label>
-                        <textarea rows="5" class="w-full px-4 py-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50" placeholder="Nhập nội dung tin nhắn"></textarea>
-                    </div>
-                    <button type="submit" class="w-full px-8 py-4 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transform transition-all duration-300 hover:scale-105">
-                        Gửi tin nhắn
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    
-    
+    </section>    
     @endif
 @endsection
 

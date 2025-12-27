@@ -90,6 +90,23 @@
                     <textarea name="description" id="description" class="form-control" rows="3">{{ old('description') }}</textarea>
                 </div>
 
+                <div class="form-group">
+                    <label for="note">Note</label>
+                    <x-forms.tinymce-editor name="note" id="note" :value="old('note')" />
+                </div>
+
+                <div class="form-group">
+                    <label for="thumbnail_image">Thumbnail Image</label>
+                    <input type="file" name="thumbnail_image" id="thumbnail_image" class="form-control" accept="image/*">
+                    <small class="form-text text-muted">Upload a thumbnail image for this tour (max 2MB)</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="detail_images">Detail Images</label>
+                    <input type="file" name="detail_images[]" id="detail_images" class="form-control" accept="image/*" multiple>
+                    <small class="form-text text-muted">Upload multiple detail images for this tour (max 2MB each)</small>
+                </div>
+
                 <hr>
                 <h4>Tour Days & Locations</h4>
                 <div id="daysContainer">
@@ -109,6 +126,7 @@
 @stop
 
 @section('js')
+<x-head.tinymce-config selector="#note" upload-url="{{ route('admin.upload-image') }}" api-key="xhvi99zf95ueinybzalp9vwc7yaolsr1rxibrza2dzwb9c8e" />
 <script>
 let dayCount = 0;
 
