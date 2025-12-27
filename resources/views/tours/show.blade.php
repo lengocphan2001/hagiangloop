@@ -368,101 +368,185 @@
 
                 <!-- Part 2: Booking Widget (1/3 width) -->
                 <div class="lg:col-span-1">
-                    <div class="sticky">
+                    <div class="sticky top-4">
                         <div class="bg-white rounded-lg shadow-xl border border-gray-200 p-6">
-                            <!-- Price Section -->
-                            <div class="relative mb-6">
-                                @if ($tour->price)
-                                    <div class="flex items-start justify-between mb-2">
-                                        <div>
-                                            <p class="text-sm text-gray-500 line-through">From
-                                                {{ number_format($tour->price, 0) }} VND</p>
-                                            <p class="text-3xl font-bold text-gray-900">
-                                                {{ number_format($tour->price, 0) }}
-                                                VND</p>
-                                            <p class="text-sm text-gray-600 mt-1">per person</p>
-                                        </div>
-                                        <span
-                                            class="bg-red-500 text-white px-3 py-1 rounded-lg text-sm font-semibold">-55%</span>
-                                    </div>
-                                    <p class="text-sm text-gray-600 mb-4">+ Local Payment may apply</p>
-                                @endif
-
-                                <!-- Price Info -->
-                                <div class="flex items-start gap-2 mb-4">
-                                    <svg class="w-5 h-5 text-gray-400 mt-0.5 flex-shrink-0" fill="none"
-                                        stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                    </svg>
-                                    <p class="text-xs text-gray-600">Price based on Private Double Room</p>
-                                </div>
-                            </div>
-
-                            <!-- Date Selection -->
-                            <div class="mb-4">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Select Date</label>
-                                <div class="relative">
-                                    <input type="date" id="tourDate"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer">
-                                    <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
-                                        </path>
-                                    </svg>
-                                </div>
-                            </div>
-
-                            <!-- Adults Selection -->
+                            <!-- Tour/Price Section -->
                             <div class="mb-6">
-                                <label class="block text-sm font-medium text-gray-700 mb-2">Adults</label>
-                                <div class="relative">
-                                    <select id="tourAdults"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none appearance-none cursor-pointer bg-white">
-                                        <option value="1">1 Adult</option>
-                                        <option value="2" selected>2 Adults</option>
-                                        <option value="3">3 Adults</option>
-                                        <option value="4">4 Adults</option>
-                                        <option value="5">5 Adults</option>
-                                        <option value="6">6 Adults</option>
-                                    </select>
-                                    <svg class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400 pointer-events-none"
-                                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M17 13l-5 5m0 0l-5-5m5 5V6"></path>
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
+                                    <h3 class="font-bold text-gray-900">Tour</h3>
+                                </div>
+                                <div class="flex items-center justify-between mb-2">
+                                    <div>
+                                        <p class="text-sm text-gray-500 line-through" id="tourPriceOriginal">
+                                            {{ $tour->price ? number_format($tour->price, 0, ',', '.') . ' VND' : 'N/A' }}
+                                        </p>
+                                        <p class="text-2xl font-bold text-gray-900" id="tourPrice">
+                                            {{ $tour->price ? number_format($tour->price, 0, ',', '.') . ' VND' : 'N/A' }}
+                                        </p>
+                                    </div>
+                                    <div class="text-right">
+                                        <span class="bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">-55%</span>
+                                    </div>
                                 </div>
                             </div>
 
-                            <!-- Action Buttons -->
-                            <div class="flex gap-3 mb-4">
-                                <button onclick="checkAvailability()"
-                                    class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200">
-                                    Check Availability
-                                </button>
-                                <button
-                                    class="w-12 h-12 border-2 border-gray-300 rounded-lg flex items-center justify-center hover:border-gray-400 transition-colors">
-                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z">
-                                        </path>
+                            <!-- Start Date Section -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                </button>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">Ngày bắt đầu tour</h3>
+                                </div>
+                                <input type="text" id="tourStartDate" 
+                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                    placeholder="Chọn ngày bắt đầu tour"
+                                    readonly>
                             </div>
 
-                            <!-- Guarantee -->
-                            <div class="flex items-center gap-2 text-sm">
-                                <svg class="w-5 h-5 text-green-500 flex-shrink-0" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                                    </path>
-                                </svg>
-                                <span class="text-gray-600">Best price guarantee</span>
-                                <a href="#" class="text-blue-600 hover:underline">Learn More</a>
+                            <!-- Bus Service Option -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
+                                    <input type="checkbox" id="useBusService" 
+                                        class="w-5 h-5 text-pink-500 border-gray-300 rounded focus:ring-pink-500 cursor-pointer"
+                                        onchange="toggleBusService()">
+                                    <label for="useBusService" class="flex items-center gap-2 cursor-pointer flex-1">
+                                        <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
+                                            <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
+                                        </svg>
+                                        <span class="font-semibold text-gray-900 text-sm sm:text-base">Sử dụng dịch vụ bus</span>
+                                    </label>
+                                </div>
                             </div>
+
+                            <!-- Bus Service - Outbound -->
+                            <div id="busServiceSection" class="mb-6 hidden">
+                                <div class="mb-6">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">Choose a starting point</h3>
+                                    </div>
+                                <div class="mb-3 relative">
+                                    <!-- Custom Dropdown Button -->
+                                    <button type="button" id="busStartingPointBtn" 
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
+                                        <span id="busStartingPointText" class="text-gray-700">Select starting point</span>
+                                        <svg class="w-5 h-5 text-gray-400 transition-transform" id="busStartingPointIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown Menu -->
+                                    <div id="busStartingPointDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
+                                        <div class="py-1" id="busStartingPointOptions">
+                                            <!-- Options will be loaded from API -->
+                                            <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="busStartingPoint" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" id="busDepartureDate" 
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                        placeholder="Chọn ngày khởi hành"
+                                        readonly>
+                                </div>
+                                    <div id="outboundBusOptions" class="space-y-3">
+                                        <!-- Outbound bus options will be loaded here -->
+                                    </div>
+                                </div>
+
+                                <!-- Bus Service - Return -->
+                                <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">Choose the return destination</h3>
+                                </div>
+                                <div class="mb-3 relative">
+                                    <!-- Custom Dropdown Button -->
+                                    <button type="button" id="busReturnDestinationBtn" 
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
+                                        <span id="busReturnDestinationText" class="text-gray-700">Select return destination</span>
+                                        <svg class="w-5 h-5 text-gray-400 transition-transform" id="busReturnDestinationIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <!-- Dropdown Menu -->
+                                    <div id="busReturnDestinationDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
+                                        <div class="py-1" id="busReturnDestinationOptions">
+                                            <!-- Options will be loaded from API -->
+                                            <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" id="busReturnDestination" value="">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" id="busReturnDate" 
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                        placeholder="Chọn ngày về"
+                                        readonly>
+                                </div>
+                                    <div id="returnBusOptions" class="space-y-3">
+                                        <!-- Return bus options will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Gifts Section -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <h3 class="font-bold text-gray-900">Gifts</h3>
+                                </div>
+                                <div id="giftOptions" class="space-y-3">
+                                    <!-- Gift options will be loaded here -->
+                                </div>
+                            </div>
+
+                            <!-- People Section -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <h3 class="font-bold text-gray-900">Person</h3>
+                                </div>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Người lớn</label>
+                                        <input type="number" id="adultsCount" min="1" value="2" 
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm text-gray-600 mb-1">Trẻ em</label>
+                                        <input type="number" id="childrenCount" min="0" value="0" 
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Total Section -->
+                            <div class="mb-6 pt-4 border-t border-gray-200">
+                                <div class="flex items-center justify-between">
+                                    <span class="text-lg font-bold text-gray-900">Total:</span>
+                                    <span class="text-2xl font-bold text-pink-600" id="bookingTotal">0 VND</span>
+                                </div>
+                            </div>
+
+                            <!-- Action Button -->
+                            <button onclick="checkAvailability()"
+                                class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200">
+                                Continue Checkout
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -610,8 +694,83 @@
     </div>
 
     @push('styles')
+        <!-- Air Datepicker CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
         <style>
+            /* Air Datepicker theme customization */
+            .air-datepicker {
+                border-radius: 0.5rem;
+                box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+                border: 1px solid #e5e7eb;
+                font-family: inherit;
+            }
+
+            .air-datepicker-header {
+                background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+                border-radius: 0.5rem 0.5rem 0 0;
+                color: white;
+            }
+
+            .air-datepicker-nav--title {
+                color: white;
+                font-weight: 600;
+            }
+
+            .air-datepicker-nav--action {
+                color: white;
+            }
+
+            .air-datepicker-nav--action:hover {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 0.25rem;
+            }
+
+            .air-datepicker-body--day-name {
+                color: #6b7280;
+                font-weight: 600;
+            }
+
+            .air-datepicker-cell {
+                color: #374151;
+                font-weight: 500;
+            }
+
+            .air-datepicker-cell.-day-:hover {
+                background: #fce7f3;
+                border-color: #ec4899;
+            }
+
+            .air-datepicker-cell.-selected-,
+            .air-datepicker-cell.-selected-.-current- {
+                background: #ec4899;
+                border-color: #ec4899;
+                color: white;
+                font-weight: 600;
+            }
+
+            .air-datepicker-cell.-selected-:hover {
+                background: #db2777;
+                border-color: #db2777;
+            }
+
+            .air-datepicker-cell.-current- {
+                border-color: #ec4899;
+                color: #ec4899;
+                font-weight: 600;
+            }
+
+            .air-datepicker-cell.-current-:hover {
+                background: #fce7f3;
+            }
+
+            .air-datepicker-cell.-disabled- {
+                color: #d1d5db;
+            }
+
+            .air-datepicker-cell.-disabled-:hover {
+                background: transparent;
+            }
         </style>
         <style>
             .tour-title-animate {
@@ -894,10 +1053,64 @@
             .overflow-x-auto::-webkit-scrollbar-thumb:hover {
                 background: #d97706;
             }
+
+            /* Fix date input on mobile */
+            input[type="date"] {
+                -webkit-appearance: none;
+                appearance: none;
+                position: relative;
+            }
+
+            input[type="date"]::-webkit-calendar-picker-indicator {
+                position: absolute;
+                right: 8px;
+                top: 50%;
+                transform: translateY(-50%);
+                cursor: pointer;
+                opacity: 0.6;
+            }
+
+            input[type="date"]::-webkit-inner-spin-button,
+            input[type="date"]::-webkit-clear-button {
+                display: none;
+            }
+
+            /* Custom Dropdown Styles */
+            [id$="Dropdown"] {
+                animation: fadeInDown 0.2s ease-out;
+            }
+
+            @keyframes fadeInDown {
+                from {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            /* Ensure text doesn't overlap on mobile */
+            @media (max-width: 640px) {
+                input[type="date"],
+                select {
+                    font-size: 14px;
+                    padding-right: 2.5rem;
+                }
+
+                input[type="date"]::-webkit-calendar-picker-indicator {
+                    right: 6px;
+                    width: 20px;
+                    height: 20px;
+                }
+            }
         </style>
     @endpush
 
     @push('scripts')
+        <!-- Air Datepicker JS -->
+        <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
@@ -1093,20 +1306,527 @@
                 }
             });
 
-            // Check Availability function
-            function checkAvailability() {
-                const date = document.getElementById('tourDate').value;
-                const adults = document.getElementById('tourAdults').value;
+            // Booking Form Logic
+            let bookingData = {
+                tourPrice: {{ $tour->price ?? 0 }},
+                outboundBus: null,
+                returnBus: null,
+                selectedGift: null,
+                adults: 2,
+                children: 0
+            };
 
-                if (!date) {
-                    alert('Please select a date');
+            // Load bus services
+            async function loadBusServices(direction, containerId) {
+                try {
+                    // Get filter value based on direction
+                    let filterValue = '';
+                    if (direction === 'outbound') {
+                        filterValue = document.getElementById('busStartingPoint')?.value || '';
+                    } else if (direction === 'return') {
+                        filterValue = document.getElementById('busReturnDestination')?.value || '';
+                    }
+
+                    const response = await fetch(`{{ route('api.bus-services') }}?direction=${direction}`);
+                    const services = await response.json();
+                    
+                    // Filter services based on selected point
+                    let filteredServices = services;
+                    if (filterValue) {
+                        if (direction === 'outbound') {
+                            filteredServices = services.filter(s => s.starting_point === filterValue);
+                        } else if (direction === 'return') {
+                            filteredServices = services.filter(s => s.return_destination === filterValue);
+                        }
+                    }
+                    
+                    const container = document.getElementById(containerId);
+                    container.innerHTML = '';
+
+                    if (filteredServices.length === 0) {
+                        container.innerHTML = '<p class="text-sm text-gray-500">No bus services available for selected location</p>';
+                        return;
+                    }
+
+                    filteredServices.forEach(service => {
+                        const busOption = document.createElement('div');
+                        busOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors';
+                        busOption.onclick = () => selectBusService(direction, service.id, busOption);
+                        
+                        const isRecommended = service.is_recommended ? '<span class="bg-pink-500 text-white px-2 py-1 rounded text-xs font-semibold ml-2">RECOMMENDED</span>' : '';
+                        
+                        busOption.innerHTML = `
+                            <div class="flex items-start gap-3">
+                                <input type="radio" name="bus_${direction}" value="${service.id}" 
+                                    class="mt-1 text-pink-500 focus:ring-pink-500 flex-shrink-0" 
+                                    onchange="selectBusService('${direction}', ${service.id}, this.closest('div'))">
+                                ${service.image ? `<img src="${service.image}" alt="${service.name}" class="w-20 h-16 object-cover rounded flex-shrink-0">` : '<div class="w-20 h-16 bg-gray-200 rounded flex-shrink-0"></div>'}
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-start gap-2 flex-wrap">
+                                        <span class="font-semibold text-gray-900 break-words flex-1 min-w-0">${service.name}: ${service.departure_time}</span>
+                                        ${isRecommended}
+                                    </div>
+                                    <p class="text-sm text-gray-600 mt-1 break-words">${service.pick_up_location}</p>
+                                    <p class="text-lg font-bold text-pink-600 mt-2">${formatPrice(service.price)} VND</p>
+                                </div>
+                            </div>
+                        `;
+                        container.appendChild(busOption);
+                    });
+                } catch (error) {
+                    console.error('Error loading bus services:', error);
+                }
+            }
+
+            // Select bus service
+            function selectBusService(direction, serviceId, element) {
+                // Update radio button
+                const radio = element.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+
+                // Remove selected class from all options
+                const container = direction === 'outbound' ? 'outboundBusOptions' : 'returnBusOptions';
+                document.querySelectorAll(`#${container} > div`).forEach(div => {
+                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.add('border-gray-300');
+                });
+
+                // Add selected class to current option
+                element.classList.remove('border-gray-300');
+                element.classList.add('border-pink-500', 'bg-pink-50');
+
+                // Store selected bus
+                bookingData[direction === 'outbound' ? 'outboundBus' : 'returnBus'] = serviceId;
+                calculateTotal();
+            }
+
+            // Load gifts
+            async function loadGifts() {
+                try {
+                    const response = await fetch('{{ route("api.gifts") }}');
+                    const gifts = await response.json();
+                    
+                    const container = document.getElementById('giftOptions');
+                    container.innerHTML = '';
+
+                    if (gifts.length === 0) {
+                        container.innerHTML = '<p class="text-sm text-gray-500">No gifts available</p>';
+                        return;
+                    }
+
+                    gifts.forEach(gift => {
+                        const giftOption = document.createElement('div');
+                        giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors';
+                        giftOption.onclick = () => selectGift(gift.id, giftOption);
+                        
+                        giftOption.innerHTML = `
+                            <div class="flex items-center gap-3">
+                                <input type="radio" name="gift" value="${gift.id}" 
+                                    class="text-pink-500 focus:ring-pink-500" 
+                                    onchange="selectGift(${gift.id}, this.closest('div'))">
+                                ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-16 h-16 object-cover rounded">` : '<div class="w-16 h-16 bg-gray-200 rounded"></div>'}
+                                <span class="font-semibold text-gray-900">${gift.name}</span>
+                            </div>
+                        `;
+                        container.appendChild(giftOption);
+                    });
+                } catch (error) {
+                    console.error('Error loading gifts:', error);
+                }
+            }
+
+            // Select gift
+            function selectGift(giftId, element) {
+                // Update radio button
+                const radio = element.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+
+                // Remove selected class from all options
+                document.querySelectorAll('#giftOptions > div').forEach(div => {
+                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.add('border-gray-300');
+                });
+
+                // Add selected class to current option
+                element.classList.remove('border-gray-300');
+                element.classList.add('border-pink-500', 'bg-pink-50');
+
+                // Store selected gift
+                bookingData.selectedGift = giftId;
+                calculateTotal();
+            }
+
+            // Calculate total
+            async function calculateTotal() {
+                let total = 0;
+
+                // Tour price (fixed, not affected by number of people)
+                const adults = parseInt(document.getElementById('adultsCount').value) || 0;
+                const children = parseInt(document.getElementById('childrenCount').value) || 0;
+                bookingData.adults = adults;
+                bookingData.children = children;
+
+                // Tour price is fixed, not multiplied by number of people
+                total += bookingData.tourPrice;
+
+                // Outbound bus price (only if bus service is enabled, fixed price not multiplied by number of people)
+                const useBusService = document.getElementById('useBusService')?.checked;
+                if (useBusService && bookingData.outboundBus) {
+                    try {
+                        const response = await fetch(`{{ route('api.bus-services') }}?direction=outbound`);
+                        const services = await response.json();
+                        const selectedService = services.find(s => s.id === bookingData.outboundBus);
+                        if (selectedService) {
+                            total += selectedService.price; // Fixed price, not multiplied by number of people
+                        }
+                    } catch (error) {
+                        console.error('Error calculating outbound bus:', error);
+                    }
+                }
+
+                // Return bus price (only if bus service is enabled, fixed price not multiplied by number of people)
+                if (useBusService && bookingData.returnBus) {
+                    try {
+                        const response = await fetch(`{{ route('api.bus-services') }}?direction=return`);
+                        const services = await response.json();
+                        const selectedService = services.find(s => s.id === bookingData.returnBus);
+                        if (selectedService) {
+                            total += selectedService.price; // Fixed price, not multiplied by number of people
+                        }
+                    } catch (error) {
+                        console.error('Error calculating return bus:', error);
+                    }
+                }
+
+                // Update total display
+                document.getElementById('bookingTotal').textContent = formatPrice(total) + ' VND';
+            }
+
+            // Format price
+            function formatPrice(price) {
+                return new Intl.NumberFormat('vi-VN').format(Math.round(price));
+            }
+
+            // Custom Dropdown Functions
+            function toggleDropdown(dropdownId, iconId) {
+                const dropdown = document.getElementById(dropdownId);
+                const icon = document.getElementById(iconId);
+                
+                // Close all other dropdowns
+                document.querySelectorAll('[id$="Dropdown"]').forEach(dd => {
+                    if (dd.id !== dropdownId) {
+                        dd.classList.add('hidden');
+                        const otherIcon = document.getElementById(dd.id.replace('Dropdown', 'Icon'));
+                        if (otherIcon) {
+                            otherIcon.style.transform = 'rotate(0deg)';
+                        }
+                    }
+                });
+
+                // Toggle current dropdown
+                if (dropdown.classList.contains('hidden')) {
+                    dropdown.classList.remove('hidden');
+                    if (icon) icon.style.transform = 'rotate(180deg)';
+                } else {
+                    dropdown.classList.add('hidden');
+                    if (icon) icon.style.transform = 'rotate(0deg)';
+                }
+            }
+
+            // Load starting points from API
+            async function loadStartingPoints() {
+                try {
+                    const response = await fetch('{{ route("api.bus-services.starting-points") }}');
+                    const startingPoints = await response.json();
+                    
+                    const container = document.getElementById('busStartingPointOptions');
+                    container.innerHTML = '';
+
+                    if (startingPoints.length === 0) {
+                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">No starting points available</div>';
+                        return;
+                    }
+
+                    startingPoints.forEach(point => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center gap-2';
+                        button.onclick = () => selectStartingPoint(point, button);
+                        button.innerHTML = `
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>${point}</span>
+                        `;
+                        container.appendChild(button);
+                    });
+                } catch (error) {
+                    console.error('Error loading starting points:', error);
+                    document.getElementById('busStartingPointOptions').innerHTML = '<div class="px-4 py-2 text-sm text-red-500 text-center">Error loading starting points</div>';
+                }
+            }
+
+            // Load return destinations from API
+            async function loadReturnDestinations() {
+                try {
+                    const response = await fetch('{{ route("api.bus-services.return-destinations") }}');
+                    const returnDestinations = await response.json();
+                    
+                    const container = document.getElementById('busReturnDestinationOptions');
+                    container.innerHTML = '';
+
+                    if (returnDestinations.length === 0) {
+                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">No return destinations available</div>';
+                        return;
+                    }
+
+                    returnDestinations.forEach(destination => {
+                        const button = document.createElement('button');
+                        button.type = 'button';
+                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center gap-2';
+                        button.onclick = () => selectReturnDestination(destination, button);
+                        button.innerHTML = `
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span>${destination}</span>
+                        `;
+                        container.appendChild(button);
+                    });
+                } catch (error) {
+                    console.error('Error loading return destinations:', error);
+                    document.getElementById('busReturnDestinationOptions').innerHTML = '<div class="px-4 py-2 text-sm text-red-500 text-center">Error loading return destinations</div>';
+                }
+            }
+
+            function selectStartingPoint(value, element) {
+                const hiddenInput = document.getElementById('busStartingPoint');
+                const textSpan = document.getElementById('busStartingPointText');
+                const dropdown = document.getElementById('busStartingPointDropdown');
+                const icon = document.getElementById('busStartingPointIcon');
+                
+                hiddenInput.value = value;
+                textSpan.textContent = element.textContent.trim();
+                textSpan.classList.remove('text-gray-700');
+                textSpan.classList.add('text-gray-900', 'font-medium');
+                
+                dropdown.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                
+                // Trigger change event
+                hiddenInput.dispatchEvent(new Event('change'));
+            }
+
+            function selectReturnDestination(value, element) {
+                const hiddenInput = document.getElementById('busReturnDestination');
+                const textSpan = document.getElementById('busReturnDestinationText');
+                const dropdown = document.getElementById('busReturnDestinationDropdown');
+                const icon = document.getElementById('busReturnDestinationIcon');
+                
+                hiddenInput.value = value;
+                textSpan.textContent = element.textContent.trim();
+                textSpan.classList.remove('text-gray-700');
+                textSpan.classList.add('text-gray-900', 'font-medium');
+                
+                dropdown.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+                
+                // Trigger change event
+                hiddenInput.dispatchEvent(new Event('change'));
+            }
+
+            // Close dropdowns when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!event.target.closest('[id$="Btn"]') && !event.target.closest('[id$="Dropdown"]')) {
+                    document.querySelectorAll('[id$="Dropdown"]').forEach(dropdown => {
+                        dropdown.classList.add('hidden');
+                        const iconId = dropdown.id.replace('Dropdown', 'Icon');
+                        const icon = document.getElementById(iconId);
+                        if (icon) icon.style.transform = 'rotate(0deg)';
+                    });
+                }
+            });
+
+            // Toggle bus service section visibility
+            function toggleBusService() {
+                const checkbox = document.getElementById('useBusService');
+                const busSection = document.getElementById('busServiceSection');
+                
+                if (checkbox.checked) {
+                    busSection.classList.remove('hidden');
+                } else {
+                    busSection.classList.add('hidden');
+                    // Clear bus selections when hidden
+                    bookingData.outboundBus = null;
+                    bookingData.returnBus = null;
+                    // Clear selected bus options
+                    document.querySelectorAll('#outboundBusOptions input[type="radio"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                    document.querySelectorAll('#returnBusOptions input[type="radio"]').forEach(radio => {
+                        radio.checked = false;
+                    });
+                    // Clear bus option selections styling
+                    document.querySelectorAll('#outboundBusOptions > div').forEach(div => {
+                        div.classList.remove('border-pink-500', 'bg-pink-50');
+                        div.classList.add('border-gray-300');
+                    });
+                    document.querySelectorAll('#returnBusOptions > div').forEach(div => {
+                        div.classList.remove('border-pink-500', 'bg-pink-50');
+                        div.classList.add('border-gray-300');
+                    });
+                    // Recalculate total
+                    calculateTotal();
+                }
+            }
+
+            // Initialize Flatpickr for date inputs
+            function initDatePickers() {
+                // Check if AirDatepicker is loaded
+                if (typeof AirDatepicker === 'undefined') {
+                    console.warn('AirDatepicker not loaded yet, retrying...');
+                    setTimeout(initDatePickers, 200);
                     return;
                 }
 
-                // Redirect to WhatsApp with booking details
-                const message = `Hello! I'm interested in booking {{ $tour->name }}.\nDate: ${date}\nAdults: ${adults}`;
-                window.open(`https://wa.me/84915121987?text=${encodeURIComponent(message)}`, '_blank');
+                const today = new Date();
+                const minDate = today.toISOString().split('T')[0];
+
+                // Helper function to initialize AirDatepicker
+                function initDatePicker(element, options = {}) {
+                    if (!element || element._datepicker) return;
+                    
+                    try {
+                        const datepicker = new AirDatepicker(element, {
+                            dateFormat: 'dd/MM/yyyy',
+                            minDate: minDate,
+                            isMobile: window.innerWidth <= 768,
+                            autoClose: true,
+                            onSelect: function({date, formattedDate, datepicker}) {
+                                // Format for backend (YYYY-MM-DD)
+                                const formattedDateISO = date ? date.toISOString().split('T')[0] : '';
+                                element.dataset.value = formattedDateISO;
+                                // Update display value
+                                if (date) {
+                                    element.value = formattedDate;
+                                }
+                            },
+                            ...options
+                        });
+                        return datepicker;
+                    } catch (e) {
+                        console.error('Error initializing AirDatepicker:', e);
+                        return null;
+                    }
+                }
+
+                // Tour start date picker
+                const tourStartDateEl = document.getElementById('tourStartDate');
+                if (tourStartDateEl) {
+                    initDatePicker(tourStartDateEl);
+                }
+
+                // Bus departure date picker
+                const busDepartureDateEl = document.getElementById('busDepartureDate');
+                if (busDepartureDateEl) {
+                    initDatePicker(busDepartureDateEl);
+                }
+
+                // Bus return date picker
+                const busReturnDateEl = document.getElementById('busReturnDate');
+                if (busReturnDateEl) {
+                    initDatePicker(busReturnDateEl);
+                }
             }
+
+            // Check Availability function - Redirect to checkout
+            function checkAvailability() {
+                const startDateInput = document.getElementById('tourStartDate');
+                const startDate = startDateInput ? (startDateInput.dataset.value || startDateInput.value) : '';
+                const displayDate = startDateInput ? startDateInput.value : '';
+                const adults = document.getElementById('adultsCount').value;
+                const children = document.getElementById('childrenCount').value;
+                const totalPriceText = document.getElementById('bookingTotal').textContent;
+                const totalPrice = parseFloat(totalPriceText.replace(/[^\d]/g, '')) || 0;
+                const useBusService = document.getElementById('useBusService')?.checked;
+
+                if (!startDate) {
+                    alert('Vui lòng chọn ngày bắt đầu tour');
+                    return;
+                }
+
+                // Build checkout URL with all booking details
+                const params = new URLSearchParams({
+                    tour_id: {{ $tour->id }},
+                    tour_start_date: startDate,
+                    adults: adults,
+                    children: children || 0,
+                    total_price: totalPrice,
+                    use_bus: useBusService ? '1' : '0'
+                });
+
+                if (useBusService && bookingData.outboundBus) {
+                    params.append('outbound_bus', bookingData.outboundBus);
+                }
+                if (useBusService && bookingData.returnBus) {
+                    params.append('return_bus', bookingData.returnBus);
+                }
+                if (bookingData.selectedGift) {
+                    params.append('gift', bookingData.selectedGift);
+                }
+
+                // Redirect to checkout page
+                window.location.href = `{{ route('checkout.show') }}?${params.toString()}`;
+            }
+
+            // Initialize on page load
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize date pickers first
+                initDatePickers();
+
+                // Load starting points and return destinations from API
+                loadStartingPoints();
+                loadReturnDestinations();
+
+                // Load gifts
+                loadGifts();
+
+                // Custom dropdown button click handlers
+                document.getElementById('busStartingPointBtn').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleDropdown('busStartingPointDropdown', 'busStartingPointIcon');
+                });
+
+                document.getElementById('busReturnDestinationBtn').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    toggleDropdown('busReturnDestinationDropdown', 'busReturnDestinationIcon');
+                });
+
+                // Load bus services when starting point is selected (only if bus service is enabled)
+                document.getElementById('busStartingPoint').addEventListener('change', function() {
+                    const useBusService = document.getElementById('useBusService')?.checked;
+                    if (useBusService && this.value) {
+                        loadBusServices('outbound', 'outboundBusOptions');
+                    }
+                });
+
+                // Load bus services when return destination is selected (only if bus service is enabled)
+                document.getElementById('busReturnDestination').addEventListener('change', function() {
+                    const useBusService = document.getElementById('useBusService')?.checked;
+                    if (useBusService && this.value) {
+                        loadBusServices('return', 'returnBusOptions');
+                    }
+                });
+
+                // Update total when people count changes
+                document.getElementById('adultsCount').addEventListener('input', calculateTotal);
+                document.getElementById('childrenCount').addEventListener('input', calculateTotal);
+
+                // Initial total calculation
+                calculateTotal();
+            });
 
             // Match thumbnail height with detail image only (not including description)
             document.addEventListener('DOMContentLoaded', function() {

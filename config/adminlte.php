@@ -360,6 +360,40 @@ return [
             ],
         ],
         [
+            'text' => 'Gifts',
+            'icon' => 'fas fa-fw fa-gift',
+            'active' => ['admin/gifts*'],
+            'submenu' => [
+                [
+                    'text' => 'List Gifts',
+                    'url' => 'admin/gifts',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add New Gift',
+                    'url' => 'admin/gifts/create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Bus Services',
+            'icon' => 'fas fa-fw fa-bus',
+            'active' => ['admin/bus-services*'],
+            'submenu' => [
+                [
+                    'text' => 'List Bus Services',
+                    'url' => 'admin/bus-services',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add New Bus Service',
+                    'url' => 'admin/bus-services/create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
             'text' => 'Bookings',
             'url' => '#',
             'icon' => 'fas fa-fw fa-calendar-check',

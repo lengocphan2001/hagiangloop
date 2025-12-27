@@ -30,6 +30,19 @@ Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
+// Checkout routes
+Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
+Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
+Route::get('/checkout/success/{id}', [App\Http\Controllers\CheckoutController::class, 'success'])->name('checkout.success');
+
+// API routes
+Route::prefix('api')->group(function () {
+    Route::get('/gifts', [App\Http\Controllers\Api\GiftController::class, 'index'])->name('api.gifts');
+    Route::get('/bus-services', [App\Http\Controllers\Api\BusServiceController::class, 'index'])->name('api.bus-services');
+    Route::get('/bus-services/starting-points', [App\Http\Controllers\Api\BusServiceController::class, 'getStartingPoints'])->name('api.bus-services.starting-points');
+    Route::get('/bus-services/return-destinations', [App\Http\Controllers\Api\BusServiceController::class, 'getReturnDestinations'])->name('api.bus-services.return-destinations');
+});
+
 // Auth routes (sẽ được implement sau)
 Route::get('/login', function () {
     return view('auth.login');
@@ -58,6 +71,12 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // News management
     Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
+    
+    // Gifts management
+    Route::resource('gifts', App\Http\Controllers\Admin\GiftController::class);
+    
+    // Bus Services management
+    Route::resource('bus-services', App\Http\Controllers\Admin\BusServiceController::class);
     
     // Image upload for TinyMCE
     Route::post('/upload-image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload'])->name('upload-image');
