@@ -564,7 +564,7 @@
     </section>
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
-    <section class="py-16 lg:py-24 bg-gradient-to-b from-gray-50 via-white to-gray-50">
+    <section class="pb-16 bg-gradient-to-b from-gray-50 via-white to-gray-50">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="text-center mb-12">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
