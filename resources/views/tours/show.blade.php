@@ -911,6 +911,11 @@
                     });
                 }
 
+                // Set all chevrons to point up initially (all accordions are closed)
+                document.querySelectorAll('.day-chevron').forEach(chevron => {
+                    chevron.style.transform = 'rotate(180deg)';
+                });
+
                 // Make toggleDayAccordion globally available
                 window.toggleDayAccordion = toggleDayAccordion;
             });
@@ -934,7 +939,7 @@
 
                         otherContent.classList.add('hidden');
                         if (otherChevron) {
-                            otherChevron.classList.remove('rotate-180');
+                            otherChevron.style.transform = 'rotate(180deg)';
                         }
                         if (otherHeader) {
                             otherHeader.classList.remove('bg-gray-50');
@@ -943,16 +948,16 @@
                 });
 
                 if (isHidden) {
-                    // Open this day - no animation
+                    // Open this day - chevron points down (0deg)
                     content.classList.remove('hidden');
-                    chevron.classList.add('rotate-180');
+                    chevron.style.transform = 'rotate(0deg)';
                     if (header) {
                         header.classList.add('bg-gray-50');
                     }
                 } else {
-                    // Close this day - no animation
+                    // Close this day - chevron points up (180deg)
                     content.classList.add('hidden');
-                    chevron.classList.remove('rotate-180');
+                    chevron.style.transform = 'rotate(180deg)';
                     if (header) {
                         header.classList.remove('bg-gray-50');
                     }
