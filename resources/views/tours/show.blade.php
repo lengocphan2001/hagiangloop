@@ -102,7 +102,7 @@
                                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                                             </path>
                                                         </svg>
-                                                        <p class="font-semibold text-base">View all</p>
+                                                        <p class="font-semibold text-base">{{ __('tours.view_all') }}</p>
                                                         <p class="text-xs">{{ count($tour->detail_images) }} photos</p>
                                                     </div>
                                                 </div>
@@ -113,7 +113,7 @@
                             </div>
                         @endif
                         <div class="text-start mb-8">
-                            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Tour Itinerary</h2>
+                            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">{{ __('tours.tour_itinerary') }}</h2>
                         </div>
                         @foreach ($tour->tourDays as $dayIndex => $day)
                             <div id="day-{{ $day->day_number }}"
@@ -370,27 +370,44 @@
                 <div class="lg:col-span-1">
                     <div class="sticky top-4">
                         <div class="bg-white rounded-lg shadow-xl border border-gray-200 p-6">
-                            <!-- Tour/Price Section -->
+                            <!-- Tour Type Selection Section -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900">Tour</h3>
+                                    <h3 class="font-bold text-gray-900">{{ __('tours.tour') }}</h3>
                                 </div>
-                                <div class="flex items-center justify-between mb-2">
-                                    <div>
-                                        <p class="text-sm text-gray-500 line-through" id="tourPriceOriginal">
-                                            {{ $tour->price ? number_format($tour->price, 0, ',', '.') . ' VND' : 'N/A' }}
-                                        </p>
-                                        <p class="text-2xl font-bold text-gray-900" id="tourPrice">
-                                            {{ $tour->price ? number_format($tour->price, 0, ',', '.') . ' VND' : 'N/A' }}
-                                        </p>
+                                @if($tour->tourTypes && $tour->tourTypes->count() > 0)
+                                    <div class="relative mb-3">
+                                        <button type="button" id="tourTypeBtn" 
+                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
+                                            <span id="tourTypeText" class="text-gray-700">{{ __('tours.select_tour_type') }}</span>
+                                            <svg class="w-5 h-5 text-gray-400 transition-transform" id="tourTypeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <div id="tourTypeDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+                                            <div class="py-1" id="tourTypeOptions">
+                                                @foreach($tour->tourTypes as $type)
+                                                    <button type="button" class="w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center justify-between tour-type-option" 
+                                                            data-id="{{ $type->id }}" 
+                                                            data-name="{{ $type->name }}" 
+                                                            data-price="{{ $type->price }}"
+                                                            onclick="selectTourType({{ $type->id }}, '{{ $type->name }}', {{ $type->price }}, this)">
+                                                        <span>{{ $type->name }}</span>
+                                                        <span class="font-semibold text-pink-600">{{ number_format($type->price, 0, ',', '.') }}₫</span>
+                                                    </button>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="selectedTourTypeId" value="">
                                     </div>
-                                    <div class="text-right">
-                                        <span class="bg-red-500 text-white px-2 py-1 rounded text-xs font-semibold">-55%</span>
+                                    <div id="selectedTourTypeDisplay" class="hidden">
+                                        <p class="text-sm text-gray-500 line-through" id="tourPriceOriginal"></p>
+                                        <p class="text-2xl font-bold text-gray-900" id="tourPrice"></p>
                                     </div>
-                                </div>
+                                @endif
                             </div>
 
                             <!-- Start Date Section -->
@@ -399,11 +416,11 @@
                                     <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">Ngày bắt đầu tour</h3>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.start_date') }}</h3>
                                 </div>
                                 <input type="text" id="tourStartDate" 
                                     class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
-                                    placeholder="Chọn ngày bắt đầu tour"
+                                    placeholder="{{ __('tours.select_date') }}"
                                     readonly>
                             </div>
 
@@ -418,7 +435,7 @@
                                             <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
                                             <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
                                         </svg>
-                                        <span class="font-semibold text-gray-900 text-sm sm:text-base">Sử dụng dịch vụ bus</span>
+                                        <span class="font-semibold text-gray-900 text-sm sm:text-base">{{ __('tours.use_bus_service') }}</span>
                                     </label>
                                 </div>
                             </div>
@@ -430,7 +447,7 @@
                                         <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                         </svg>
-                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">Choose a starting point</h3>
+                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.select_starting_point') }}</h3>
                                     </div>
                                 <div class="mb-3 relative">
                                     <!-- Custom Dropdown Button -->
@@ -467,7 +484,7 @@
                                     <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">Choose the return destination</h3>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.choose_return_destination') }}</h3>
                                 </div>
                                 <div class="mb-3 relative">
                                     <!-- Custom Dropdown Button -->
@@ -505,9 +522,9 @@
                                     <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900">Gifts</h3>
+                                    <h3 class="font-bold text-gray-900">{{ __('tours.gifts') }}</h3>
                                 </div>
-                                <div id="giftOptions" class="space-y-3">
+                                <div id="giftOptions" class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-gray-100">
                                     <!-- Gift options will be loaded here -->
                                 </div>
                             </div>
@@ -518,26 +535,19 @@
                                     <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900">Person</h3>
+                                    <h3 class="font-bold text-gray-900">{{ __('tours.people') }}</h3>
                                 </div>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div>
-                                        <label class="block text-sm text-gray-600 mb-1">Người lớn</label>
-                                        <input type="number" id="adultsCount" min="1" value="2" 
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
-                                    </div>
-                                    <div>
-                                        <label class="block text-sm text-gray-600 mb-1">Trẻ em</label>
-                                        <input type="number" id="childrenCount" min="0" value="0" 
-                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
-                                    </div>
+                                <div>
+                                    <label class="block text-sm text-gray-600 mb-1">{{ __('tours.adults') }}</label>
+                                    <input type="number" id="adultsCount" min="1" value="2" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
                                 </div>
                             </div>
 
                             <!-- Total Section -->
                             <div class="mb-6 pt-4 border-t border-gray-200">
                                 <div class="flex items-center justify-between">
-                                    <span class="text-lg font-bold text-gray-900">Total:</span>
+                                    <span class="text-lg font-bold text-gray-900">{{ __('common.total') }}:</span>
                                     <span class="text-2xl font-bold text-pink-600" id="bookingTotal">0 VND</span>
                                 </div>
                             </div>
@@ -545,7 +555,7 @@
                             <!-- Action Button -->
                             <button onclick="checkAvailability()"
                                 class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200">
-                                Continue Checkout
+                                {{ __('tours.continue_checkout') }}
                             </button>
                         </div>
                     </div>
@@ -624,7 +634,7 @@
                         </svg>
                         Book via WhatsApp
                     </a>
-                    <a href="mailto:Mamashomestayhg@gmail.com?subject=Tour Inquiry: {{ urlencode($tour->name) }}"
+                    <a href="mailto:alleyhomestay@gmail.com?subject=Tour Inquiry: {{ urlencode($tour->name) }}"
                         class="bg-gradient-to-r from-amber-400 to-amber-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:from-amber-500 hover:to-amber-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
                         <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="none">
                             <path
@@ -1113,6 +1123,20 @@
         <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.js"></script>
         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
         <script>
+            // Vietnamese locale for Air Datepicker
+            const vietnameseLocale = {
+                days: ['Chủ nhật', 'Thứ hai', 'Thứ ba', 'Thứ tư', 'Thứ năm', 'Thứ sáu', 'Thứ bảy'],
+                daysShort: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                daysMin: ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'],
+                months: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                monthsShort: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
+                today: 'Hôm nay',
+                clear: 'Xóa',
+                dateFormat: 'dd/MM/yyyy',
+                timeFormat: 'HH:mm',
+                firstDay: 1
+            };
+
             document.addEventListener('DOMContentLoaded', function() {
                 // Initialize AOS
                 if (typeof AOS !== 'undefined') {
@@ -1309,12 +1333,101 @@
             // Booking Form Logic
             let bookingData = {
                 tourPrice: {{ $tour->price ?? 0 }},
+                tourTypeId: null,
                 outboundBus: null,
                 returnBus: null,
                 selectedGift: null,
-                adults: 2,
-                children: 0
+                adults: 2
             };
+
+            // Tour Type Dropdown Logic
+            const tourTypeBtn = document.getElementById('tourTypeBtn');
+            const tourTypeDropdown = document.getElementById('tourTypeDropdown');
+            const tourTypeIcon = document.getElementById('tourTypeIcon');
+            const tourTypeText = document.getElementById('tourTypeText');
+            const selectedTourTypeId = document.getElementById('selectedTourTypeId');
+            const selectedTourTypeDisplay = document.getElementById('selectedTourTypeDisplay');
+
+            if (tourTypeBtn && tourTypeDropdown) {
+                // Toggle dropdown
+                tourTypeBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const isHidden = tourTypeDropdown.classList.contains('hidden');
+                    
+                    // Close all other dropdowns
+                    document.querySelectorAll('[id$="Dropdown"]').forEach(dropdown => {
+                        if (dropdown !== tourTypeDropdown) {
+                            dropdown.classList.add('hidden');
+                        }
+                    });
+                    
+                    if (isHidden) {
+                        tourTypeDropdown.classList.remove('hidden');
+                        tourTypeIcon.style.transform = 'rotate(180deg)';
+                    } else {
+                        tourTypeDropdown.classList.add('hidden');
+                        tourTypeIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Close dropdown when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!tourTypeBtn.contains(e.target) && !tourTypeDropdown.contains(e.target)) {
+                        tourTypeDropdown.classList.add('hidden');
+                        tourTypeIcon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            }
+
+            function selectTourType(typeId, typeName, typePrice, element) {
+                // Update button text
+                if (tourTypeText) {
+                    tourTypeText.textContent = typeName;
+                }
+                
+                // Update hidden input
+                if (selectedTourTypeId) {
+                    selectedTourTypeId.value = typeId;
+                }
+                
+                // Update booking data
+                bookingData.tourPrice = typePrice;
+                bookingData.tourTypeId = typeId;
+                
+                // Update price display
+                const tourPriceElement = document.getElementById('tourPrice');
+                const tourPriceOriginalElement = document.getElementById('tourPriceOriginal');
+                
+                if (tourPriceElement) {
+                    tourPriceElement.textContent = formatPrice(typePrice) + ' VND';
+                }
+                
+                if (tourPriceOriginalElement && selectedTourTypeDisplay) {
+                    // Show the selected tour type display
+                    selectedTourTypeDisplay.classList.remove('hidden');
+                }
+                
+                // Remove selected class from all options
+                document.querySelectorAll('.tour-type-option').forEach(option => {
+                    option.classList.remove('bg-pink-50', 'text-pink-600');
+                });
+                
+                // Add selected class to current option
+                if (element) {
+                    element.classList.add('bg-pink-50', 'text-pink-600');
+                }
+                
+                // Close dropdown
+                if (tourTypeDropdown) {
+                    tourTypeDropdown.classList.add('hidden');
+                }
+                if (tourTypeIcon) {
+                    tourTypeIcon.style.transform = 'rotate(0deg)';
+                }
+                
+                // Recalculate total
+                calculateTotal();
+            }
 
             // Load bus services
             async function loadBusServices(direction, containerId) {
@@ -1344,7 +1457,7 @@
                     container.innerHTML = '';
 
                     if (filteredServices.length === 0) {
-                        container.innerHTML = '<p class="text-sm text-gray-500">No bus services available for selected location</p>';
+                        container.innerHTML = '<p class="text-sm text-gray-500">{{ __('tours.no_bus_services') }}</p>';
                         return;
                     }
 
@@ -1410,22 +1523,22 @@
                     container.innerHTML = '';
 
                     if (gifts.length === 0) {
-                        container.innerHTML = '<p class="text-sm text-gray-500">No gifts available</p>';
+                        container.innerHTML = '<p class="text-sm text-gray-500">{{ __('tours.no_gifts') }}</p>';
                         return;
                     }
 
                     gifts.forEach(gift => {
                         const giftOption = document.createElement('div');
-                        giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors';
+                        giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors flex-shrink-0 w-32';
                         giftOption.onclick = () => selectGift(gift.id, giftOption);
                         
                         giftOption.innerHTML = `
-                            <div class="flex items-center gap-3">
+                            <div class="flex flex-col items-center gap-2">
                                 <input type="radio" name="gift" value="${gift.id}" 
                                     class="text-pink-500 focus:ring-pink-500" 
                                     onchange="selectGift(${gift.id}, this.closest('div'))">
-                                ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-16 h-16 object-cover rounded">` : '<div class="w-16 h-16 bg-gray-200 rounded"></div>'}
-                                <span class="font-semibold text-gray-900">${gift.name}</span>
+                                ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-full h-24 object-cover rounded">` : '<div class="w-full h-24 bg-gray-200 rounded"></div>'}
+                                <span class="font-semibold text-gray-900 text-center text-xs break-words">${gift.name}</span>
                             </div>
                         `;
                         container.appendChild(giftOption);
@@ -1462,9 +1575,7 @@
 
                 // Tour price (fixed, not affected by number of people)
                 const adults = parseInt(document.getElementById('adultsCount').value) || 0;
-                const children = parseInt(document.getElementById('childrenCount').value) || 0;
                 bookingData.adults = adults;
-                bookingData.children = children;
 
                 // Tour price is fixed, not multiplied by number of people
                 total += bookingData.tourPrice;
@@ -1543,7 +1654,7 @@
                     container.innerHTML = '';
 
                     if (startingPoints.length === 0) {
-                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">No starting points available</div>';
+                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">{{ __('tours.no_starting_points') }}</div>';
                         return;
                     }
 
@@ -1577,7 +1688,7 @@
                     container.innerHTML = '';
 
                     if (returnDestinations.length === 0) {
-                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">No return destinations available</div>';
+                        container.innerHTML = '<div class="px-4 py-2 text-sm text-gray-500 text-center">{{ __('tours.no_return_destinations') }}</div>';
                         return;
                     }
 
@@ -1700,17 +1811,24 @@
                     
                     try {
                         const datepicker = new AirDatepicker(element, {
+                            locale: vietnameseLocale,
                             dateFormat: 'dd/MM/yyyy',
                             minDate: minDate,
                             isMobile: window.innerWidth <= 768,
                             autoClose: true,
                             onSelect: function({date, formattedDate, datepicker}) {
-                                // Format for backend (YYYY-MM-DD)
-                                const formattedDateISO = date ? date.toISOString().split('T')[0] : '';
-                                element.dataset.value = formattedDateISO;
-                                // Update display value
+                                // Format for backend (YYYY-MM-DD) - format directly without timezone conversion
                                 if (date) {
+                                    const year = date.getFullYear();
+                                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                                    const day = String(date.getDate()).padStart(2, '0');
+                                    const formattedDateISO = `${year}-${month}-${day}`;
+                                    element.dataset.value = formattedDateISO;
+                                    // Update display value
                                     element.value = formattedDate;
+                                } else {
+                                    element.dataset.value = '';
+                                    element.value = '';
                                 }
                             },
                             ...options
@@ -1747,7 +1865,6 @@
                 const startDate = startDateInput ? (startDateInput.dataset.value || startDateInput.value) : '';
                 const displayDate = startDateInput ? startDateInput.value : '';
                 const adults = document.getElementById('adultsCount').value;
-                const children = document.getElementById('childrenCount').value;
                 const totalPriceText = document.getElementById('bookingTotal').textContent;
                 const totalPrice = parseFloat(totalPriceText.replace(/[^\d]/g, '')) || 0;
                 const useBusService = document.getElementById('useBusService')?.checked;
@@ -1762,7 +1879,6 @@
                     tour_id: {{ $tour->id }},
                     tour_start_date: startDate,
                     adults: adults,
-                    children: children || 0,
                     total_price: totalPrice,
                     use_bus: useBusService ? '1' : '0'
                 });
@@ -1822,7 +1938,6 @@
 
                 // Update total when people count changes
                 document.getElementById('adultsCount').addEventListener('input', calculateTotal);
-                document.getElementById('childrenCount').addEventListener('input', calculateTotal);
 
                 // Initial total calculation
                 calculateTotal();

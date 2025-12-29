@@ -59,16 +59,6 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="price">Price (VND)</label>
-                            <input type="number" name="price" id="price" class="form-control @error('price') is-invalid @enderror" 
-                                   value="{{ old('price', $tour->price) }}" min="0" step="1000">
-                            @error('price')
-                                <span class="invalid-feedback">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
                             <label for="sort_order">Sort Order</label>
                             <input type="number" name="sort_order" id="sort_order" class="form-control" 
                                    value="{{ old('sort_order', $tour->sort_order) }}">
@@ -136,6 +126,15 @@
                     <i class="fas fa-plus"></i> Add Day
                 </button>
 
+                <hr>
+                <h4>Tour Types</h4>
+                <div id="tourTypesContainer">
+                    <!-- Tour types will be added here dynamically -->
+                </div>
+                <button type="button" class="btn btn-secondary btn-sm mt-2" onclick="addTourType()">
+                    <i class="fas fa-plus"></i> Add Tour Type
+                </button>
+
                 <div class="form-group mt-4">
                     <button type="submit" class="btn btn-primary">Update Tour</button>
                     <a href="{{ route('admin.tours.index') }}" class="btn btn-secondary">Cancel</a>
@@ -172,6 +171,8 @@
 <script>
 let dayCount = 0;
 const tourDays = @json($tourDaysData);
+let tourTypeCount = 0;
+const tourTypes = @json($tourTypesData ?? []);
 
 function addDay(dayData = null) {
     dayCount++;
@@ -355,6 +356,69 @@ function removeExistingImage(button) {
     }
 }
 
+// Tour Types Management
+function addTourType(typeData = null) {
+    tourTypeCount++;
+    const typeIndex = tourTypeCount;
+    const container = document.getElementById('tourTypesContainer');
+    
+    const typeHtml = `
+        <div class="card mb-2 tour-type-item">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-start mb-2">
+                    <h6 class="mb-0">Tour Type ${typeIndex}</h6>
+                    <button type="button" class="btn btn-sm btn-danger" onclick="removeTourType(this)">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Name <span class="text-danger">*</span></label>
+                            <input type="text" name="tour_types[${typeIndex}][name]" 
+                                   class="form-control" value="${typeData ? typeData.name : ''}" required>
+                            ${typeData && typeData.id ? `<input type="hidden" name="tour_types[${typeIndex}][id]" value="${typeData.id}">` : ''}
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Price (VND) <span class="text-danger">*</span></label>
+                            <input type="number" name="tour_types[${typeIndex}][price]" 
+                                   class="form-control" value="${typeData ? typeData.price : ''}" min="0" step="1000" required>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label>Sort Order</label>
+                            <input type="number" name="tour_types[${typeIndex}][sort_order]" 
+                                   class="form-control" value="${typeData ? typeData.sort_order : typeIndex}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="form-check">
+                                <input type="checkbox" name="tour_types[${typeIndex}][is_active]" 
+                                       class="form-check-input" value="1" 
+                                       ${typeData === null || typeData.is_active ? 'checked' : ''}>
+                                <label class="form-check-label">Active</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    container.insertAdjacentHTML('beforeend', typeHtml);
+}
+
+function removeTourType(button) {
+    if (confirm('Are you sure you want to remove this tour type?')) {
+        button.closest('.tour-type-item').remove();
+    }
+}
+
 // Initialize with existing days
 document.addEventListener('DOMContentLoaded', function() {
     if (tourDays.length > 0) {
@@ -363,6 +427,13 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     } else {
         addDay();
+    }
+    
+    // Initialize with existing tour types
+    if (tourTypes.length > 0) {
+        tourTypes.forEach(type => {
+            addTourType(type);
+        });
     }
 });
 </script>

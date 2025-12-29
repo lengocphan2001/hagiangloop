@@ -4,7 +4,7 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', 'Tours - Hà Giang Loop Tours')
+@section('title', __('tours_index.title') . ' - Hà Giang Loop Tours')
 
 @section('content')
 <!-- Hero Section -->
@@ -18,14 +18,14 @@
         <div class="text-center max-w-4xl">
             <div class="inline-block mb-6 hero-badge" data-aos="fade-down" data-aos-duration="600">
                 <span class="bg-gradient-to-r from-amber-400 to-amber-600 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg inline-block transform hover:scale-110 transition-transform duration-300">
-                    EXPLORE ADVENTURES
+                    {{ __('tours_index.explore_adventures') }}
                 </span>
             </div>
             <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                Discover <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-green-400 bg-clip-text text-transparent animate-gradient">Hà Giang</span>
+                {{ __('tours_index.discover_ha_giang') }} <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-green-400 bg-clip-text text-transparent animate-gradient">Hà Giang</span>
             </h1>
             <p class="text-xl lg:text-2xl text-gray-300 mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                Embark on an unforgettable journey through the stunning landscapes of Northern Vietnam
+                {{ __('tours_index.subtitle') }}
             </p>
         </div>
     </div>
@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="absolute bottom-0 left-0 right-0 p-6 z-10 image-content" data-aos="fade-up" data-aos-delay="{{ ($index * 150) + 300 }}">
                                     <h3 class="text-2xl lg:text-3xl font-bold text-white mb-2 drop-shadow-lg">{{ $tour->name }}</h3>
-                                    <p class="text-white/95 text-sm font-medium">{{ $tour->days }} Days / {{ $tour->nights }} Nights</p>
+                                    <p class="text-white/95 text-sm font-medium">{{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}</p>
                                 </div>
                             </div>
 
@@ -95,7 +95,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium">{{ $tour->tourDays->sum(fn($day) => $day->locations->count()) }} Amazing Locations</span>
+                                        <span class="text-gray-700 font-medium">{{ $tour->tourDays->sum(fn($day) => $day->locations->count()) }} {{ __('tours_index.amazing_locations') }}</span>
                                     </div>
                                     <div class="flex items-center text-sm highlight-item" data-aos="fade-right" data-aos-delay="{{ ($index * 150) + 500 }}">
                                         <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-green-100 mr-3 icon-box">
@@ -103,7 +103,7 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                                             </svg>
                                         </div>
-                                        <span class="text-gray-700 font-medium">{{ $tour->days }} Days Adventure</span>
+                                        <span class="text-gray-700 font-medium">{{ $tour->days }} {{ __('tours_index.days_adventure') }}</span>
                                     </div>
                                 </div>
 
@@ -114,14 +114,14 @@
                                             <span class="text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent price-number">{{ number_format($tour->price, 0) }}</span>
                                             <span class="text-gray-500 ml-2 text-lg">VND</span>
                                         </div>
-                                        <p class="text-gray-500 text-sm mt-1">per person</p>
+                                        <p class="text-gray-500 text-sm mt-1">{{ __('tours_index.per_person') }}</p>
                                     </div>
                                 @endif
 
                                 <!-- CTA Button -->
                                 <a href="{{ route('tours.show', $tour->slug) }}" 
                                    class="block w-full bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 text-white text-center py-4 rounded-xl font-bold text-base hover:from-amber-600 hover:via-amber-700 hover:to-amber-800 transition-colors duration-300 shadow-lg hover:shadow-xl">
-                                    View Details
+                                    {{ __('tours_index.view_details') }}
                                 </a>
                             </div>
                         </div>
@@ -133,8 +133,8 @@
                 <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
                 </svg>
-                <h3 class="text-2xl font-bold text-gray-700 mb-2">No Tours Available</h3>
-                <p class="text-gray-500">Check back soon for exciting tour packages!</p>
+                <h3 class="text-2xl font-bold text-gray-700 mb-2">{{ __('tours_index.no_tours_available') }}</h3>
+                <p class="text-gray-500">{{ __('tours_index.check_back_soon') }}</p>
             </div>
         @endif
     </div>

@@ -25,14 +25,19 @@ class ContactMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('New Contact Form Submission - ' . ($this->contactData['name'] ?? 'Unknown'))
-                    ->view('emails.contact')
-                    ->with([
-                        'contactName' => (string) ($this->contactData['name'] ?? ''),
-                        'whatsapp' => (string) ($this->contactData['whatsapp'] ?? ''),
-                        'email' => (string) ($this->contactData['email'] ?? ''),
-                        'country' => (string) ($this->contactData['country'] ?? ''),
-                        'contactMessage' => (string) ($this->contactData['message'] ?? ''),
+        $contactName = isset($this->contactData['name']) ? (string) $this->contactData['name'] : '';
+        $whatsapp = isset($this->contactData['whatsapp']) ? (string) $this->contactData['whatsapp'] : '';
+        $email = isset($this->contactData['email']) ? (string) $this->contactData['email'] : '';
+        $country = isset($this->contactData['country']) ? (string) $this->contactData['country'] : '';
+        $contactMessage = isset($this->contactData['message']) ? (string) $this->contactData['message'] : '';
+        
+        return $this->subject(__('emails.contact_subject') . ' - ' . $contactName)
+                    ->view('emails.contact', [
+                        'contactName' => $contactName,
+                        'whatsapp' => $whatsapp,
+                        'email' => $email,
+                        'country' => $country,
+                        'contactMessage' => $contactMessage,
                     ]);
     }
 }

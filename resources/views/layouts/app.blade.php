@@ -27,30 +27,33 @@
         <section class="relative w-screen" style="position: relative;">
             <!-- Slider Images -->
             <div class="slider-container relative w-full" style="z-index: 1; position: relative;">
-                <div class="slide active relative w-full" style="opacity: 1; z-index: 1; position: relative;">
-                    <div class="relative w-full">
-                        <img src="{{ asset('images/slider1.webp') }}" alt="Slider 1" class="slider-image" loading="eager">
-                        <div class="absolute inset-0 bg-black/30" style="z-index: 10;"></div>
-                        <div class="absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-black/90 via-black/70 to-transparent" style="z-index: 10;"></div>
+                @php
+                    $sliderImages = [
+                        ['path' => 'images/sliders/1.jpg', 'alt' => 'Slider 1'],
+                        ['path' => 'images/sliders/2.jpg', 'alt' => 'Slider 2'],
+                        ['path' => 'images/sliders/3.jpg', 'alt' => 'Slider 3'],
+                        ['path' => 'images/sliders/4.png', 'alt' => 'Slider 4'],
+                    ];
+                @endphp
+                @foreach($sliderImages as $index => $image)
+                    <div class="slide {{ $index === 0 ? 'active' : '' }} {{ $index === 0 ? 'relative' : 'absolute' }} top-0 left-0 w-full" style="{{ $index === 0 ? 'opacity: 1; z-index: 1; position: relative;' : 'opacity: 0; z-index: 0; position: absolute;' }}">
+                        <div class="relative w-full">
+                            <img src="{{ asset($image['path']) }}" alt="{{ $image['alt'] }}" class="slider-image" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                            <div class="absolute inset-0 bg-black/30" style="z-index: 10;"></div>
+                            <div class="absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-black/90 via-black/70 to-transparent" style="z-index: 10;"></div>
+                        </div>
                     </div>
-                </div>
-                <div class="slide absolute top-0 left-0 w-full" style="opacity: 0; z-index: 0; position: absolute;">
-                    <div class="relative w-full">
-                        <img src="{{ asset('images/slider2.webp') }}" alt="Slider 2" class="slider-image" loading="lazy">
-                        <div class="absolute inset-0 bg-black/30" style="z-index: 10;"></div>
-                        <div class="absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-black/90 via-black/70 to-transparent" style="z-index: 10;"></div>
-                    </div>
-                </div>
+                @endforeach
             </div>
             
             <!-- Content -->
             <div class="hero-content" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 999; display: flex; align-items: center; justify-content: center; pointer-events: none; width: 100%; height: 100%;">
                 <div class="text-center max-w-4xl mx-auto px-4" style="pointer-events: auto;">
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
-                        Khám phá <span class="bg-gradient-to-r from-yellow-300 to-green-300 bg-clip-text text-transparent">Hà Giang</span>
+                        {{ __('slider.title') }} <span class="bg-gradient-to-r from-yellow-300 to-green-300 bg-clip-text text-transparent">{{ __('slider.title_highlight') }}</span>
                     </h1>
                     <p class="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 leading-relaxed">
-                        Trải nghiệm vẻ đẹp hoang sơ của vùng đất địa đầu Tổ quốc với những tour du lịch đáng nhớ
+                        {{ __('slider.subtitle') }}
                     </p>
                 </div>
             </div>
@@ -58,8 +61,9 @@
             <!-- Slider Controls -->
             <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center">
                 <div class="slider-dots flex space-x-2">
-                    <button class="dot active w-3 h-3 rounded-full bg-white"></button>
-                    <button class="dot w-3 h-3 rounded-full bg-white/50"></button>
+                    @for($i = 0; $i < 4; $i++)
+                        <button class="dot {{ $i === 0 ? 'active' : '' }} w-3 h-3 rounded-full {{ $i === 0 ? 'bg-white' : 'bg-white/50' }}"></button>
+                    @endfor
                 </div>
             </div>
         </section>
@@ -86,7 +90,7 @@
             </button>
 
             <!-- Gmail Button (fixed position) -->
-            <a href="mailto:Mamashomestayhg@gmail.com" 
+            <a href="mailto:alleyhomestay@gmail.com" 
                 target="_blank"
                 class="floating-btn absolute bottom-[4rem] right-0 w-12 h-12 rounded-lg bg-white hover:bg-gray-100 flex items-center justify-center shadow-lg"
                 style="transition: none !important; animation: none !important; transform: none !important;">

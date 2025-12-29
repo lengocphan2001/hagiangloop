@@ -24,7 +24,6 @@
                         <th>Name</th>
                         <th>Duration</th>
                         <th>Days/Nights</th>
-                        <th>Price</th>
                         <th>Status</th>
                         <th style="width: 150px">Actions</th>
                     </tr>
@@ -36,7 +35,6 @@
                             <td>{{ $tour->name }}</td>
                             <td>{{ $tour->duration }}</td>
                             <td>{{ $tour->days }}D/{{ $tour->nights }}N</td>
-                            <td>{{ $tour->price ? number_format($tour->price, 0) . ' VND' : 'N/A' }}</td>
                             <td>
                                 @if($tour->is_active)
                                     <span class="badge badge-success">Active</span>
@@ -62,7 +60,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="7" class="text-center">No tours found. <a href="{{ route('admin.tours.create') }}">Create your first tour</a></td>
+                            <td colspan="6" class="text-center">No tours found. <a href="{{ route('admin.tours.create') }}">Create your first tour</a></td>
                         </tr>
                     @endforelse
                 </tbody>

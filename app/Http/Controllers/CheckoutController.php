@@ -33,6 +33,26 @@ class CheckoutController extends Controller
             return redirect()->route('tours.index')->with('error', 'Please select a tour first.');
         }
 
+        // Ensure tour_start_date is in YYYY-MM-DD format (already should be from JS)
+        // Just validate format, don't parse with timezone
+        if ($tourStartDate) {
+            try {
+                // If already in YYYY-MM-DD format, use it directly
+                if (preg_match('/^\d{4}-\d{2}-\d{2}$/', $tourStartDate)) {
+                    // Already correct format, use as is
+                } else {
+                    // Parse and format without timezone conversion
+                    $date = \Carbon\Carbon::createFromFormat('Y-m-d', $tourStartDate);
+                    if (!$date) {
+                        $date = \Carbon\Carbon::parse($tourStartDate);
+                    }
+                    $tourStartDate = $date->format('Y-m-d');
+                }
+            } catch (\Exception $e) {
+                // Keep original if parsing fails
+            }
+        }
+
         $tour = Tour::findOrFail($tourId);
         $outboundBus = ($useBusService && $outboundBusId) ? BusService::find($outboundBusId) : null;
         $returnBus = ($useBusService && $returnBusId) ? BusService::find($returnBusId) : null;
@@ -58,6 +78,19 @@ class CheckoutController extends Controller
     {
         try {
             $validated = $request->validated();
+            
+            // Ensure tour_start_date is in correct format
+            if (isset($validated['tour_start_date'])) {
+                try {
+                    $date = \Carbon\Carbon::parse($validated['tour_start_date']);
+                    $validated['tour_start_date'] = $date->format('Y-m-d');
+                } catch (\Exception $e) {
+                    Log::error('Invalid date format', [
+                        'date' => $validated['tour_start_date'],
+                        'error' => $e->getMessage()
+                    ]);
+                }
+            }
 
             // Create order
             $order = Order::create($validated);

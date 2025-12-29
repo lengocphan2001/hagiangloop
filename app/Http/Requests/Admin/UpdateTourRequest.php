@@ -35,7 +35,6 @@ class UpdateTourRequest extends FormRequest
             'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'detail_images' => 'nullable|array',
             'detail_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
-            'price' => 'nullable|numeric|min:0',
             'is_active' => 'boolean',
             'sort_order' => 'nullable|integer',
             'days_data' => 'required|array',
@@ -53,6 +52,12 @@ class UpdateTourRequest extends FormRequest
             'days_data.*.locations.*.thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'days_data.*.locations.*.detail_images' => 'nullable|array',
             'days_data.*.locations.*.detail_images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
+            'tour_types' => 'nullable|array',
+            'tour_types.*.id' => 'nullable|exists:tour_types,id',
+            'tour_types.*.name' => 'required|string|max:255',
+            'tour_types.*.price' => 'required|numeric|min:0',
+            'tour_types.*.is_active' => 'boolean',
+            'tour_types.*.sort_order' => 'nullable|integer',
         ];
     }
 }

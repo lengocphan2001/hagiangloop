@@ -69,7 +69,7 @@
                     <label for="pick_up_location">Pick Up Location <span class="text-danger">*</span></label>
                     <textarea name="pick_up_location" id="pick_up_location" class="form-control @error('pick_up_location') is-invalid @enderror" 
                               rows="2" required>{{ old('pick_up_location', $busService->pick_up_location) }}</textarea>
-                    <small class="form-text text-muted">e.g., 162 Tran Quang Khai street or Mama's Homestay</small>
+                    <small class="form-text text-muted">e.g., 162 Tran Quang Khai street or Alley Homestay</small>
                     @error('pick_up_location')
                         <span class="invalid-feedback">{{ $message }}</span>
                     @enderror

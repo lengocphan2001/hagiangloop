@@ -35,7 +35,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                         </svg>
-                        <span class="text-xs">EN</span>
+                        <span class="text-xs uppercase">{{ strtoupper(app()->getLocale()) }}</span>
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
@@ -52,11 +52,14 @@
                         x-transition:leave-end="opacity-0 transform scale-95"
                         class="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg py-2 z-50"
                         style="display: none;">
-                        <a href="#"
-                            class="block px-4 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors duration-200">English</a>
-                        <a href="#"
-                            class="block px-4 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors duration-200">Tiếng
-                            Việt</a>
+                        <a href="{{ route('language.switch', 'en') }}"
+                            class="block px-4 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors duration-200 {{ app()->getLocale() === 'en' ? 'bg-gray-100 font-semibold' : '' }}">
+                            {{ __('common.english') }}
+                        </a>
+                        <a href="{{ route('language.switch', 'vi') }}"
+                            class="block px-4 py-2 text-xs text-gray-900 hover:bg-gray-100 transition-colors duration-200 {{ app()->getLocale() === 'vi' ? 'bg-gray-100 font-semibold' : '' }}">
+                            {{ __('common.vietnamese') }}
+                        </a>
                     </div>
                 </div>
             </div>
@@ -84,7 +87,7 @@
                 <a href="{{ route('home') }}"
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group"
                     :class="isHome ? 'text-amber-300' : (scrolled ? 'text-white' : 'text-white')">
-                    HOME
+                    {{ __('common.home') }}
                     @if ($isHome)
                         <span
                             class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
@@ -96,7 +99,7 @@
                 <a href="{{ route('page.show', 'about') }}" 
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isAbout ? 'text-amber-300' : 'text-white' }}"
                     :class="scrolled && !{{ $isAbout ? 'true' : 'false' }} ? 'text-white' : ''">
-                    ABOUT
+                    {{ __('common.about') }}
                     @if ($isAbout)
                         <span
                             class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
@@ -108,7 +111,7 @@
                 <a href="{{ route('tours.index') }}"
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isTours ? 'text-amber-300' : 'text-white' }}"
                     :class="scrolled && !{{ $isTours ? 'true' : 'false' }} ? 'text-white' : ''">
-                    TOURS
+                    {{ __('common.tours') }}
                     @if ($isTours)
                         <span
                             class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
@@ -120,7 +123,7 @@
                 <a href="{{ route('news.index') }}" 
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isNews ? 'text-amber-300' : 'text-white' }}"
                     :class="scrolled && !{{ $isNews ? 'true' : 'false' }} ? 'text-white' : ''">
-                    NEWS
+                    {{ __('common.news') }}
                     @if ($isNews)
                         <span
                             class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
@@ -132,7 +135,7 @@
                 <a href="{{ route('contact.index') }}"
                     class="font-medium uppercase text-sm transition-colors duration-200 relative group {{ $isContact ? 'text-amber-300' : 'text-white' }}"
                     :class="scrolled && !{{ $isContact ? 'true' : 'false' }} ? 'text-white' : ''">
-                    CONTACT
+                    {{ __('common.contact') }}
                     @if($isContact)
                         <span
                             class="absolute bottom-[-4px] left-0 w-full h-0.5 bg-amber-300 transition-all duration-300"></span>
@@ -152,9 +155,9 @@
                 </button>
 
                 <!-- BOOKING Button -->
-                <a href="#booking"
+                <a href="{{ route('booking.index') }}"
                     class="px-8 py-3 bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ml-4">
-                    BOOKING
+                    {{ __('common.booking') }}
                 </a>
             </div>
 
@@ -199,7 +202,7 @@
             <div class="flex flex-col h-full">
                 <!-- Sidebar Header -->
                 <div class="flex items-center justify-between p-6 border-b border-white/10">
-                    <h2 class="text-xl font-bold text-white">Menu</h2>
+                    <h2 class="text-xl font-bold text-white">{{ __('common.menu') }}</h2>
                     <button @click="open = false" class="p-2 text-white hover:bg-white/10 rounded-lg transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
@@ -212,32 +215,32 @@
                     <a href="{{ route('home') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('home') ? 'text-amber-300' : '' }}">
-                        HOME
+                        {{ __('common.home') }}
                     </a>
                     <a href="{{ route('page.show', 'about') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('page.show') && request()->route('slug') == 'about' ? 'text-amber-300' : '' }}">
-                        ABOUT
+                        {{ __('common.about') }}
                     </a>
                     <a href="{{ route('tours.index') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('tours.*') ? 'text-amber-300' : '' }}">
-                        TOURS
+                        {{ __('common.tours') }}
                     </a>
                     <a href="{{ route('news.index') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('news.*') ? 'text-amber-300' : '' }}">
-                        NEWS
+                        {{ __('common.news') }}
                     </a>
                     <a href="{{ route('contact.index') }}" 
                         @click="open = false"
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('contact.*') ? 'text-amber-300' : '' }}">
-                        CONTACT
+                        {{ __('common.contact') }}
                     </a>
-                    <a href="#booking" 
+                    <a href="{{ route('booking.index') }}" 
                         @click="open = false"
                         class="block bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base text-center py-4 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 mt-6">
-                        BOOKING
+                        {{ __('common.booking') }}
                     </a>
                 </div>
             </div>

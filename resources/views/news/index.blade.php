@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'News - Hà Giang Loop Tours')
+@section('title', __('news.title') . ' - Hà Giang Loop Tours')
 
 @section('content')
 <!-- Hero Section -->
@@ -13,14 +13,14 @@
         <div class="text-center max-w-4xl">
             <div class="inline-block mb-6 hero-badge" data-aos="fade-down" data-aos-duration="600">
                 <span class="bg-gradient-to-r from-blue-400 to-purple-400 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg inline-block transform hover:scale-110 transition-transform duration-300">
-                    LATEST NEWS
+                    {{ __('news.latest_news') }}
                 </span>
             </div>
             <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                News & <span class="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">Updates</span>
+                {{ __('news.news_and_updates') }} <span class="bg-gradient-to-r from-blue-300 via-indigo-300 to-purple-300 bg-clip-text text-transparent animate-gradient">{{ __('news.updates') }}</span>
             </h1>
             <p class="text-xl lg:text-2xl text-gray-200 mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
-                Stay updated with the latest news and stories from Hà Giang
+                {{ __('news.subtitle') }}
             </p>
         </div>
     </div>
@@ -64,7 +64,7 @@
                                 </div>
                             @endif
 
-                            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
                                 {{ $item->title }}
                             </h2>
 
@@ -76,10 +76,10 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                                     </svg>
-                                    {{ $item->views }} views
+                                    {{ $item->views }} {{ __('news.views') }}
                                 </span>
                                 <span class="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors flex items-center gap-1">
-                                    Read More
+                                    {{ __('news.read_more') }}
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
@@ -99,8 +99,8 @@
                 <svg class="w-24 h-24 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path>
                 </svg>
-                <h3 class="text-2xl font-bold text-gray-700 mb-2">No News Available</h3>
-                <p class="text-gray-500">Check back soon for exciting news and updates!</p>
+                <h3 class="text-2xl font-bold text-gray-700 mb-2">{{ __('news.no_news_available') }}</h3>
+                <p class="text-gray-500">{{ __('news.check_back_soon') }}</p>
             </div>
         @endif
     </div>

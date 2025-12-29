@@ -26,8 +26,8 @@
                     <h2 class="text-xl font-bold text-gray-900 mb-4">Order Details</h2>
                     <div class="space-y-3 text-sm">
                         <div class="flex justify-between">
-                            <span class="text-gray-600">Order ID:</span>
-                            <span class="font-medium text-gray-900">#{{ $order->id }}</span>
+                            <span class="text-gray-600">Order Code:</span>
+                            <span class="font-medium text-gray-900">{{ $order->order_code }}</span>
                         </div>
                         <div class="flex justify-between">
                             <span class="text-gray-600">Tour:</span>

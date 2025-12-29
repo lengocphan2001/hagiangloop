@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreTourRequest;
 use App\Http\Requests\Admin\UpdateTourRequest;
 use App\Models\Tour;
+use App\Models\TourType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -100,6 +101,18 @@ class TourController extends Controller
                     ]);
                 }
             }
+
+            // Create tour types
+            if ($request->has('tour_types') && is_array($request->tour_types)) {
+                foreach ($request->tour_types as $typeData) {
+                    $tour->tourTypes()->create([
+                        'name' => $typeData['name'],
+                        'price' => $typeData['price'],
+                        'is_active' => isset($typeData['is_active']) ? (bool)$typeData['is_active'] : true,
+                        'sort_order' => $typeData['sort_order'] ?? 0,
+                    ]);
+                }
+            }
         });
 
         return redirect()->route('admin.tours.index')
@@ -120,7 +133,7 @@ class TourController extends Controller
      */
     public function edit(Tour $tour)
     {
-        $tour->load('tourDays.locations');
+        $tour->load('tourDays.locations', 'tourTypes');
         
         // Prepare tour days data for JavaScript
         $tourDaysData = $tour->tourDays->map(function($day) {
@@ -153,8 +166,19 @@ class TourController extends Controller
                 'locations' => $locations,
             ];
         })->toArray();
+
+        // Prepare tour types data for JavaScript
+        $tourTypesData = $tour->tourTypes->map(function($type) {
+            return [
+                'id' => $type->id,
+                'name' => $type->name,
+                'price' => $type->price,
+                'is_active' => $type->is_active,
+                'sort_order' => $type->sort_order,
+            ];
+        })->toArray();
         
-        return view('admin.tours.edit', compact('tour', 'tourDaysData'));
+        return view('admin.tours.edit', compact('tour', 'tourDaysData', 'tourTypesData'));
     }
 
     /**
@@ -253,6 +277,42 @@ class TourController extends Controller
                         'sort_order' => $index + 1,
                     ]);
                 }
+            }
+
+            // Handle tour types
+            if ($request->has('tour_types') && is_array($request->tour_types)) {
+                // Get existing tour type IDs
+                $existingTypeIds = collect($request->tour_types)
+                    ->pluck('id')
+                    ->filter()
+                    ->toArray();
+
+                // Delete tour types that are not in the request
+                $tour->tourTypes()->whereNotIn('id', $existingTypeIds)->delete();
+
+                // Update or create tour types
+                foreach ($request->tour_types as $typeData) {
+                    if (isset($typeData['id']) && $typeData['id']) {
+                        // Update existing tour type
+                        $tour->tourTypes()->where('id', $typeData['id'])->update([
+                            'name' => $typeData['name'],
+                            'price' => $typeData['price'],
+                            'is_active' => isset($typeData['is_active']) ? (bool)$typeData['is_active'] : true,
+                            'sort_order' => $typeData['sort_order'] ?? 0,
+                        ]);
+                    } else {
+                        // Create new tour type
+                        $tour->tourTypes()->create([
+                            'name' => $typeData['name'],
+                            'price' => $typeData['price'],
+                            'is_active' => isset($typeData['is_active']) ? (bool)$typeData['is_active'] : true,
+                            'sort_order' => $typeData['sort_order'] ?? 0,
+                        ]);
+                    }
+                }
+            } else {
+                // If no tour types provided, delete all existing ones
+                $tour->tourTypes()->delete();
             }
         });
 

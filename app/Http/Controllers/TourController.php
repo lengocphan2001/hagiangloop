@@ -28,7 +28,9 @@ class TourController extends Controller
     {
         $tour = Tour::where('slug', $slug)
             ->where('is_active', true)
-            ->with('tourDays.locations')
+            ->with(['tourDays.locations', 'tourTypes' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }])
             ->firstOrFail();
 
         // Get other tours for recommendations
@@ -39,5 +41,26 @@ class TourController extends Controller
             ->get();
 
         return view('tours.show', compact('tour', 'otherTours'));
+    }
+
+    /**
+     * Get tour types for a specific tour (API).
+     */
+    public function getTourTypes($id)
+    {
+        $tour = Tour::where('id', $id)
+            ->where('is_active', true)
+            ->with(['tourTypes' => function($query) {
+                $query->where('is_active', true)->orderBy('sort_order');
+            }])
+            ->firstOrFail();
+
+        return response()->json($tour->tourTypes->map(function($type) {
+            return [
+                'id' => $type->id,
+                'name' => $type->name,
+                'price' => $type->price,
+            ];
+        }));
     }
 }

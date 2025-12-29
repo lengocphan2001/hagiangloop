@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'title' => 'Tours',
+    'select_tour_type' => 'Select tour type',
+    'tour' => 'Tour',
+    'start_date' => 'Start Date',
+    'select_starting_point' => 'Select starting point',
+    'choose_return_destination' => 'Choose the return destination',
+    'use_bus_service' => 'Use bus service',
+    'gifts' => 'Gifts',
+    'people' => 'People',
+    'adults' => 'Adults',
+    'continue_checkout' => 'Continue Checkout',
+    'select_date' => 'Select date',
+    'days' => 'Days',
+    'nights' => 'Nights',
+    'adventure' => 'Adventure',
+    'view_all' => 'View all',
+    'tour_itinerary' => 'Tour Itinerary',
+    'no_starting_points' => 'No starting points available',
+    'no_return_destinations' => 'No return destinations available',
+    'no_bus_services' => 'No bus services available for selected location',
+    'no_gifts' => 'No gifts available',
+];
+

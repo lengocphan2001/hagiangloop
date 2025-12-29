@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Trang chủ - Hà Giang Loop Tours')
+@section('title', __('common.home') . ' - Hà Giang Loop Tours')
 
 @section('content')
     <!-- Journey Highlight Section (fullwidth bg + floating card) -->
@@ -377,7 +377,7 @@
                     
                     <!-- Body Text -->
                     <p class="text-xs sm:text-sm text-gray-700 mb-6 sm:mb-8 leading-relaxed max-w-lg">
-                        Welcome to Mama's Homestay website! Here, we extend an invitation for you to embark on an exhilarating adventure through the picturesque countryside of Vietnam— all from the saddle of a motorbike. Our motorbike tours promise a distinctive and authentic journey, revealing the breathtaking landscapes and hidden gems of this captivating country.
+                        Welcome to Alley Homestay website! Here, we extend an invitation for you to embark on an exhilarating adventure through the picturesque countryside of Vietnam— all from the saddle of a motorbike. Our motorbike tours promise a distinctive and authentic journey, revealing the breathtaking landscapes and hidden gems of this captivating country.
                     </p>
                     
                     <!-- CTA Button -->
@@ -609,7 +609,7 @@
                                 </div>
                             @endif
 
-                            <h3 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
                                 {{ $item->title }}
                             </h3>
 

@@ -394,9 +394,10 @@ return [
             ],
         ],
         [
-            'text' => 'Bookings',
-            'url' => '#',
-            'icon' => 'fas fa-fw fa-calendar-check',
+            'text' => 'Orders',
+            'url' => 'admin/orders',
+            'icon' => 'fas fa-fw fa-shopping-cart',
+            'active' => ['admin/orders*'],
         ],
         [
             'text' => 'Users',

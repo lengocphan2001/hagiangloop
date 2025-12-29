@@ -33,7 +33,6 @@
                     <strong>Days/Nights:</strong> {{ $tour->days }}D/{{ $tour->nights }}N<br>
                 </div>
                 <div class="col-md-6">
-                    <strong>Price:</strong> {{ $tour->price ? number_format($tour->price, 0) . ' VND' : 'N/A' }}<br>
                     <strong>Status:</strong> 
                     @if($tour->is_active)
                         <span class="badge badge-success">Active</span>

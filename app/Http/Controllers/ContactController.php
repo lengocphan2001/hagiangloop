@@ -42,7 +42,7 @@ class ContactController extends Controller
                 'whatsapp' => $validated['whatsapp'],
             ]);
             
-            return back()->with('success', 'Thank you for your message! We will get back to you soon.');
+            return back()->with('success', __('contact.success'));
         } catch (\Exception $e) {
             Log::error('Failed to send contact email', [
                 'error' => $e->getMessage(),
@@ -55,7 +55,7 @@ class ContactController extends Controller
             // In development, show detailed error. In production, show generic message
             $errorMessage = config('app.debug') 
                 ? 'Error: ' . $e->getMessage() . ' (Check logs/storage/logs/laravel.log for details)'
-                : 'Sorry, there was an error sending your message. Please try again later or contact us directly.';
+                : __('contact.error');
             
             return back()->with('error', $errorMessage)->withInput();
         }

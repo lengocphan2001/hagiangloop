@@ -21,14 +21,12 @@ class Tour extends Model
         'note',
         'thumbnail_image',
         'detail_images',
-        'price',
         'is_active',
         'sort_order',
     ];
 
     protected $casts = [
         'is_active' => 'boolean',
-        'price' => 'decimal:2',
         'detail_images' => 'array',
     ];
 
@@ -70,5 +68,13 @@ class Tour extends Model
         return $this->hasManyThrough(TourLocation::class, TourDay::class)
             ->orderBy('tour_days.day_number')
             ->orderBy('tour_locations.sort_order');
+    }
+
+    /**
+     * Get the tour types for the tour.
+     */
+    public function tourTypes(): HasMany
+    {
+        return $this->hasMany(TourType::class)->orderBy('sort_order');
     }
 }

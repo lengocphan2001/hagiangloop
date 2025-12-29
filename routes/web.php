@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Language routes
+Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
+
 Route::get('/', function () {
     $latestNews = App\Models\News::published()
         ->orderBy('sort_order')
@@ -30,6 +33,9 @@ Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
+// Booking routes
+Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
+
 // Checkout routes
 Route::get('/checkout', [App\Http\Controllers\CheckoutController::class, 'show'])->name('checkout.show');
 Route::post('/checkout', [App\Http\Controllers\CheckoutController::class, 'store'])->name('checkout.store');
@@ -41,6 +47,7 @@ Route::prefix('api')->group(function () {
     Route::get('/bus-services', [App\Http\Controllers\Api\BusServiceController::class, 'index'])->name('api.bus-services');
     Route::get('/bus-services/starting-points', [App\Http\Controllers\Api\BusServiceController::class, 'getStartingPoints'])->name('api.bus-services.starting-points');
     Route::get('/bus-services/return-destinations', [App\Http\Controllers\Api\BusServiceController::class, 'getReturnDestinations'])->name('api.bus-services.return-destinations');
+    Route::get('/tours/{id}/types', [App\Http\Controllers\TourController::class, 'getTourTypes'])->name('api.tours.types');
 });
 
 // Auth routes (sẽ được implement sau)
@@ -77,6 +84,11 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // Bus Services management
     Route::resource('bus-services', App\Http\Controllers\Admin\BusServiceController::class);
+    
+    // Orders management
+    Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders/{order}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
+    Route::put('orders/{order}/status', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
     
     // Image upload for TinyMCE
     Route::post('/upload-image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload'])->name('upload-image');

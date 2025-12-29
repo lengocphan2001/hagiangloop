@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name'); // VIP CABIN, LUXURY BUS, LIMOUSINE BUS
             $table->string('type'); // vip_cabin, luxury_bus, limousine_bus
             $table->string('departure_time'); // 11AM, 7:30PM, 10:45AM, 3PM
-            $table->text('pick_up_location'); // 162 Tran Quang Khai street, Mama's Homestay
+            $table->text('pick_up_location'); // 162 Tran Quang Khai street, Alley Homestay
             $table->decimal('price', 10, 0); // 350000, 300000, 550000
             $table->boolean('is_recommended')->default(false);
             $table->string('starting_point')->nullable(); // HANOI (for outbound)
