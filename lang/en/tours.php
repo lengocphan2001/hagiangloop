@@ -22,5 +22,7 @@ return [
     'no_return_destinations' => 'No return destinations available',
     'no_bus_services' => 'No bus services available for selected location',
     'no_gifts' => 'No gifts available',
+    'accommodation' => 'ACCOMMODATION (during the loop)',
+    'no_accommodations' => 'No accommodations available',
 ];
 

@@ -21,7 +21,7 @@ class OrderConfirmationMail extends Mailable
     public function __construct(Order $order)
     {
         // Load all necessary relationships
-        $this->order = $order->load(['tour', 'outboundBusService', 'returnBusService', 'gift']);
+        $this->order = $order->load(['tour', 'outboundBusService', 'returnBusService', 'gift', 'accommodation']);
     }
 
     /**

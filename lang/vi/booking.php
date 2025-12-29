@@ -19,6 +19,10 @@ return [
     'select_date_first' => 'Vui lòng chọn ngày bắt đầu trước',
     'subtitle' => 'Chọn tour hoàn hảo và tùy chỉnh đặt tour của bạn',
     'select_tour_type_date_details' => 'Chọn loại tour và ngày để xem chi tiết',
+    'select_tour_description' => 'Chọn tour phù hợp cho chuyến phiêu lưu của bạn',
+    'select_tour_type_date_description' => 'Chọn loại tour và ngày khởi hành',
+    'bus_services_gifts_description' => 'Thêm dịch vụ xe bus và chọn quà tặng',
+    'summary_description' => 'Xem lại chi tiết đặt chỗ trước khi thanh toán',
     'not_available' => 'Không có',
     'loading' => 'Đang tải...',
 ];

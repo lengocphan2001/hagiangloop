@@ -9,15 +9,7 @@
 @section('content')
     <!-- Hero Section with Tour Info -->
     <section
-        class="relative bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 overflow-hidden tour-detail-hero-section">
-        <div class="absolute inset-0 tour-detail-hero-decorative">
-            <div class="absolute top-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl tour-detail-hero-blob"></div>
-            <div class="absolute bottom-0 right-0 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl tour-detail-hero-blob">
-            </div>
-            <div
-                class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl tour-detail-hero-blob">
-            </div>
-        </div>
+        class="relative overflow-hidden tour-detail-hero-section">
         <div class="container mx-auto px-4 lg:px-6 relative z-10 py-10 lg:py-16">
             <div class="max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
                 <div class="inline-block mb-6 flex items-center justify-center" data-aos="fade-down" data-aos-duration="600">
@@ -26,11 +18,11 @@
                         {{ $tour->duration }}
                     </span>
                 </div>
-                <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 tour-title-animate text-center w-full"
+                <h1 class="text-5xl lg:text-7xl font-bold text-black mb-6 tour-title-animate text-center w-full"
                     data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                     {{ $tour->name }}
                 </h1>
-                <p class="text-xl lg:text-2xl text-gray-200 mb-8 text-center w-full" data-aos="fade-up"
+                <p class="text-xl lg:text-2xl text-black mb-8 text-center w-full" data-aos="fade-up"
                     data-aos-duration="800" data-aos-delay="200">
                     {{ $tour->days }} Days / {{ $tour->nights }} Nights Adventure
                 </p>
@@ -38,11 +30,11 @@
                     <div class="mb-8 text-center w-full" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
                         <span
                             class="text-5xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">{{ number_format($tour->price, 0) }}</span>
-                        <span class="text-2xl text-gray-300"> VND</span>
+                        <span class="text-2xl text-black"> VND</span>
                     </div>
                 @endif
                 @if ($tour->description)
-                    <p class="text-lg text-gray-200 max-w-2xl mx-auto mb-8 text-center w-full" data-aos="fade-up"
+                    <p class="text-lg text-black max-w-2xl mx-auto mb-8 text-center w-full" data-aos="fade-up"
                         data-aos-duration="800" data-aos-delay="400">
                         {{ $tour->description }}
                     </p>
@@ -373,7 +365,7 @@
                             <!-- Tour Type Selection Section -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.tour') }}</h3>
@@ -405,7 +397,7 @@
                                     </div>
                                     <div id="selectedTourTypeDisplay" class="hidden">
                                         <p class="text-sm text-gray-500 line-through" id="tourPriceOriginal"></p>
-                                        <p class="text-2xl font-bold text-gray-900" id="tourPrice"></p>
+                                        <p class="text-2xl font-bold text-red-600" id="tourPrice"></p>
                                     </div>
                                 @endif
                             </div>
@@ -413,7 +405,7 @@
                             <!-- Start Date Section -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.start_date') }}</h3>
@@ -444,7 +436,7 @@
                             <div id="busServiceSection" class="mb-6 hidden">
                                 <div class="mb-6">
                                     <div class="flex items-center gap-2 mb-3">
-                                        <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                         </svg>
                                         <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.select_starting_point') }}</h3>
@@ -481,7 +473,7 @@
                                 <!-- Bus Service - Return -->
                                 <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.choose_return_destination') }}</h3>
@@ -519,7 +511,7 @@
                             <!-- Gifts Section -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.gifts') }}</h3>
@@ -529,17 +521,30 @@
                                 </div>
                             </div>
 
+                            <!-- Accommodation Section -->
+                            <div class="mb-6">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.accommodation') }}</h3>
+                                </div>
+                                <div id="accommodationOptions" class="space-y-2">
+                                    <!-- Accommodation options will be loaded here -->
+                                </div>
+                            </div>
+
                             <!-- People Section -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.people') }}</h3>
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">{{ __('tours.adults') }}</label>
-                                    <input type="number" id="adultsCount" min="1" value="2" 
+                                    <input type="number" id="adultsCount" min="1" value="1" 
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
                                 </div>
                             </div>
@@ -548,7 +553,7 @@
                             <div class="mb-6 pt-4 border-t border-gray-200">
                                 <div class="flex items-center justify-between">
                                     <span class="text-lg font-bold text-gray-900">{{ __('common.total') }}:</span>
-                                    <span class="text-2xl font-bold text-pink-600" id="bookingTotal">0 VND</span>
+                                    <span class="text-2xl font-bold text-red-600" id="bookingTotal">0 VND</span>
                                 </div>
                             </div>
 
@@ -1336,7 +1341,11 @@
                 tourTypeId: null,
                 outboundBus: null,
                 returnBus: null,
+                outboundBusPrice: 0,
+                returnBusPrice: 0,
                 selectedGift: null,
+                selectedAccommodation: null,
+                accommodationPrice: 0,
                 adults: 2
             };
 
@@ -1569,6 +1578,85 @@
                 calculateTotal();
             }
 
+            // Load accommodations
+            async function loadAccommodations() {
+                try {
+                    const response = await fetch('{{ route("api.accommodations") }}');
+                    const accommodations = await response.json();
+                    
+                    const container = document.getElementById('accommodationOptions');
+                    container.innerHTML = '';
+
+                    if (accommodations.length === 0) {
+                        container.innerHTML = '<p class="text-sm text-gray-500">{{ __('tours.no_accommodations') }}</p>';
+                        return;
+                    }
+
+                    accommodations.forEach(accommodation => {
+                        const accommodationOption = document.createElement('div');
+                        accommodationOption.className = 'flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-pink-500 transition-colors';
+                        accommodationOption.onclick = () => selectAccommodation(accommodation.id, accommodationOption);
+                        
+                        const priceText = accommodation.price_per_night > 0 
+                            ? `${accommodation.price_per_night.toLocaleString('vi-VN')}₫/night`
+                            : '(No fees)';
+                        
+                        const capacityText = accommodation.capacity_min === accommodation.capacity_max
+                            ? `${accommodation.capacity_min} people`
+                            : `${accommodation.capacity_min}-${accommodation.capacity_max} people`;
+                        
+                        accommodationOption.innerHTML = `
+                            <input type="radio" name="accommodation" value="${accommodation.id}" 
+                                class="text-pink-500 focus:ring-pink-500" 
+                                onchange="selectAccommodation(${accommodation.id}, this.closest('div'))">
+                            <div class="flex-1">
+                                <div class="font-semibold text-gray-900 text-sm">${accommodation.name}</div>
+                                ${accommodation.bed_type ? `<div class="text-xs text-gray-600">${accommodation.bed_type}</div>` : ''}
+                                <div class="text-xs text-gray-500">${capacityText} - ${priceText}</div>
+                            </div>
+                        `;
+                        container.appendChild(accommodationOption);
+                    });
+                } catch (error) {
+                    console.error('Error loading accommodations:', error);
+                }
+            }
+
+            // Select accommodation
+            async function selectAccommodation(accommodationId, element) {
+                // Update radio button
+                const radio = element.querySelector('input[type="radio"]');
+                if (radio) radio.checked = true;
+
+                // Remove selected class from all options
+                document.querySelectorAll('#accommodationOptions > div').forEach(div => {
+                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.add('border-gray-300');
+                });
+
+                // Add selected class to current option
+                element.classList.remove('border-gray-300');
+                element.classList.add('border-pink-500', 'bg-pink-50');
+
+                // Store selected accommodation and fetch price
+                bookingData.selectedAccommodation = accommodationId;
+                try {
+                    const response = await fetch('{{ route("api.accommodations") }}');
+                    const accommodations = await response.json();
+                    const selectedAccommodation = accommodations.find(a => a.id === accommodationId);
+                    if (selectedAccommodation) {
+                        // Ensure price is a number, not a string
+                        bookingData.accommodationPrice = parseFloat(selectedAccommodation.price_per_night) || 0;
+                    } else {
+                        bookingData.accommodationPrice = 0;
+                    }
+                } catch (error) {
+                    console.error('Error fetching accommodation price:', error);
+                    bookingData.accommodationPrice = 0;
+                }
+                calculateTotal();
+            }
+
             // Calculate total
             async function calculateTotal() {
                 let total = 0;
@@ -1607,6 +1695,14 @@
                     } catch (error) {
                         console.error('Error calculating return bus:', error);
                     }
+                }
+
+                // Accommodation price (fixed price per room for the entire tour, NOT multiplied by nights or number of people)
+                if (bookingData.selectedAccommodation && bookingData.accommodationPrice > 0) {
+                    // Price is fixed per room for the entire tour (not multiplied by nights or number of people)
+                    // Ensure accommodationPrice is a number
+                    const accommodationPrice = parseFloat(bookingData.accommodationPrice) || 0;
+                    total += accommodationPrice;
                 }
 
                 // Update total display
@@ -1892,6 +1988,9 @@
                 if (bookingData.selectedGift) {
                     params.append('gift', bookingData.selectedGift);
                 }
+                if (bookingData.selectedAccommodation) {
+                    params.append('accommodation', bookingData.selectedAccommodation);
+                }
 
                 // Redirect to checkout page
                 window.location.href = `{{ route('checkout.show') }}?${params.toString()}`;
@@ -1908,6 +2007,9 @@
 
                 // Load gifts
                 loadGifts();
+
+                // Load accommodations
+                loadAccommodations();
 
                 // Custom dropdown button click handlers
                 document.getElementById('busStartingPointBtn').addEventListener('click', function(e) {

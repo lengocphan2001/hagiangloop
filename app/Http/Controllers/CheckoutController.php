@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Tour;
 use App\Models\BusService;
 use App\Models\Gift;
+use App\Models\Accommodation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Log;
@@ -26,6 +27,7 @@ class CheckoutController extends Controller
         $outboundBusId = $request->get('outbound_bus');
         $returnBusId = $request->get('return_bus');
         $giftId = $request->get('gift');
+        $accommodationId = $request->get('accommodation');
         $totalPrice = $request->get('total_price', 0);
         $useBusService = $request->get('use_bus') === '1' || $request->get('use_bus') === true;
 
@@ -57,6 +59,7 @@ class CheckoutController extends Controller
         $outboundBus = ($useBusService && $outboundBusId) ? BusService::find($outboundBusId) : null;
         $returnBus = ($useBusService && $returnBusId) ? BusService::find($returnBusId) : null;
         $gift = $giftId ? Gift::find($giftId) : null;
+        $accommodation = $accommodationId ? Accommodation::find($accommodationId) : null;
 
         return view('checkout', compact(
             'tour',
@@ -66,6 +69,7 @@ class CheckoutController extends Controller
             'outboundBus',
             'returnBus',
             'gift',
+            'accommodation',
             'totalPrice',
             'useBusService'
         ));
@@ -127,7 +131,7 @@ class CheckoutController extends Controller
      */
     public function success($id)
     {
-        $order = Order::with(['tour', 'outboundBusService', 'returnBusService', 'gift'])->findOrFail($id);
+        $order = Order::with(['tour', 'outboundBusService', 'returnBusService', 'gift', 'accommodation'])->findOrFail($id);
         return view('checkout-success', compact('order'));
     }
 }

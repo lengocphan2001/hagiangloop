@@ -81,6 +81,7 @@ class CheckoutRequest extends FormRequest
             'outbound_bus_service_id' => 'nullable|exists:bus_services,id',
             'return_bus_service_id' => 'nullable|exists:bus_services,id',
             'gift_id' => 'nullable|exists:gifts,id',
+            'accommodation_id' => 'nullable|exists:accommodations,id',
             'total_price' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
         ];

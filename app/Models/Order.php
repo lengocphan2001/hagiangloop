@@ -20,6 +20,7 @@ class Order extends Model
         'outbound_bus_service_id',
         'return_bus_service_id',
         'gift_id',
+        'accommodation_id',
         'total_price',
         'status',
         'notes',
@@ -85,5 +86,10 @@ class Order extends Model
     public function gift()
     {
         return $this->belongsTo(Gift::class);
+    }
+
+    public function accommodation()
+    {
+        return $this->belongsTo(Accommodation::class);
     }
 }

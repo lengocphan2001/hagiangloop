@@ -12,7 +12,7 @@
     <div class="container mx-auto px-4 py-10 lg:px-6 z-10 flex flex-col items-center justify-center">
         <div class="text-center max-w-4xl">
             <div class="inline-block mb-6 hero-badge" data-aos="fade-down" data-aos-duration="600">
-                <span class="bg-gradient-to-r from-blue-400 to-purple-400 text-white px-6 py-2 rounded-full font-semibold text-sm shadow-lg inline-block transform hover:scale-110 transition-transform duration-300">
+                <span class="">
                     {{ __('news.latest_news') }}
                 </span>
             </div>

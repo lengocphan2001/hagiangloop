@@ -11,6 +11,7 @@ return [
     'outbound' => 'Chiều đi',
     'return' => 'Chiều về',
     'gift' => 'Quà tặng',
+    'accommodation' => 'Chỗ ở',
     'full_name' => 'Họ và tên',
     'phone_number' => 'Số điện thoại',
     'additional_notes' => 'Ghi chú thêm',

@@ -139,6 +139,26 @@
         </div>
         @endif
 
+        @if($order->accommodation)
+        <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #ec4899; margin-top: 0; margin-bottom: 15px;">{{ __('emails.accommodation') }}</h2>
+            <div style="margin-bottom: 10px;">
+                <h3 style="margin: 0 0 8px 0; color: #111827; font-size: 18px;">{{ $order->accommodation->name }}</h3>
+                @if($order->accommodation->bed_type)
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">{{ $order->accommodation->bed_type }}</p>
+                @endif
+                <p style="margin: 4px 0; color: #6b7280; font-size: 14px;">
+                    {{ $order->accommodation->capacity_min }}-{{ $order->accommodation->capacity_max }} {{ __('emails.persons') }}
+                    @if($order->accommodation->price_per_night > 0)
+                        - {{ number_format($order->accommodation->price_per_night, 0, ',', '.') }} VND/{{ __('emails.night') }}
+                    @else
+                        - {{ __('emails.free') }}
+                    @endif
+                </p>
+            </div>
+        </div>
+        @endif
+
         <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
             <h2 style="color: #ec4899; margin-top: 0; margin-bottom: 15px;">{{ __('emails.price_summary') }}</h2>
             <table style="width: 100%; border-collapse: collapse;">

@@ -320,79 +320,9 @@
     @endpush
 
     <!-- Features Section -->
-    <!-- Discover Tours Section -->
-    <section class="bg-white overflow-hidden discover-tour-section w-screen relative left-1/2 right-1/2 -ml-[50vw] -mr-[50vw]" style="margin-top: 0 !important; padding-top: 0 !important;">
-        <div class="flex flex-col lg:flex-row w-full max-w-none px-0">
-            <div class="grid grid-cols-2 gap-0 w-full lg:w-2/3 lg:flex-shrink-0">
-                <!-- Left Column - 2 images stacked -->
-                <div class="flex flex-col w-full">
-                    <!-- Tour Image 1 -->
-                    <div class="relative group cursor-pointer discover-tour-image w-full">
-                        <div class="relative w-full flex items-center justify-center bg-black/10">
-                            <img src="{{ asset('images/discovertours/980-songlung2_1699348959.jpg.webp') }}" 
-                                 alt="Tour 1" 
-                                 class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                    </div>
-
-                    <!-- Tour Image 2 -->
-                    <div class="relative group cursor-pointer discover-tour-image w-full">
-                        <div class="relative w-full flex items-center justify-center bg-black/10">
-                            <img src="{{ asset('images/discovertours/dis_tour3_1699346015.jpg.webp') }}" 
-                                 alt="Tour 2" 
-                                 class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Right Column - 2 images stacked -->
-                <div class="flex flex-col w-full">
-                    <!-- Tour Image 3 -->
-                    <div class="relative group cursor-pointer discover-tour-image w-full">
-                        <div class="relative w-full flex items-center justify-center bg-black/10">
-                            <img src="{{ asset('images/discovertours/dis_tour4_1699346018.jpg.webp') }}" 
-                                 alt="Tour 3" 
-                                 class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                    </div>
-
-                    <!-- Tour Image 4 -->
-                    <div class="relative group cursor-pointer discover-tour-image w-full">
-                        <div class="relative w-full flex items-center justify-center bg-black/10">
-                            <img src="{{ asset('images/discovertours/du-lich-ha-giang-5_1699348959.jpg.webp') }}" 
-                                 alt="Tour 4" 
-                                 class="w-full h-auto object-contain transition-transform duration-500 group-hover:scale-110">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full lg:w-1/3 lg:min-w-0 bg-gradient-to-b from-orange-50 to-orange-100 relative overflow-hidden">
-                <div class="p-6 sm:p-8 lg:p-12 h-full flex flex-col justify-start mt-8 lg:mt-0 relative z-10 discover-tour-text">
-                    <!-- Heading -->
-                    <h2 class="text-xl sm:text-2xl lg:text-2xl font-bold text-gray-900 mb-4 sm:mb-6 leading-tight">
-                        The majestic natural<br>
-                        beauty eagerly awaits<br>
-                        your discovery
-                    </h2>
-                    
-                    <!-- Body Text -->
-                    <p class="text-xs sm:text-sm text-gray-700 mb-6 sm:mb-8 leading-relaxed max-w-lg">
-                        Welcome to Alley Homestay website! Here, we extend an invitation for you to embark on an exhilarating adventure through the picturesque countryside of Vietnam— all from the saddle of a motorbike. Our motorbike tours promise a distinctive and authentic journey, revealing the breathtaking landscapes and hidden gems of this captivating country.
-                    </p>
-                    
-                    <!-- CTA Button -->
-                    <a href="{{ route('tours.index') }}" 
-                       class="inline-block px-6 sm:px-8 lg:px-10 py-3 sm:py-4 bg-black text-white font-bold text-sm sm:text-base lg:text-lg rounded-lg border-2 border-white hover:bg-gray-900 transform transition-all duration-300 hover:scale-105 w-fit">
-                        DISCOVER TOUR
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- About / Tour Highlight Section -->
-    <section id="about" class="py-16 lg:py-20 bg-white">
-        <div class="w-5/7 max-w-[1500px] ml-auto lg:w-full lg:mx-auto lg:px-8"
+    <section id="about" class="mt-4 py-16 lg:py-20 bg-white">
+        <div class="w-5/7 max-w-[1500px] ml-auto lg:w-full lg:mx-auto lg:px-8 mt-4"
             x-data="{
                 slides: [
                     {
@@ -486,89 +416,13 @@
             </div>
         </div>
     </section>
-
-
-    <section class="relative py-16 lg:py-24 lg:pb-72 overflow-hidden mt-8">
-        <!-- Background full width -->
-        <div class="absolute inset-0">
-            <img src="{{ asset('images/jouney/journey.webp') }}" alt="Journey background" class="w-full h-3/4 object-cover">
-            <div class="absolute inset-0 bg-gradient-to-r h-3/4 from-black/80 via-black/65 to-black/25"></div>
-        </div>
-
-        <div class="relative z-10 w-full max-w-full mx-auto px-4 lg:px-12 overflow-hidden">
-            <!-- Main content block -->
-            <div class="relative grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-4">
-                <div class="text-amber-100 space-y-10 max-w-2xl w-full journey-text-animate">
-                    <div class="space-y-4">
-                        <p class="text-lg tracking-[0.08em] uppercase text-amber-200">Journey to conquer but you are</p>
-                        <h2 class="text-4xl lg:text-5xl font-extrabold leading-tight text-amber-100">
-                            really single-minded because of<br>
-                            <span class="text-amber-300">Mama's Tour</span>
-                        </h2>
-                    </div>
-
-                    <div class="space-y-8">
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 rounded-full border border-amber-300 flex items-center justify-center">
-                                <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c1.657 0 3-1.343 3-3S13.657 5 12 5 9 6.343 9 8s1.343 3 3 3z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A9 9 0 1118.88 17.8L12 21l-6.879-3.196z"/>
-                                </svg>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-lg font-semibold text-amber-50">Accompanying you with peace of mind</p>
-                                <p class="text-sm text-amber-200/80">Safety, guidance, and reliable support throughout every ride.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 rounded-full border border-amber-300 flex items-center justify-center">
-                                <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7l9-4 9 4-9 4-9-4z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v6l9 4 9-4V7"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 13l9 4 9-4"/>
-                                </svg>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-lg font-semibold text-amber-50">Understand beauty and culture</p>
-                                <p class="text-sm text-amber-200/80">Dive into local traditions, cuisine, and the stories behind every pass.</p>
-                            </div>
-                        </div>
-
-                        <div class="flex items-start space-x-4">
-                            <div class="w-14 h-14 rounded-full border border-amber-300 flex items-center justify-center">
-                                <svg class="w-7 h-7 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c1.657 0 3-1.343 3-3S13.657 2 12 2 9 3.343 9 5s1.343 3 3 3z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 22h14l-2-7H7l-2 7z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6"/>
-                                </svg>
-                            </div>
-                            <div class="space-y-1">
-                                <p class="text-lg font-semibold text-amber-50">Cost savings</p>
-                                <p class="text-sm text-amber-200/80">Optimized routes and services so you enjoy more with smart spending.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Floating right image card -->
-                <div class="relative mt-10 lg:mt-0 w-full lg:w-auto journey-image-animate">
-                    <div class="relative rounded-tl-[48px] rounded-tr-none rounded-bl-none rounded-br-none overflow-hidden shadow-2xl border border-white/20">
-                        <div class="w-full aspect-[2/1]">
-                            <img src="{{ asset('images/jouney/journey.webp') }}" alt="Journey with Mama's Tour" class="w-full h-full object-cover">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
     <section class="pb-16">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="text-center mb-12">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-                    Latest <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">News</span>
+                    Latest <span class="t">News</span>
                 </h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                     Stay updated with the latest news and stories from Hà Giang

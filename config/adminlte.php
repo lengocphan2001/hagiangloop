@@ -394,6 +394,23 @@ return [
             ],
         ],
         [
+            'text' => 'Accommodations',
+            'icon' => 'fas fa-fw fa-bed',
+            'active' => ['admin/accommodations*'],
+            'submenu' => [
+                [
+                    'text' => 'List Accommodations',
+                    'url' => 'admin/accommodations',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add New Accommodation',
+                    'url' => 'admin/accommodations/create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
             'text' => 'Orders',
             'url' => 'admin/orders',
             'icon' => 'fas fa-fw fa-shopping-cart',

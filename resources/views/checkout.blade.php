@@ -75,6 +75,27 @@
                             </div>
                         @endif
 
+                        <!-- Accommodation -->
+                        @if($accommodation)
+                            <div class="border-b border-gray-200 pb-4 mb-4">
+                                <h4 class="font-semibold text-gray-900 mb-2">{{ __('checkout.accommodation') }}</h4>
+                                <div class="text-sm text-gray-600">
+                                    <p class="font-semibold">{{ $accommodation->name }}</p>
+                                    @if($accommodation->bed_type)
+                                        <p class="text-xs text-gray-500">{{ $accommodation->bed_type }}</p>
+                                    @endif
+                                    <p class="text-xs text-gray-500">
+                                        {{ $accommodation->capacity_min }}-{{ $accommodation->capacity_max }}pp
+                                        @if($accommodation->price_per_night > 0)
+                                            - {{ number_format($accommodation->price_per_night, 0, ',', '.') }}₫/night
+                                        @else
+                                            - (No fees)
+                                        @endif
+                                    </p>
+                                </div>
+                            </div>
+                        @endif
+
                         <!-- Total -->
                         <div class="pt-4">
                             <div class="flex justify-between items-center">
@@ -99,6 +120,7 @@
                             <input type="hidden" name="outbound_bus_service_id" value="{{ $outboundBus ? $outboundBus->id : '' }}">
                             <input type="hidden" name="return_bus_service_id" value="{{ $returnBus ? $returnBus->id : '' }}">
                             <input type="hidden" name="gift_id" value="{{ $gift ? $gift->id : '' }}">
+                            <input type="hidden" name="accommodation_id" value="{{ $accommodation ? $accommodation->id : '' }}">
                             <input type="hidden" name="total_price" value="{{ $totalPrice }}">
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 w-full">

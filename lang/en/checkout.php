@@ -11,6 +11,7 @@ return [
     'outbound' => 'Outbound',
     'return' => 'Return',
     'gift' => 'Gift',
+    'accommodation' => 'Accommodation',
     'full_name' => 'Full Name',
     'phone_number' => 'Phone Number',
     'additional_notes' => 'Additional Notes',

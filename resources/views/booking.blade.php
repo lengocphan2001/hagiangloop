@@ -7,12 +7,27 @@
 @section('title', __('booking.title') . ' - Hà Giang Loop Tours')
 
 @section('content')
-<section class="py-8 lg:py-12 bg-gradient-to-br from-gray-50 via-white to-amber-50 min-h-screen">
-    <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+<section class="relative py-8 lg:py-12 min-h-screen overflow-hidden">
+    <!-- Decorative Background -->
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-50 via-white to-amber-50"></div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-pink-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
+    
+    <div class="relative container mx-auto px-4 lg:px-6 max-w-7xl z-10">
         <!-- Header -->
         <div class="text-center mb-8 lg:mb-12">
-            <h1 class="text-3xl lg:text-5xl font-bold text-gray-900 py-4">{{ __('booking.title') }}</h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">{{ __('booking.subtitle') }}</p>
+            <div class="inline-block mb-4">
+                <div class="flex items-center justify-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-pink-200">
+                    <svg class="w-5 h-5 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="text-sm font-semibold text-gray-700">{{ __('booking.title') }}</span>
+                </div>
+            </div>
+            <h1 class="text-4xl lg:text-6xl font-extrabold bg-gradient-to-r from-pink-600 via-rose-500 to-amber-500 bg-clip-text text-transparent mb-4">
+                {{ __('booking.title') }}
+            </h1>
+            <p class="text-lg lg:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">{{ __('booking.subtitle') }}</p>
         </div>
 
         <!-- Progress Steps -->
@@ -69,16 +84,29 @@
 
         <!-- Booking Form -->
         <div class="max-w-5xl mx-auto">
-            <div class="bg-white overflow-visible">
+            <div class="bg-white/90 backdrop-blur-lg overflow-visible rounded-2xl shadow-2xl border border-white/50">
                 <!-- Step 1: Select Tour -->
-                <div id="step1" class="step-content p-6 lg:p-8">
-                    <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6">{{ __('booking.step') }} 1: {{ __('booking.select_tour') }}</h2>
+                <div id="step1" class="step-content p-6 lg:p-10">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center shadow-lg">
+                                <span class="text-2xl font-bold text-white">1</span>
+                            </div>
+                        </div>
+                        <div class="flex-1">
+                            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 1: {{ __('booking.select_tour') }}</h2>
+                            <p class="text-gray-500 mt-1">{{ __('booking.select_tour_description') }}</p>
+                        </div>
+                    </div>
                     
                     <div class="max-w-2xl mx-auto">
-                        <label class="block text-sm font-medium text-gray-700 mb-3">
-                            <svg class="w-5 h-5 inline mr-2 text-pink-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                            </svg>
+                        <label class="flex items-center gap-2 text-sm font-semibold text-gray-700 mb-4 px-2">
+                            <div class="w-8 h-8 rounded-lg bg-pink-100 flex items-center justify-center">
+                                <svg class="w-5 h-5 text-pink-600" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                                    <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
                             {{ __('booking.select_tour') }}
                         </label>
                         <div class="relative z-50">
@@ -111,13 +139,20 @@
                         </div>
 
                         <!-- Selected Tour Preview -->
-                        <div id="selectedTourPreview" class="hidden mt-6 p-4 bg-gray-50 rounded-lg border-2 border-pink-200">
+                        <div id="selectedTourPreview" class="hidden mt-6 p-6 bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl border-2 border-pink-300 shadow-lg">
                             <div class="flex items-start gap-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                </div>
                                 <div class="flex-1">
                                     <h3 class="font-bold text-gray-900 text-lg mb-2" id="selectedTourName"></h3>
                                     <p class="text-sm text-gray-600" id="selectedTourDetails"></p>
                                 </div>
-                                <button type="button" onclick="clearTourSelection()" class="text-gray-400 hover:text-gray-600 transition-colors">
+                                <button type="button" onclick="clearTourSelection()" class="flex-shrink-0 w-8 h-8 rounded-lg bg-white hover:bg-gray-100 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors shadow-sm">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                                     </svg>
@@ -126,24 +161,37 @@
                         </div>
                     </div>
 
-                    <div class="mt-6 flex justify-end">
+                    <div class="mt-8 flex justify-end">
                         <button id="step1-next" 
-                                class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
                                 onclick="nextStep(2)" disabled>
-                            {{ __('booking.next') }}
+                            <span>{{ __('booking.next') }}</span>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <!-- Step 2: Tour Type & Date -->
-                <div id="step2" class="step-content hidden p-6 lg:p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 2: {{ __('booking.select_tour_type') }} & {{ __('booking.select_date') }}</h2>
-                        <button onclick="previousStep(1)" class="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <div id="step2" class="step-content hidden p-6 lg:p-10">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl font-bold text-white">2</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 2: {{ __('booking.select_tour_type') }} & {{ __('booking.select_date') }}</h2>
+                                <p class="text-gray-500 mt-1">{{ __('booking.select_tour_type_date_description') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="previousStep(1)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            {{ __('booking.previous') }}
+                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
@@ -210,35 +258,65 @@
                         </div>
 
                         <!-- Right Column: Selected Tour Preview -->
-                        <div class="bg-gray-50 rounded-xl p-6 lg:p-8 border-2 border-gray-200">
-                            <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('booking.summary') }}</h3>
+                        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-6 lg:p-8 border-2 border-gray-200 shadow-lg">
+                            <div class="flex items-center gap-3 mb-6">
+                                <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900">{{ __('booking.summary') }}</h3>
+                            </div>
                             <div id="selectedTourPreview" class="space-y-4">
-                                <p class="text-gray-500 text-center py-8">{{ __('booking.select_a_tour') }}</p>
+                                <div class="text-center py-12">
+                                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-200 flex items-center justify-center">
+                                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                    </div>
+                                    <p class="text-gray-500">{{ __('booking.select_a_tour') }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="mt-6 flex justify-between">
-                        <button onclick="previousStep(1)" class="px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="mt-8 flex justify-between">
+                        <button onclick="previousStep(1)" class="group px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md">
+                            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
                             {{ __('booking.previous') }}
                         </button>
                         <button id="step2-next" 
-                                class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold rounded-xl transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
                                 onclick="nextStep(3)" disabled>
-                            {{ __('booking.next') }}
+                            <span>{{ __('booking.next') }}</span>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <!-- Step 3: Bus Services & Gifts -->
-                <div id="step3" class="step-content hidden p-6 lg:p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 3: {{ __('booking.bus_services') }} & {{ __('booking.gifts') }}</h2>
-                        <button onclick="previousStep(2)" class="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <div id="step3" class="step-content hidden p-6 lg:p-10">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl font-bold text-white">3</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 3: {{ __('booking.bus_services') }} & {{ __('booking.gifts') }}</h2>
+                                <p class="text-gray-500 mt-1">{{ __('booking.bus_services_gifts_description') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="previousStep(2)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            {{ __('booking.previous') }}
+                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
@@ -322,36 +400,59 @@
                         </div>
                     </div>
 
-                    <div class="mt-6 flex justify-between">
-                        <button onclick="previousStep(2)" class="px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                    <div class="mt-8 flex justify-between">
+                        <button onclick="previousStep(2)" class="group px-6 py-3 border-2 border-gray-300 text-gray-700 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 flex items-center gap-2 shadow-sm hover:shadow-md">
+                            <svg class="w-5 h-5 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
                             {{ __('booking.previous') }}
                         </button>
                         <button id="step3-next" 
-                                class="px-6 py-3 bg-pink-500 hover:bg-pink-600 text-white font-semibold rounded-lg transition-colors duration-200"
+                                class="group px-8 py-4 bg-gradient-to-r from-pink-500 to-rose-500 hover:from-pink-600 hover:to-rose-600 text-white font-semibold rounded-xl transition-all duration-200 shadow-lg hover:shadow-xl transform hover:scale-105 flex items-center gap-2"
                                 onclick="nextStep(4)">
-                            {{ __('booking.next') }}
+                            <span>{{ __('booking.next') }}</span>
+                            <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
                         </button>
                     </div>
                 </div>
 
                 <!-- Step 4: Summary & Checkout -->
-                <div id="step4" class="step-content hidden p-6 lg:p-8">
-                    <div class="flex items-center justify-between mb-6">
-                        <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
-                        <button onclick="previousStep(3)" class="text-gray-600 hover:text-gray-900 flex items-center gap-2">
+                <div id="step4" class="step-content hidden p-6 lg:p-10">
+                    <div class="flex items-center justify-between mb-8">
+                        <div class="flex items-center gap-4">
+                            <div class="flex-shrink-0">
+                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-2xl font-bold text-white">4</span>
+                                </div>
+                            </div>
+                            <div>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
+                                <p class="text-gray-500 mt-1">{{ __('booking.summary_description') }}</p>
+                            </div>
+                        </div>
+                        <button onclick="previousStep(3)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            {{ __('booking.previous') }}
+                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                         <!-- Summary Details -->
                         <div class="lg:col-span-2 space-y-6">
-                            <div class="bg-gray-50 rounded-xl p-6 border-2 border-gray-200">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('checkout.booking_details') }}</h3>
-                                <div id="bookingSummaryDetails" class="space-y-3">
+                            <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 shadow-lg">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-900">{{ __('checkout.booking_details') }}</h3>
+                                </div>
+                                <div id="bookingSummaryDetails" class="space-y-4">
                                     <!-- Summary will be populated dynamically -->
                                 </div>
                             </div>
@@ -359,17 +460,28 @@
 
                         <!-- Total & Checkout -->
                         <div class="lg:col-span-1">
-                            <div class="bg-gradient-to-br from-pink-50 to-amber-50 rounded-xl p-6 border-2 border-pink-200 sticky top-4">
-                                <h3 class="text-xl font-bold text-gray-900 mb-4">{{ __('common.total') }}</h3>
-                                <div class="mb-6">
-                                    <div class="flex items-center justify-between mb-2">
+                            <div class="bg-gradient-to-br from-pink-50 via-rose-50 to-amber-50 rounded-2xl p-6 lg:p-8 border-2 border-pink-300 shadow-xl sticky top-4">
+                                <div class="flex items-center gap-3 mb-6">
+                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center">
+                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                            <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
+                                        </svg>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-900">{{ __('common.total') }}</h3>
+                                </div>
+                                <div class="mb-6 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-pink-200">
+                                    <div class="flex items-center justify-between">
                                         <span class="text-lg font-semibold text-gray-700">{{ __('common.total') }}:</span>
-                                        <span class="text-3xl font-bold text-pink-600" id="bookingTotal">0 VND</span>
+                                        <span class="text-3xl font-bold bg-gradient-to-r from-pink-600 to-rose-600 bg-clip-text text-transparent" id="bookingTotal">0 VND</span>
                                     </div>
                                 </div>
                                 <button onclick="proceedToCheckout()"
-                                    class="w-full bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700 text-white font-bold py-4 px-6 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg">
-                                    {{ __('booking.continue_checkout') }}
+                                    class="w-full bg-gradient-to-r from-teal-500 via-teal-600 to-cyan-600 hover:from-teal-600 hover:via-teal-700 hover:to-cyan-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                                    <span>{{ __('booking.continue_checkout') }}</span>
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                    </svg>
                                 </button>
                             </div>
                         </div>

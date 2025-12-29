@@ -47,6 +47,7 @@ Route::prefix('api')->group(function () {
     Route::get('/bus-services', [App\Http\Controllers\Api\BusServiceController::class, 'index'])->name('api.bus-services');
     Route::get('/bus-services/starting-points', [App\Http\Controllers\Api\BusServiceController::class, 'getStartingPoints'])->name('api.bus-services.starting-points');
     Route::get('/bus-services/return-destinations', [App\Http\Controllers\Api\BusServiceController::class, 'getReturnDestinations'])->name('api.bus-services.return-destinations');
+    Route::get('/accommodations', [App\Http\Controllers\Api\AccommodationController::class, 'index'])->name('api.accommodations');
     Route::get('/tours/{id}/types', [App\Http\Controllers\TourController::class, 'getTourTypes'])->name('api.tours.types');
 });
 
@@ -84,6 +85,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // Bus Services management
     Route::resource('bus-services', App\Http\Controllers\Admin\BusServiceController::class);
+    
+    // Accommodations management
+    Route::resource('accommodations', App\Http\Controllers\Admin\AccommodationController::class);
     
     // Orders management
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

@@ -8,12 +8,7 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden tours-hero-section">
-    <div class="absolute inset-0 tours-hero-decorative">
-        <div class="absolute top-0 left-0 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse tours-hero-blob"></div>
-        <div class="absolute bottom-0 right-0 w-96 h-96 bg-green-500/20 rounded-full blur-3xl animate-pulse tours-hero-blob" style="animation-delay: 1s;"></div>
-        <div class=""></div>
-    </div>
+<section class="relative overflow-hidden tours-hero-section">
     <div class="container mx-auto px-4 py-10 lg:px-6 z-10 flex flex-col items-center justify-center">
         <div class="text-center max-w-4xl">
             <div class="inline-block mb-6 hero-badge" data-aos="fade-down" data-aos-duration="600">
@@ -21,10 +16,10 @@
                     {{ __('tours_index.explore_adventures') }}
                 </span>
             </div>
-            <h1 class="text-5xl lg:text-7xl font-bold text-white mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+            <h1 class="text-5xl lg:text-7xl font-bold text-black mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                 {{ __('tours_index.discover_ha_giang') }} <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-green-400 bg-clip-text text-transparent animate-gradient">Hà Giang</span>
             </h1>
-            <p class="text-xl lg:text-2xl text-gray-300 mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+            <p class="text-xl lg:text-2xl text-black mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                 {{ __('tours_index.subtitle') }}
             </p>
         </div>
