@@ -23,7 +23,7 @@
                     <div class="space-y-2 text-base">
                         <div>{{ __('footer.address') }}: {{ __('footer.address_value') }}</div>
                         <div>- {{ __('footer.see_above') }} <a href="#" class="underline hover:text-amber-200">{{ __('footer.google_map') }}</a></div>
-                        <div>{{ __('footer.hotline_whatsapp') }}: <a href="tel:+84915121987" class="underline hover:text-amber-200">+84915121987</a></div>
+                        <div>{{ __('footer.hotline_whatsapp') }}: <a href="tel:+84968410676" class="underline hover:text-amber-200">+84968410676</a></div>
                         <div>{{ __('footer.email') }}: <a href="mailto:alleyhomestay@gmail.com" class="underline hover:text-amber-200">alleyhomestay@gmail.com</a></div>
                     </div>
                 </div>
@@ -36,10 +36,8 @@
                     <span class="text-base uppercase tracking-widest font-semibold">{{ __('footer.instagram') }}</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="relative w-44 h-44 bg-white/10 border border-white/30 rounded-xl flex items-center justify-center">
-                        <div class="w-36 h-36 bg-white rounded-lg flex items-center justify-center text-gray-900 text-sm font-semibold">
-                            QR
-                        </div>
+                    <div class="relative w-full h-44 bg-white/10 border border-white/30 rounded-xl flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('images/inssta.jpg') }}" alt="Instagram QR Code" class="w-full h-full max-w-full max-h-full object-contain rounded-lg">
                     </div>
                     <div class="text-sm tracking-wider uppercase" style="writing-mode: vertical-rl;">
                         {{ __('footer.scan_to_connect') }}
@@ -49,7 +47,7 @@
         </div>
 
         <div class="border-t border-white/20 pt-6 text-center text-sm tracking-wide text-white/70">
-            &copy; {{ date('Y') }} {{ __('footer.all_rights_reserved') }} Mama's Tour
+            &copy; {{ date('Y') }} {{ __('footer.all_rights_reserved') }} Alley Homestay
         </div>
     </div>
 </footer>
