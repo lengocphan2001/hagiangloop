@@ -145,7 +145,7 @@
                         </svg>
                         <div class="min-w-0 text-center">
                             <span class="text-xs sm:text-sm text-gray-600">{{ __('contact.hotline_whatsapp') }}:</span>
-                            <span class="text-base sm:text-lg font-bold text-gray-900 break-all"> +84849278787</span>
+                            <span class="text-base sm:text-lg font-bold text-gray-900 break-all"> +84968410676</span>
                         </div>
                     </div>
                 </div>
@@ -156,7 +156,7 @@
                         <br><br>
                         {{ __('contact.instagram') }}: <a href="https://www.instagram.com/hagiangloop" target="_blank" class="text-amber-600 hover:text-amber-700 font-semibold break-all">@hagiangloop</a>
                         <br>
-                        {{ __('contact.call') }}: <a href="tel:+84849278787" class="text-amber-600 hover:text-amber-700 font-semibold break-all">+84849278787</a>
+                        {{ __('contact.call') }}: <a href="tel:+84968410676" class="text-amber-600 hover:text-amber-700 font-semibold break-all">+84968410676</a>
                     </p>
                 </div>
             </div>
