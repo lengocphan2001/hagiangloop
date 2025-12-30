@@ -8,7 +8,7 @@
 
 @section('content')
 <section class="relative py-8 lg:py-12 min-h-screen overflow-hidden bg-white">
-    <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
+    <div class="container mx-auto px-4 lg:px-6 py-4 max-w-7xl">
         <!-- Header -->
         <div class="text-center mb-8 lg:mb-12">
             <div class="inline-block mb-4">
@@ -124,10 +124,7 @@
                                                         </div>
                                                     @endif
                                                 </div>
-                                                <div class="text-xs text-gray-500">{{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}</div>
-                                                @if($tour->description)
-                                                    <div class="text-xs text-gray-600 mt-1 line-clamp-2">{{ Str::limit($tour->description, 100) }}</div>
-                                                @endif
+                                                <div class="text-xs text-gray-500 mb-1">{{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}</div>
                                             </div>
                                         </button>
                                     @endforeach
