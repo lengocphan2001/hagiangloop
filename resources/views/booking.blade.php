@@ -208,7 +208,7 @@
                                     {{ __('tours.price') }}
                                 </label>
                                 <div class="p-4 bg-amber-50 rounded-lg border border-amber-200">
-                                    <p class="text-2xl font-bold text-amber-600" id="tourPriceDisplay">0 VND</p>
+                                    <p class="text-2xl font-bold text-red-600" id="tourPriceDisplay">0 VND</p>
                                 </div>
                             </div>
 
@@ -445,26 +445,26 @@
 
                         <!-- Total & Checkout -->
                         <div class="lg:col-span-1">
-                            <div class="bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100 rounded-2xl p-6 lg:p-8 border-2 border-amber-300 shadow-xl sticky top-4">
-                                <div class="flex items-center gap-3 mb-6">
-                                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
-                                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <div class="bg-gradient-to-br from-amber-50 via-amber-50 to-amber-100 rounded-2xl p-4 lg:p-6 border-2 border-amber-300 shadow-xl sticky top-4">
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center">
+                                        <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"></path>
                                             <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"></path>
                                         </svg>
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-900">{{ __('common.total') }}</h3>
+                                    <h3 class="text-lg font-bold text-gray-900">{{ __('common.total') }}</h3>
                                 </div>
-                                <div class="mb-6 p-4 bg-white/60 backdrop-blur-sm rounded-xl border border-amber-200">
-                                    <div class="flex items-center justify-between">
-                                        <span class="text-lg font-semibold text-gray-700">{{ __('common.total') }}:</span>
-                                        <span class="text-3xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent" id="bookingTotal">0 VND</span>
+                                <div class="mb-4 p-3 bg-white/60 backdrop-blur-sm rounded-xl border border-amber-200">
+                                    <div class="flex items-center justify-between gap-2">
+                                        <span class="text-sm font-semibold text-gray-700">{{ __('common.total') }}:</span>
+                                        <span class="text-xl lg:text-2xl font-bold text-amber-600 break-words" id="bookingTotal">0 VND</span>
                                     </div>
                                 </div>
                                 <button onclick="proceedToCheckout()"
-                                    class="w-full bg-gradient-to-r from-teal-500 via-teal-600 to-cyan-600 hover:from-teal-600 hover:via-teal-700 hover:to-cyan-700 text-white font-bold py-4 px-6 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer">
+                                    class="w-full bg-gradient-to-r from-teal-500 via-teal-600 to-cyan-600 hover:from-teal-600 hover:via-teal-700 hover:to-cyan-700 text-white font-semibold py-3 px-4 rounded-xl transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer text-sm lg:text-base">
                                     <span>{{ __('booking.continue_checkout') }}</span>
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <svg class="w-4 h-4 lg:w-5 lg:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
                                     </svg>
                                 </button>
