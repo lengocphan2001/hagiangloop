@@ -1186,17 +1186,17 @@
         const busServicesLabel = translations.bus_services || 'Bus Services';
         
         let html = `
-            <div class="flex justify-between py-2 border-b border-gray-200">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
                 <span class="text-gray-600">${tourLabel}:</span>
-                <span class="font-semibold text-gray-900">${selectedTourData?.name || translations.not_available}</span>
+                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${selectedTourData?.name || translations.not_available}</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-gray-200">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
                 <span class="text-gray-600">${startDateLabel}:</span>
-                <span class="font-semibold text-gray-900">${startDate || translations.not_available}</span>
+                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${startDate || translations.not_available}</span>
             </div>
-            <div class="flex justify-between py-2 border-b border-gray-200">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
                 <span class="text-gray-600">${adultsLabel}:</span>
-                <span class="font-semibold text-gray-900">${adults}</span>
+                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${adults}</span>
             </div>
         `;
         
@@ -1217,16 +1217,16 @@
                 const outboundPickupLocation = bookingData.outboundBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-2 border-b border-gray-200 pl-4">
-                        <div class="flex justify-between items-start mb-1">
-                            <span class="text-gray-600 font-medium">${outboundLabel}:</span>
-                            <span class="text-right">
-                                <span class="font-semibold text-gray-900">${outboundServiceName || translations.not_available}</span>
-                                ${outboundPoint ? `<br><span class="text-xs text-gray-500">${outboundPoint}</span>` : ''}
-                            </span>
+                    <div class="py-3 border-b border-gray-200 pl-4">
+                        <div class="mb-2">
+                            <span class="text-gray-600 font-medium block mb-1">${outboundLabel}:</span>
+                            <div class="ml-0 space-y-1">
+                                <div class="font-semibold text-gray-900 break-words">${outboundServiceName || translations.not_available}</div>
+                                ${outboundPoint ? `<div class="text-xs text-gray-500 break-words">${outboundPoint}</div>` : ''}
+                                ${outboundDepartureTime ? `<div class="text-xs text-gray-500 break-words">${outboundDepartureTime}</div>` : ''}
+                                ${outboundPickupLocation ? `<div class="text-xs text-gray-500 break-words">${outboundPickupLocation}</div>` : ''}
+                            </div>
                         </div>
-                        ${outboundDepartureTime ? `<div class="text-xs text-gray-500 mt-1"><i class="far fa-clock mr-1"></i>${outboundDepartureTime}</div>` : ''}
-                        ${outboundPickupLocation ? `<div class="text-xs text-gray-500 mt-1"><i class="fas fa-map-marker-alt mr-1"></i>${outboundPickupLocation}</div>` : ''}
                     </div>
                 `;
             }
@@ -1239,16 +1239,16 @@
                 const returnPickupLocation = bookingData.returnBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-2 border-b border-gray-200 pl-4">
-                        <div class="flex justify-between items-start mb-1">
-                            <span class="text-gray-600 font-medium">${returnLabel}:</span>
-                            <span class="text-right">
-                                <span class="font-semibold text-gray-900">${returnServiceName || translations.not_available}</span>
-                                ${returnPoint ? `<br><span class="text-xs text-gray-500">${returnPoint}</span>` : ''}
-                            </span>
+                    <div class="py-3 border-b border-gray-200 pl-4">
+                        <div class="mb-2">
+                            <span class="text-gray-600 font-medium block mb-1">${returnLabel}:</span>
+                            <div class="ml-0 space-y-1">
+                                <div class="font-semibold text-gray-900 break-words">${returnServiceName || translations.not_available}</div>
+                                ${returnPoint ? `<div class="text-xs text-gray-500 break-words">${returnPoint}</div>` : ''}
+                                ${returnDepartureTime ? `<div class="text-xs text-gray-500 break-words">${returnDepartureTime}</div>` : ''}
+                                ${returnPickupLocation ? `<div class="text-xs text-gray-500 break-words">${returnPickupLocation}</div>` : ''}
+                            </div>
                         </div>
-                        ${returnDepartureTime ? `<div class="text-xs text-gray-500 mt-1"><i class="far fa-clock mr-1"></i>${returnDepartureTime}</div>` : ''}
-                        ${returnPickupLocation ? `<div class="text-xs text-gray-500 mt-1"><i class="fas fa-map-marker-alt mr-1"></i>${returnPickupLocation}</div>` : ''}
                     </div>
                 `;
             }
@@ -1266,9 +1266,9 @@
         // Gift Section
         if (bookingData.selectedGift) {
             html += `
-                <div class="flex justify-between py-2 border-b border-gray-200">
+                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
                     <span class="text-gray-600">${giftLabel}:</span>
-                    <span class="font-semibold text-gray-900">${bookingData.selectedGiftName || translations.not_available}</span>
+                    <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${bookingData.selectedGiftName || translations.not_available}</span>
                 </div>
             `;
         }
