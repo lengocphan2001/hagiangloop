@@ -13,5 +13,6 @@ return [
     'check_back_soon' => 'Check back soon for exciting tour packages!',
     'days' => 'Days',
     'nights' => 'Nights',
+    'locations' => 'Locations',
 ];
 

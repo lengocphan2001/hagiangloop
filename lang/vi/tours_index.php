@@ -13,5 +13,6 @@ return [
     'check_back_soon' => 'Vui lòng quay lại sau để xem các gói tour thú vị!',
     'days' => 'Ngày',
     'nights' => 'Đêm',
+    'locations' => 'Địa điểm',
 ];
 

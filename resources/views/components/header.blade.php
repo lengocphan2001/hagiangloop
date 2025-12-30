@@ -70,8 +70,8 @@
             <!-- Logo -->
             <div class="flex-shrink-0 flex items-center justify-center">
                 <a href="{{ route('home') }}" class="flex items-center justify-center group">
-                    <img src="{{ asset('images/alley-01.png') }}" alt="Alley HOMESTAY"
-                        class="max-h-6 w-auto object-contain scale-300 transform origin-center transition-transform duration-300 group-hover:scale-105">
+                    <img src="{{ asset('images/alley-0.png') }}" alt="Alley HOMESTAY"
+                        class="max-h-20 w-auto object-contain transform origin-center transition-transform duration-300 group-hover:scale-105">
                 </a>
             </div>
             <!-- Desktop Navigation -->

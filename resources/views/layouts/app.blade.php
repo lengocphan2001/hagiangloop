@@ -37,8 +37,8 @@
                 @endphp
                 @foreach($sliderImages as $index => $image)
                     <div class="slide {{ $index === 0 ? 'active' : '' }} {{ $index === 0 ? 'relative' : 'absolute' }} top-0 left-0 w-full" style="{{ $index === 0 ? 'opacity: 1; z-index: 1; position: relative;' : 'opacity: 0; z-index: 0; position: absolute;' }}">
-                        <div class="relative w-full">
-                            <img src="{{ asset($image['path']) }}" alt="{{ $image['alt'] }}" class="slider-image" loading="{{ $index === 0 ? 'eager' : 'lazy' }}">
+                        <div class="relative w-full" style="height: 100%;">
+                            <img src="{{ asset($image['path']) }}" alt="{{ $image['alt'] }}" class="slider-image" loading="{{ $index === 0 ? 'eager' : 'lazy' }}" style="width: 100%; height: auto; display: block;">
                             <div class="absolute inset-0 bg-black/30" style="z-index: 10;"></div>
                             <div class="absolute top-0 left-0 right-0 h-60 bg-gradient-to-b from-black/90 via-black/70 to-transparent" style="z-index: 10;"></div>
                         </div>
@@ -66,14 +66,6 @@
                 </div>
             </div>
 
-            <!-- Slider Controls -->
-            <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center justify-center">
-                <div class="slider-dots flex space-x-2">
-                    @for($i = 0; $i < 4; $i++)
-                        <button class="dot {{ $i === 0 ? 'active' : '' }} w-3 h-3 rounded-full {{ $i === 0 ? 'bg-white' : 'bg-white/50' }}"></button>
-                    @endfor
-                </div>
-            </div>
         </section>
 
         <!-- Main Content -->
@@ -137,14 +129,105 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const slides = document.querySelectorAll('.slide');
-            const dots = document.querySelectorAll('.dot');
             const sliderContainer = document.querySelector('.slider-container');
+            const sliderImages = document.querySelectorAll('.slider-image');
             let currentSlide = 0;
             let autoSlideInterval;
             let isDragging = false;
             let startX = 0;
             let currentX = 0;
             let translateX = 0;
+
+            // Function to normalize image heights (works on both desktop and mobile)
+            function normalizeImageHeights() {
+                // Reset all images to auto height to measure their natural rendered height
+                sliderImages.forEach(img => {
+                    img.style.height = 'auto';
+                    img.style.width = '100%';
+                    img.style.objectFit = 'cover';
+                });
+                
+                // Reset container and slides
+                if (sliderContainer) {
+                    sliderContainer.style.height = 'auto';
+                }
+                slides.forEach(slide => {
+                    slide.style.height = 'auto';
+                });
+                
+                // Function to measure and set heights
+                const measureAndSetHeights = () => {
+                    let maxHeight = 0;
+                    
+                    // Measure actual rendered height of each image when width is 100%
+                    sliderImages.forEach(img => {
+                        if (img.complete && img.naturalHeight > 0) {
+                            // Force a reflow to ensure image is rendered
+                            void img.offsetHeight;
+                            
+                            // Get the actual rendered height
+                            const imgRect = img.getBoundingClientRect();
+                            const currentHeight = imgRect.height;
+                            
+                            // Also try offsetHeight as fallback
+                            const offsetHeight = img.offsetHeight || img.clientHeight;
+                            const measuredHeight = currentHeight > 0 ? currentHeight : offsetHeight;
+                            
+                            if (measuredHeight > maxHeight) {
+                                maxHeight = measuredHeight;
+                            }
+                        }
+                    });
+                    
+                    // If we found a max height, apply it to all images and containers
+                    if (maxHeight > 0) {
+                        sliderImages.forEach(img => {
+                            img.style.height = maxHeight + 'px';
+                            img.style.objectFit = 'cover';
+                            img.style.width = '100%';
+                        });
+                        
+                        // Set container and slide heights
+                        if (sliderContainer) {
+                            sliderContainer.style.height = maxHeight + 'px';
+                        }
+                        
+                        slides.forEach(slide => {
+                            slide.style.height = maxHeight + 'px';
+                        });
+                    }
+                };
+                
+                // Wait for all images to load
+                let loadedCount = 0;
+                const totalImages = sliderImages.length;
+                
+                if (totalImages === 0) return;
+                
+                const checkIfAllLoaded = () => {
+                    loadedCount++;
+                    if (loadedCount === totalImages) {
+                        // Longer delay on mobile to ensure rendering is complete
+                        const isMobile = window.innerWidth <= 768;
+                        setTimeout(measureAndSetHeights, isMobile ? 400 : 200);
+                    }
+                };
+                
+                sliderImages.forEach(img => {
+                    if (img.complete && img.naturalHeight > 0) {
+                        checkIfAllLoaded();
+                    } else {
+                        img.addEventListener('load', checkIfAllLoaded, { once: true });
+                        img.addEventListener('error', checkIfAllLoaded, { once: true });
+                    }
+                });
+                
+                // Fallback: check on window load (important for mobile)
+                window.addEventListener('load', () => {
+                    const isMobile = window.innerWidth <= 768;
+                    setTimeout(measureAndSetHeights, isMobile ? 500 : 300);
+                }, { once: true });
+            }
 
             function showSlide(index, animated = true) {
                 const content = document.querySelector('.hero-content');
@@ -168,10 +251,6 @@
                     }
                 });
                 
-                dots.forEach((dot, i) => {
-                    dot.classList.toggle('active', i === index);
-                    dot.style.backgroundColor = i === index ? 'white' : 'rgba(255, 255, 255, 0.5)';
-                });
                 
                 // Animate content from bottom
                 if (window.gsap && animated) {
@@ -271,19 +350,30 @@
                 sliderContainer.addEventListener('mouseleave', handleEnd);
             }
 
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    currentSlide = index;
-                    showSlide(currentSlide);
-                    stopAutoSlide();
-                    startAutoSlide();
-                });
-            });
 
             // Initialize first slide
             showSlide(0);
             // Start auto slide
             startAutoSlide();
+            
+            // Normalize image heights (works on both desktop and mobile)
+            normalizeImageHeights();
+            
+            // Re-normalize on window resize (important for mobile orientation changes)
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => {
+                    normalizeImageHeights();
+                }, 300);
+            });
+            
+            // Also normalize on orientation change (mobile)
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    normalizeImageHeights();
+                }, 500);
+            });
         });
     </script>
     
@@ -310,6 +400,12 @@
             width: 100%;
             object-fit: cover;
             display: block;
+            height: auto;
+        }
+        .slider-image {
+            width: 100% !important;
+            height: auto;
+            object-fit: cover;
         }
         .hero-content {
             opacity: 1;

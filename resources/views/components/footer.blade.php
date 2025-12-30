@@ -5,7 +5,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-12 items-center">
             <!-- Logo + title -->
             <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-                <img src="{{ asset('images/alley-01.png') }}" alt="Alley Homestay" class="w-48 object-contain transform scale-300 origin-center">
+                <img src="{{ asset('images/alley-0.png') }}" alt="Alley Homestay" class="w-96 object-contain transform origin-center">
             </div>
 
             <!-- Contact -->

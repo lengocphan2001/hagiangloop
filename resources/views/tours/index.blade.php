@@ -32,92 +32,78 @@
         @if($tours->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
                 @foreach($tours as $index => $tour)
-                    <div class="tour-card group cursor-pointer" 
-                         style="opacity: 1 !important; visibility: visible !important; display: flex !important; transform: translateZ(0);"
-                         onclick="window.location.href='{{ route('tours.show', $tour->slug) }}'">
-                        <div class="bg-white rounded-3xl overflow-hidden h-full flex flex-col transition-all duration-300 border border-gray-100 hover:border-amber-300 hover:-translate-y-1 card-inner">
-                            <!-- Image Section -->
-                            <div class="relative h-72 overflow-hidden bg-gradient-to-br from-slate-100 to-slate-200 rounded-t-3xl">
-                                @if($tour->thumbnail_image)
-                                    <img src="{{ Storage::url($tour->thumbnail_image) }}" 
+                    <article class="tour-card bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-gray-100 hover:border-amber-300 hover:-translate-y-1 group cursor-pointer"
+                             onclick="window.location.href='{{ route('tours.show', $tour->slug) }}'">
+                        <!-- Featured Image -->
+                        <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
+                            @if($tour->thumbnail_image)
+                                <img src="{{ Storage::url($tour->thumbnail_image) }}" 
+                                     alt="{{ $tour->name }}" 
+                                     class="w-full h-full object-cover">
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+                            @else
+                                @php
+                                    $firstLocation = $tour->tourDays->flatMap->locations->firstWhere('thumbnail_image');
+                                @endphp
+                                @if($firstLocation && $firstLocation->thumbnail_image)
+                                    <img src="{{ asset('storage/' . $firstLocation->thumbnail_image) }}" 
                                          alt="{{ $tour->name }}" 
                                          class="w-full h-full object-cover">
                                     <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                                 @else
-                                    @php
-                                        $firstLocation = $tour->tourDays->flatMap->locations->firstWhere('thumbnail_image');
-                                    @endphp
-                                    @if($firstLocation && $firstLocation->thumbnail_image)
-                                        <img src="{{ asset('storage/' . $firstLocation->thumbnail_image) }}" 
-                                             alt="{{ $tour->name }}" 
-                                             class="w-full h-full object-cover">
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-                                    @else
-                                        <div class="w-full h-full bg-gradient-to-br from-amber-400 via-amber-300 to-green-400 flex items-center justify-center">
-                                            <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            </svg>
-                                        </div>
-                                    @endif
-                                @endif
-                                <div class="absolute top-4 right-4 z-10 duration-badge">
-                                    <span class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xl backdrop-blur-sm border border-amber-400/30">
-                                        {{ $tour->duration }}
-                                    </span>
-                                </div>
-                                <div class="absolute bottom-0 left-0 right-0 p-6 z-10 image-content">
-                                    <h3 class="text-2xl lg:text-3xl font-bold text-white mb-2 drop-shadow-lg">{{ $tour->name }}</h3>
-                                    <p class="text-white/95 text-sm font-medium">{{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}</p>
-                                </div>
-                            </div>
-
-                            <!-- Content Section -->
-                            <div class="p-6 lg:p-8 flex-grow flex flex-col bg-white min-h-0">
-                                @if($tour->description)
-                                    <p class="text-gray-700 mb-6 leading-relaxed line-clamp-3">{{ Str::limit($tour->description, 120) }}</p>
-                                @endif
-
-                                <!-- Tour Highlights -->
-                                <div class="mb-6 space-y-3 highlights-container">
-                                    <div class="flex items-center text-sm highlight-item">
-                                        <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-100 mr-3 icon-box">
-                                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            </svg>
-                                        </div>
-                                        <span class="text-gray-700 font-medium">{{ $tour->tourDays->sum(fn($day) => $day->locations->count()) }} {{ __('tours_index.amazing_locations') }}</span>
-                                    </div>
-                                    <div class="flex items-center text-sm highlight-item">
-                                        <div class="flex items-center justify-center w-8 h-8 rounded-lg bg-amber-100 mr-3 icon-box">
-                                            <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                                            </svg>
-                                        </div>
-                                        <span class="text-gray-700 font-medium">{{ $tour->days }} {{ __('tours_index.days_adventure') }}</span>
-                                    </div>
-                                </div>
-
-                                <!-- Price -->
-                                @if($tour->price)
-                                    <div class="mb-6 pb-6 border-b border-gray-200 price-container">
-                                        <div class="flex items-baseline">
-                                            <span class="text-4xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent price-number">{{ number_format($tour->price, 0) }}</span>
-                                            <span class="text-gray-500 ml-2 text-lg">VND</span>
-                                        </div>
-                                        <p class="text-gray-500 text-sm mt-1">{{ __('tours_index.per_person') }}</p>
+                                    <div class="relative h-64 bg-gradient-to-br from-amber-400 via-amber-300 to-green-400 flex items-center justify-center">
+                                        <svg class="w-24 h-24 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                        </svg>
                                     </div>
                                 @endif
-
-                                <!-- CTA Button -->
-                                <a href="{{ route('tours.show', $tour->slug) }}" 
-                                   class="block w-full bg-amber-500 text-white text-center py-4 rounded-xl font-bold text-base hover:bg-amber-600 transition-colors duration-300 shadow-lg cursor-pointer">
-                                    {{ __('tours_index.view_details') }}
-                                </a>
+                            @endif
+                            <div class="absolute top-4 right-4 z-10">
+                                <span class="bg-gradient-to-r from-amber-500 to-amber-600 text-white px-5 py-2.5 rounded-full font-bold text-sm shadow-xl backdrop-blur-sm border border-amber-400/30">
+                                    {{ $tour->duration }}
+                                </span>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- Content -->
+                        <div class="p-4 sm:p-6 lg:p-8">
+                            <div class="text-sm text-gray-500 mb-3">
+                                <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                {{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}
+                            </div>
+
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 break-words">
+                                {{ $tour->name }}
+                            </h2>
+
+                            @if($tour->price)
+                                <div class="mb-3">
+                                    <span class="text-2xl font-bold bg-gradient-to-r from-amber-600 to-amber-700 bg-clip-text text-transparent">{{ number_format($tour->price, 0) }}</span>
+                                    <span class="text-gray-500 ml-1 text-sm">VND</span>
+                                    <span class="text-gray-500 text-xs ml-1">/ {{ __('tours_index.per_person') }}</span>
+                                </div>
+                            @endif
+
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">
+                                    <svg class="w-4 h-4 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    {{ $tour->tourDays->sum(fn($day) => $day->locations->count()) }} {{ __('tours_index.locations') }}
+                                </span>
+                                <span class="text-blue-600 font-semibold flex items-center gap-1">
+                                    {{ __('tours_index.view_details') }}
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+                    </article>
                 @endforeach
             </div>
         @else
@@ -192,47 +178,12 @@
         animation: gradient 3s ease infinite;
     }
 
-    /* Tour Card Animations - Prevent layout shift between items */
-    .tour-card {
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-        opacity: 1;
-        visibility: visible;
-        position: relative;
-    }
-
     /* Ensure floating buttons are always on top - higher than any tour animations */
     .fixed.bottom-6.right-6 {
         z-index: 9999 !important;
         position: fixed !important;
         isolation: isolate !important;
     }
-
-    .card-inner {
-        position: relative;
-        overflow: visible;
-    }
-
-    
-    .line-clamp-3 {
-        display: -webkit-box;
-        -webkit-line-clamp: 3;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-height: 4.5em;
-    }
-
-
-    .tour-card .bg-white {
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
-        min-height: 0;
-        display: flex;
-        flex-direction: column;
-        flex: 1 1 auto;
-    }
-
 
     /* Floating Animation for Decorative Elements - Only in tours hero section, NOT slider */
     @keyframes float {
@@ -255,12 +206,6 @@
     .tours-hero-section .tours-hero-blob:nth-child(2) {
         animation-delay: 2s;
     }
-
-    /* Highlights - Always visible, no animation on hover */
-    .highlight-item {
-        opacity: 1;
-        transform: translateX(0);
-    }
 </style>
 @endpush
 
@@ -275,19 +220,8 @@
                 easing: 'ease-out-cubic',
                 once: true,
                 offset: 100,
-                delay: 0
             });
         }
-
-        // Force cards to be visible immediately - NO DELAY, NO WAITING
-        const tourCards = document.querySelectorAll('.tour-card');
-        tourCards.forEach(card => {
-            // Force visibility immediately with !important
-            card.style.setProperty('opacity', '1', 'important');
-            card.style.setProperty('visibility', 'visible', 'important');
-            card.style.setProperty('display', 'flex', 'important');
-            card.style.setProperty('transform', 'translateY(0)', 'important');
-        });
     });
 </script>
 @endpush

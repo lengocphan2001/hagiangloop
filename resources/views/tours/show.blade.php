@@ -593,7 +593,7 @@
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Ready to Start Your Adventure?</h2>
                 <p class="text-xl text-gray-600 mb-8">Book your tour now and experience the beauty of Hà Giang</p>
                 <div class="flex flex-wrap justify-center gap-4">
-                    <a href="https://wa.me/84915121987?text=Hello! I'm interested in {{ urlencode($tour->name) }}"
+                    <a href="https://wa.me/84968410676?text=Hello! I'm interested in {{ urlencode($tour->name) }}"
                         target="_blank"
                         class="bg-gradient-to-r from-green-400 to-green-600 text-white px-10 py-4 rounded-lg font-semibold text-lg hover:from-green-500 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center">
                         <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
