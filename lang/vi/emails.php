@@ -36,5 +36,8 @@ return [
     'email' => 'Email',
     'country' => 'Quốc gia',
     'message' => 'Tin nhắn',
+    'additional_passengers' => 'Hành khách bổ sung',
+    'passenger' => 'Hành khách',
+    'full_name' => 'Họ và tên',
 ];
 

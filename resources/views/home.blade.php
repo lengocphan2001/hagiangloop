@@ -499,5 +499,115 @@
         </div>
     </section>    
     @endif
+
+    <!-- FAQs Section -->
+    @if(isset($faqs) && $faqs->count() > 0)
+    <section class="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+        <div class="container mx-auto px-4 lg:px-6 max-w-6xl">
+            <div class="text-center mb-12 lg:mb-16">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    {{ __('faq.title') }}
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    {{ __('faq.subtitle') }}
+                </p>
+            </div>
+
+            <div class="max-w-4xl mx-auto space-y-3">
+                @foreach($faqs as $index => $faq)
+                    <div class="faq-item rounded-lg overflow-hidden transition-all duration-300">
+                        <button 
+                            type="button"
+                            class="faq-question w-full px-6 py-4 text-left flex items-center justify-between focus:outline-none transition-all duration-200 bg-white text-gray-900 cursor-pointer"
+                            onclick="toggleFAQ({{ $index }})"
+                            aria-expanded="false"
+                            id="faq-btn-{{ $index }}">
+                            <span class="font-semibold text-lg pr-4" id="faq-text-{{ $index }}">{{ $faq->question }}</span>
+                            <svg 
+                                class="faq-icon w-10 h-10 flex-shrink-0 transition-transform duration-300 text-gray-600 border border-gray-300 rounded-full p-2" 
+                                id="faq-icon-{{ $index }}"
+                                fill="none" 
+                                stroke="currentColor" 
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div 
+                            class="faq-answer hidden px-6 py-4 leading-relaxed bg-white"
+                            id="faq-answer-{{ $index }}">
+                            <p class="text-gray-900">{{ $faq->answer }}</p>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 @endsection
+
+@push('scripts')
+<script>
+    function toggleFAQ(index) {
+        const answer = document.getElementById(`faq-answer-${index}`);
+        const icon = document.getElementById(`faq-icon-${index}`);
+        const button = document.getElementById(`faq-btn-${index}`);
+        
+        const isOpen = !answer.classList.contains('hidden');
+        
+        // Close all FAQs
+        document.querySelectorAll('.faq-answer').forEach((el, idx) => {
+            if (idx !== index) {
+                el.classList.add('hidden');
+                const otherIcon = document.getElementById(`faq-icon-${idx}`);
+                const otherButton = document.getElementById(`faq-btn-${idx}`);
+                const otherAnswerText = el.querySelector('p');
+                
+                otherIcon.classList.remove('rotate-180');
+                otherIcon.classList.remove('text-white');
+                otherIcon.classList.add('text-gray-600');
+                otherButton.classList.remove('bg-gray-800', 'text-white');
+                otherButton.classList.add('bg-white', 'text-gray-900');
+                el.classList.remove('bg-gray-800');
+                el.classList.add('bg-white');
+                if (otherAnswerText) {
+                    otherAnswerText.classList.remove('text-white');
+                    otherAnswerText.classList.add('text-gray-900');
+                }
+            }
+        });
+        
+        // Toggle current FAQ
+        const answerText = answer.querySelector('p');
+        if (isOpen) {
+            answer.classList.add('hidden');
+            answer.classList.remove('bg-gray-800');
+            answer.classList.add('bg-white');
+            icon.classList.remove('rotate-180');
+            icon.classList.remove('text-white');
+            icon.classList.add('text-gray-600');
+            button.classList.remove('bg-gray-800', 'text-white');
+            button.classList.add('bg-white', 'text-gray-900');
+            if (answerText) {
+                answerText.classList.remove('text-white');
+                answerText.classList.add('text-gray-900');
+            }
+            button.setAttribute('aria-expanded', 'false');
+        } else {
+            answer.classList.remove('hidden');
+            answer.classList.remove('bg-white');
+            answer.classList.add('bg-gray-800');
+            icon.classList.add('rotate-180');
+            icon.classList.remove('text-gray-600');
+            icon.classList.add('text-white');
+            button.classList.remove('bg-white', 'text-gray-900');
+            button.classList.add('bg-gray-800', 'text-white');
+            if (answerText) {
+                answerText.classList.remove('text-gray-900');
+                answerText.classList.add('text-white');
+            }
+            button.setAttribute('aria-expanded', 'true');
+        }
+    }
+</script>
+@endpush
 

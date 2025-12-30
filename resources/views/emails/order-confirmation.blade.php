@@ -159,6 +159,33 @@
         </div>
         @endif
 
+        @php
+            $additionalPassengers = is_array($order->additional_passengers) 
+                ? $order->additional_passengers 
+                : (is_string($order->additional_passengers) ? json_decode($order->additional_passengers, true) : []);
+            $additionalPassengers = $additionalPassengers ?: [];
+        @endphp
+        @if(!empty($additionalPassengers) && is_array($additionalPassengers))
+        <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+            <h2 style="color: #ec4899; margin-top: 0; margin-bottom: 15px;">{{ __('emails.additional_passengers') }}</h2>
+            @foreach($additionalPassengers as $index => $passenger)
+            <div style="margin-bottom: 15px; padding: 15px; background: #f9fafb; border-radius: 6px; border-left: 4px solid #ec4899;">
+                <h3 style="color: #111827; margin-top: 0; margin-bottom: 10px; font-size: 16px;">{{ __('emails.passenger') }} {{ $index + 2 }}</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <tr>
+                        <td style="padding: 6px 0; color: #6b7280; font-size: 14px;"><strong>{{ __('emails.full_name') }}:</strong></td>
+                        <td style="padding: 6px 0; text-align: right; font-weight: 600;">{{ $passenger['name'] ?? '' }}</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 6px 0; color: #6b7280; font-size: 14px;"><strong>{{ __('emails.country') }}:</strong></td>
+                        <td style="padding: 6px 0; text-align: right;">{{ $passenger['country'] ?? '' }}</td>
+                    </tr>
+                </table>
+            </div>
+            @endforeach
+        </div>
+        @endif
+
         <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
             <h2 style="color: #ec4899; margin-top: 0; margin-bottom: 15px;">{{ __('emails.price_summary') }}</h2>
             <table style="width: 100%; border-collapse: collapse;">

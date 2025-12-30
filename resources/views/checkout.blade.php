@@ -175,6 +175,47 @@
                                 </div>
                             </div>
 
+                            @if($adults > 1)
+                            <!-- Additional Passengers Information -->
+                            <div class="mb-6 w-full">
+                                <h3 class="text-lg font-semibold text-gray-900 mb-4">{{ __('checkout.additional_passengers') }}</h3>
+                                <p class="text-sm text-gray-600 mb-4">{{ __('checkout.additional_passengers_description', ['count' => $adults - 1]) }}</p>
+                                
+                                <div id="additionalPassengersContainer" class="space-y-4">
+                                    @for($i = 2; $i <= $adults; $i++)
+                                    <div class="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                                        <h4 class="text-md font-medium text-gray-700 mb-3">{{ __('checkout.passenger') }} {{ $i }}</h4>
+                                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                            <div>
+                                                <label for="passenger_name_{{ $i }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                                    {{ __('checkout.full_name') }} <span class="text-red-500">*</span>
+                                                </label>
+                                                <input type="text" name="additional_passengers[{{ $i - 2 }}][name]" id="passenger_name_{{ $i }}" 
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none @error('additional_passengers.' . ($i - 2) . '.name') border-red-500 @enderror"
+                                                    value="{{ old('additional_passengers.' . ($i - 2) . '.name') }}" required>
+                                                @error('additional_passengers.' . ($i - 2) . '.name')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+
+                                            <div>
+                                                <label for="passenger_country_{{ $i }}" class="block text-sm font-medium text-gray-700 mb-2">
+                                                    {{ __('checkout.country') }} <span class="text-red-500">*</span>
+                                                </label>
+                                                <input type="text" name="additional_passengers[{{ $i - 2 }}][country]" id="passenger_country_{{ $i }}" 
+                                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none @error('additional_passengers.' . ($i - 2) . '.country') border-red-500 @enderror"
+                                                    value="{{ old('additional_passengers.' . ($i - 2) . '.country') }}" required>
+                                                @error('additional_passengers.' . ($i - 2) . '.country')
+                                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @endfor
+                                </div>
+                            </div>
+                            @endif
+
                             <div class="mb-6 w-full">
                                 <label for="notes" class="block text-sm font-medium text-gray-700 mb-2">
                                     {{ __('checkout.additional_notes') }} ({{ __('common.optional') }})

@@ -36,5 +36,8 @@ return [
     'email' => 'Email',
     'country' => 'Country',
     'message' => 'Message',
+    'additional_passengers' => 'Additional Passengers',
+    'passenger' => 'Passenger',
+    'full_name' => 'Full Name',
 ];
 

@@ -411,6 +411,23 @@ return [
             ],
         ],
         [
+            'text' => 'FAQs',
+            'icon' => 'fas fa-fw fa-question-circle',
+            'active' => ['admin/faqs*'],
+            'submenu' => [
+                [
+                    'text' => 'List FAQs',
+                    'url' => 'admin/faqs',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add New FAQ',
+                    'url' => 'admin/faqs/create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
             'text' => 'Orders',
             'url' => 'admin/orders',
             'icon' => 'fas fa-fw fa-shopping-cart',

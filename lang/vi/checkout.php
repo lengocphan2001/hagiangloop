@@ -23,5 +23,9 @@ return [
     'adult_s' => 'Người lớn',
     'child_ren' => 'Trẻ em',
     'please_fix_errors' => 'Vui lòng sửa các lỗi sau:',
+    'additional_passengers' => 'Thông tin hành khách bổ sung',
+    'additional_passengers_description' => 'Vui lòng cung cấp thông tin cho :count hành khách bổ sung:',
+    'passenger' => 'Hành khách',
+    'country' => 'Quốc gia',
 ];
 

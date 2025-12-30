@@ -12,7 +12,12 @@ Route::get('/', function () {
         ->limit(3)
         ->get();
     
-    return view('home', compact('latestNews'));
+    $faqs = App\Models\FAQ::where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('created_at', 'asc')
+        ->get();
+    
+    return view('home', compact('latestNews', 'faqs'));
 })->name('home');
 
 // Page routes
@@ -88,6 +93,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // Accommodations management
     Route::resource('accommodations', App\Http\Controllers\Admin\AccommodationController::class);
+    
+    // FAQs management
+    Route::resource('faqs', App\Http\Controllers\Admin\FAQController::class);
     
     // Orders management
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

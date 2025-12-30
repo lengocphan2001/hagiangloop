@@ -63,6 +63,36 @@
                         </div>
                     </div>
 
+                    <!-- Additional Passengers -->
+                    @php
+                        $additionalPassengers = is_array($order->additional_passengers) 
+                            ? $order->additional_passengers 
+                            : (is_string($order->additional_passengers) ? json_decode($order->additional_passengers, true) : []);
+                        $additionalPassengers = $additionalPassengers ?: [];
+                    @endphp
+                    @if(!empty($additionalPassengers) && is_array($additionalPassengers))
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="font-weight-bold mb-0">Additional Passengers</h5>
+                        </div>
+                        <div class="card-body">
+                            @foreach($additionalPassengers as $index => $passenger)
+                            <div class="mb-3 p-3 border rounded">
+                                <h6 class="font-weight-bold mb-2">Passenger {{ $index + 2 }}</h6>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <strong>Name:</strong> {{ $passenger['name'] ?? 'N/A' }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        <strong>Country:</strong> {{ $passenger['country'] ?? 'N/A' }}
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @endif
+
                     <!-- Tour Information -->
                     <div class="mb-4">
                         <h5 class="font-weight-bold">Tour Information</h5>

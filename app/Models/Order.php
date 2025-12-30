@@ -14,6 +14,7 @@ class Order extends Model
         'customer_email',
         'customer_phone',
         'customer_address',
+        'additional_passengers',
         'tour_start_date',
         'adults_count',
         'children_count',
@@ -29,6 +30,7 @@ class Order extends Model
     protected $casts = [
         'tour_start_date' => 'date',
         'total_price' => 'decimal:0',
+        'additional_passengers' => 'array',
     ];
 
     /**

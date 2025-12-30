@@ -84,6 +84,9 @@ class CheckoutRequest extends FormRequest
             'accommodation_id' => 'nullable|exists:accommodations,id',
             'total_price' => 'required|numeric|min:0',
             'notes' => 'nullable|string',
+            'additional_passengers' => 'nullable|array',
+            'additional_passengers.*.name' => 'required|string|max:255',
+            'additional_passengers.*.country' => 'required|string|max:255',
         ];
     }
 }

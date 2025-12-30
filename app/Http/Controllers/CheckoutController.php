@@ -96,6 +96,15 @@ class CheckoutController extends Controller
                 }
             }
 
+            // Process additional passengers if provided
+            // Laravel will automatically encode to JSON due to the 'array' cast in the model
+            if (isset($validated['additional_passengers']) && is_array($validated['additional_passengers'])) {
+                // Ensure it's a valid array (Laravel will handle JSON encoding via cast)
+                $validated['additional_passengers'] = array_values($validated['additional_passengers']);
+            } else {
+                $validated['additional_passengers'] = null;
+            }
+
             // Create order
             $order = Order::create($validated);
 

@@ -23,5 +23,9 @@ return [
     'adult_s' => 'Adult(s)',
     'child_ren' => 'Child(ren)',
     'please_fix_errors' => 'Please fix the following errors:',
+    'additional_passengers' => 'Additional Passengers Information',
+    'additional_passengers_description' => 'Please provide information for :count additional passenger(s):',
+    'passenger' => 'Passenger',
+    'country' => 'Country',
 ];
 

@@ -556,7 +556,7 @@
                                     <span class="text-2xl font-bold text-red-600" id="bookingTotal">0 VND</span>
                                 </div>
                             </div>
-
+ 
                             <!-- Action Button -->
                             <button onclick="checkAvailability()"
                                 class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200">
