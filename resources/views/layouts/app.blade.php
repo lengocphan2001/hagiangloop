@@ -100,7 +100,7 @@
             </a>
 
             <!-- WhatsApp Button (fixed position) -->
-            <a href="https://wa.me/84915121987" 
+            <a href="https://wa.me/84968410676" 
                 target="_blank"
                 class="floating-btn absolute bottom-[7.5rem] right-0 w-12 h-12 rounded-lg bg-[#25D366] hover:bg-[#20BA5A] flex items-center justify-center shadow-lg cursor-pointer"
                 style="transition: none !important; animation: none !important; transform: none !important;">
@@ -110,7 +110,7 @@
             </a>
 
             <!-- Instagram Button (fixed position) -->
-            <a href="https://www.instagram.com" 
+            <a href="https://www.instagram.com/alley_homestay" 
                 target="_blank"
                 class="floating-btn absolute bottom-[11rem] right-0 w-12 h-12 rounded-lg flex items-center justify-center shadow-lg"
                 style="background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); transition: none !important; animation: none !important; transform: none !important;">
