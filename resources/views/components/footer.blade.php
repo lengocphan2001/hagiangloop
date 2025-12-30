@@ -35,8 +35,8 @@
                     <span class="text-base uppercase tracking-widest font-semibold">{{ __('footer.instagram') }}</span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <div class="relative w-fit h-44 border border-white/30 rounded-xl flex items-center justify-center overflow-hidden">
-                        <img src="{{ asset('images/insta.png') }}" alt="Instagram QR Code" class="w-full h-full max-w-full max-h-full object-contain rounded-lg">
+                    <div class="relative w-fit h-44 flex items-center justify-center overflow-hidden">
+                        <img src="{{ asset('images/insta.png') }}" alt="Instagram QR Code" class="w-fit h-fit object-contain border border-white/30 rounded-lg">
                     </div>
                     <div class="text-sm tracking-wider uppercase" style="writing-mode: vertical-rl;">
                         {{ __('footer.scan_to_connect') }}
