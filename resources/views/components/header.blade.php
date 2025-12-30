@@ -71,7 +71,7 @@
             <div class="flex-shrink-0 flex items-center justify-center">
                 <a href="{{ route('home') }}" class="flex items-center justify-center group">
                     <img src="{{ asset('images/alley-0.png') }}" alt="Alley HOMESTAY"
-                        class="max-h-20 w-auto object-contain transform origin-center transition-transform duration-300 group-hover:scale-105">
+                        class="max-h-10 sm:max-h-10 md:max-h-20 w-auto object-contain transform origin-center transition-transform duration-300 group-hover:scale-105">
                 </a>
             </div>
             <!-- Desktop Navigation -->

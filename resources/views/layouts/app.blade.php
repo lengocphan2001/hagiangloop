@@ -47,7 +47,7 @@
             </div>
             
             <!-- Content -->
-            <div class="hero-content" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 999; display: flex; align-items: center; justify-content: center; pointer-events: none; width: 100%; height: 100%;">
+            <div class="hero-content" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 999; display: flex; align-items: center; justify-content: center; pointer-events: none; width: 100%; height: 100%; padding-top: 3.5rem;">
                 <div class="text-center max-w-4xl mx-auto px-4" style="pointer-events: auto;">
                     <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight">
                         {{ __('slider.title') }} <span class="bg-gradient-to-r from-yellow-300 to-green-300 bg-clip-text text-transparent">{{ __('slider.title_highlight') }}</span>
@@ -145,6 +145,7 @@
                     img.style.height = 'auto';
                     img.style.width = '100%';
                     img.style.objectFit = 'cover';
+                    img.style.display = 'block';
                 });
                 
                 // Reset container and slides
@@ -159,32 +160,47 @@
                 const measureAndSetHeights = () => {
                     let maxHeight = 0;
                     
-                    // Measure actual rendered height of each image when width is 100%
+                    // Get container width first
+                    const containerWidth = sliderContainer ? sliderContainer.offsetWidth : window.innerWidth;
+                    
+                    // Calculate height for each image based on aspect ratio
                     sliderImages.forEach(img => {
-                        if (img.complete && img.naturalHeight > 0) {
-                            // Force a reflow to ensure image is rendered
-                            void img.offsetHeight;
+                        if (img.complete && img.naturalHeight > 0 && img.naturalWidth > 0) {
+                            // Calculate height based on aspect ratio when width is 100% of container
+                            const aspectRatio = img.naturalHeight / img.naturalWidth;
+                            const calculatedHeight = containerWidth * aspectRatio;
                             
-                            // Get the actual rendered height
-                            const imgRect = img.getBoundingClientRect();
-                            const currentHeight = imgRect.height;
-                            
-                            // Also try offsetHeight as fallback
-                            const offsetHeight = img.offsetHeight || img.clientHeight;
-                            const measuredHeight = currentHeight > 0 ? currentHeight : offsetHeight;
-                            
-                            if (measuredHeight > maxHeight) {
-                                maxHeight = measuredHeight;
+                            if (calculatedHeight > maxHeight) {
+                                maxHeight = calculatedHeight;
                             }
                         }
                     });
                     
-                    // If we found a max height, apply it to all images and containers
-                    if (maxHeight > 0) {
+                    // Fallback: measure actual rendered heights if calculation fails
+                    if (maxHeight === 0 || maxHeight === Infinity || isNaN(maxHeight)) {
+                        sliderImages.forEach(img => {
+                            if (img.complete && img.naturalHeight > 0) {
+                                // Force a reflow
+                                void img.offsetHeight;
+                                
+                                // Get actual rendered height
+                                const imgRect = img.getBoundingClientRect();
+                                const currentHeight = imgRect.height || img.offsetHeight || img.clientHeight;
+                                
+                                if (currentHeight > maxHeight && currentHeight > 0) {
+                                    maxHeight = currentHeight;
+                                }
+                            }
+                        });
+                    }
+                    
+                    // If we found a valid max height, apply it to all images and containers
+                    if (maxHeight > 0 && maxHeight !== Infinity && !isNaN(maxHeight)) {
                         sliderImages.forEach(img => {
                             img.style.height = maxHeight + 'px';
                             img.style.objectFit = 'cover';
                             img.style.width = '100%';
+                            img.style.display = 'block';
                         });
                         
                         // Set container and slide heights
@@ -209,7 +225,13 @@
                     if (loadedCount === totalImages) {
                         // Longer delay on mobile to ensure rendering is complete
                         const isMobile = window.innerWidth <= 768;
-                        setTimeout(measureAndSetHeights, isMobile ? 400 : 200);
+                        setTimeout(() => {
+                            measureAndSetHeights();
+                            // Double check after a short delay (especially for mobile)
+                            if (isMobile) {
+                                setTimeout(measureAndSetHeights, 200);
+                            }
+                        }, isMobile ? 500 : 200);
                     }
                 };
                 
@@ -225,7 +247,13 @@
                 // Fallback: check on window load (important for mobile)
                 window.addEventListener('load', () => {
                     const isMobile = window.innerWidth <= 768;
-                    setTimeout(measureAndSetHeights, isMobile ? 500 : 300);
+                    setTimeout(() => {
+                        measureAndSetHeights();
+                        // Double check for mobile
+                        if (isMobile) {
+                            setTimeout(measureAndSetHeights, 300);
+                        }
+                    }, isMobile ? 600 : 300);
                 }, { once: true });
             }
 
@@ -382,6 +410,8 @@
         .slider-container {
             position: relative;
             width: 100%;
+            max-width: 100%;
+            overflow: hidden;
             z-index: 1 !important;
         }
         .slide {
@@ -391,6 +421,8 @@
             transition: opacity 1.5s ease-in-out;
             z-index: 0;
             width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
         .slide.active {
             opacity: 1 !important;
@@ -398,19 +430,28 @@
         }
         .slide img {
             width: 100%;
+            max-width: 100%;
             object-fit: cover;
             display: block;
             height: auto;
         }
         .slider-image {
             width: 100% !important;
+            max-width: 100% !important;
             height: auto;
             object-fit: cover;
+            display: block;
         }
         .hero-content {
             opacity: 1;
             transform: translateY(0);
             will-change: opacity, transform;
+            padding-top: 5rem;
+        }
+        @media (min-width: 768px) {
+            .hero-content {
+                padding-top: 6rem;
+            }
         }
 
         /* Disable all animations and transitions for floating buttons */
