@@ -7,13 +7,8 @@
 @section('title', __('booking.title') . ' - Hà Giang Loop Tours')
 
 @section('content')
-<section class="relative py-8 lg:py-12 min-h-screen overflow-hidden">
-    <!-- Decorative Background -->
-    <div class="absolute inset-0 bg-gradient-to-br from-amber-50 via-white to-amber-50"></div>
-    <div class="absolute top-0 right-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-amber-200/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-    
-    <div class="relative container mx-auto px-4 lg:px-6 max-w-7xl z-10">
+<section class="relative py-8 lg:py-12 min-h-screen overflow-hidden bg-white">
+    <div class="container mx-auto px-4 lg:px-6 max-w-7xl">
         <!-- Header -->
         <div class="text-center mb-8 lg:mb-12">
             <div class="inline-block mb-4">
@@ -83,15 +78,15 @@
             <div class="bg-white/90 backdrop-blur-lg overflow-visible rounded-2xl shadow-2xl border border-white/50">
                 <!-- Step 1: Select Tour -->
                 <div id="step1" class="step-content p-6 lg:p-10">
-                    <div class="flex items-center gap-4 mb-8">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-8">
                         <div class="flex-shrink-0">
-                            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg">
-                                <span class="text-2xl font-bold text-white">1</span>
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 flex items-center justify-center shadow-lg">
+                                <span class="text-xl sm:text-2xl font-bold text-white">1</span>
                             </div>
                         </div>
-                        <div class="flex-1">
-                            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 1: {{ __('booking.select_tour') }}</h2>
-                            <p class="text-gray-500 mt-1">{{ __('booking.select_tour_description') }}</p>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 1: {{ __('booking.select_tour') }}</h2>
+                            <p class="text-sm sm:text-base text-gray-500 mt-1 break-words">{{ __('booking.select_tour_description') }}</p>
                         </div>
                     </div>
                     
@@ -178,16 +173,16 @@
 
                 <!-- Step 2: Tour Type & Date -->
                 <div id="step2" class="step-content hidden p-6 lg:p-10">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
+                        <div class="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
                             <div class="flex-shrink-0">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
-                                    <span class="text-2xl font-bold text-white">2</span>
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-xl sm:text-2xl font-bold text-white">2</span>
                                 </div>
                             </div>
-                            <div>
-                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 2: {{ __('booking.select_date') }}</h2>
-                                <p class="text-gray-500 mt-1">{{ __('booking.select_date_description') }}</p>
+                            <div class="flex-1 min-w-0">
+                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 2: {{ __('booking.select_date') }}</h2>
+                                <p class="text-sm sm:text-base text-gray-500 mt-1 break-words">{{ __('booking.select_date_description') }}</p>
                             </div>
                         </div>
                         <button onclick="previousStep(1)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
@@ -288,16 +283,16 @@
 
                 <!-- Step 3: Bus Services & Gifts -->
                 <div id="step3" class="step-content hidden p-6 lg:p-10">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
+                        <div class="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
                             <div class="flex-shrink-0">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg">
-                                    <span class="text-2xl font-bold text-white">3</span>
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-teal-500 to-cyan-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-xl sm:text-2xl font-bold text-white">3</span>
                                 </div>
                             </div>
-                            <div>
-                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 3: {{ __('booking.bus_services') }} & {{ __('booking.gifts') }}</h2>
-                                <p class="text-gray-500 mt-1">{{ __('booking.bus_services_gifts_description') }}</p>
+                            <div class="flex-1 min-w-0">
+                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 3: {{ __('booking.bus_services') }} & {{ __('booking.gifts') }}</h2>
+                                <p class="text-sm sm:text-base text-gray-500 mt-1 break-words">{{ __('booking.bus_services_gifts_description') }}</p>
                             </div>
                         </div>
                         <button onclick="previousStep(2)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
@@ -408,16 +403,16 @@
 
                 <!-- Step 4: Summary & Checkout -->
                 <div id="step4" class="step-content hidden p-6 lg:p-10">
-                    <div class="flex items-center justify-between mb-8">
-                        <div class="flex items-center gap-4">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
+                        <div class="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
                             <div class="flex-shrink-0">
-                                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
-                                    <span class="text-2xl font-bold text-white">4</span>
+                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
+                                    <span class="text-xl sm:text-2xl font-bold text-white">4</span>
                                 </div>
                             </div>
-                            <div>
-                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
-                                <p class="text-gray-500 mt-1">{{ __('booking.summary_description') }}</p>
+                            <div class="flex-1 min-w-0">
+                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
+                                <p class="text-sm sm:text-base text-gray-500 mt-1 break-words">{{ __('booking.summary_description') }}</p>
                             </div>
                         </div>
                         <button onclick="previousStep(3)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
