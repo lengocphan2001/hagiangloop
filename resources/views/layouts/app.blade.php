@@ -55,6 +55,14 @@
                     <p class="text-sm sm:text-base md:text-xl lg:text-2xl text-gray-200 mb-6 md:mb-8 leading-relaxed">
                         {{ __('slider.subtitle') }}
                     </p>
+                    <a href="{{ route('booking.index') }}#booking" 
+                       onclick="sessionStorage.setItem('scrollToBooking', 'true');"
+                       class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-600 hover:via-amber-700 hover:to-amber-800 text-white font-bold py-3 px-8 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer">
+                        <span>{{ __('slider.book_now') }}</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
                 </div>
             </div>
 

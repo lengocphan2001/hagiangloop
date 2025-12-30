@@ -154,7 +154,7 @@
                     <p class="text-gray-700 leading-relaxed text-sm sm:text-base break-words px-2">
                         {{ __('contact.welcome_message') }}
                         <br><br>
-                        {{ __('contact.instagram') }}: <a href="https://www.instagram.com/hagiangloop" target="_blank" class="text-amber-600 hover:text-amber-700 font-semibold break-all">@hagiangloop</a>
+                        {{ __('contact.instagram') }}: <a href="https://www.instagram.com/alley_homestay" target="_blank" class="text-amber-600 hover:text-amber-700 font-semibold break-all">@alley_homestay</a>
                         <br>
                         {{ __('contact.call') }}: <a href="tel:+84968410676" class="text-amber-600 hover:text-amber-700 font-semibold break-all">+84968410676</a>
                     </p>

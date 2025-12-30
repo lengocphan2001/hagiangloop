@@ -17,7 +17,7 @@
                 </span>
             </div>
             <h1 class="text-5xl lg:text-7xl font-bold text-black mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                {{ __('tours_index.discover_ha_giang') }} <span class="bg-gradient-to-r from-amber-400 via-amber-300 to-green-400 bg-clip-text text-transparent animate-gradient">Hà Giang</span>
+                {{ __('tours_index.discover_ha_giang') }} <span class="">Hà Giang</span>
             </h1>
             <p class="text-xl lg:text-2xl text-black mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                 {{ __('tours_index.subtitle') }}

@@ -8,7 +8,7 @@ return [
     'bus_services' => 'Bus Services',
     'gifts' => 'Gifts',
     'people' => 'People',
-    'summary' => 'Booking Summary',
+    'summary' => 'Summary',
     'continue_checkout' => 'Continue to Checkout',
     'step' => 'Step',
     'of' => 'of',

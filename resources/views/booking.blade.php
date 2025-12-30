@@ -31,52 +31,48 @@
         </div>
 
         <!-- Progress Steps -->
-        <div class="flex justify-center items-center mb-8 lg:mb-12 px-2">
-            <div class="flex items-start justify-center max-w-4xl mx-auto">
-                <div class="flex items-start w-full gap-1 sm:gap-2 lg:gap-4">
-                    <!-- Step 1: Select Tour -->
-                    <div class="flex items-start flex-1 min-w-0" id="step1-indicator">
-                        <div class="flex flex-col items-center flex-1 min-w-0">
-                            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-sm lg:text-base border-4 border-white shadow-lg step-circle active flex-shrink-0">
-                                1
-                            </div>
-                            <span class="mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-gray-700 text-center whitespace-nowrap leading-tight">{{ __('booking.select_tour') }}</span>
+        <div class="flex justify-center items-center mb-8 lg:mb-12 px-2 overflow-x-auto">
+            <div class="flex items-start justify-center gap-0 min-w-max">
+                <!-- Step 1: Select Tour -->
+                <div class="flex items-start flex-shrink-0" id="step1-indicator">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full bg-amber-500 text-white flex items-center justify-center font-bold text-xs sm:text-sm lg:text-base border-2 sm:border-4 border-white shadow-lg step-circle active flex-shrink-0">
+                            1
                         </div>
-                        <div class="flex-1 h-1 bg-gray-200 mx-1 sm:mx-2 lg:mx-4 step-line mt-5 lg:mt-6 flex-shrink"></div>
+                        <span class="mt-1 sm:mt-2 text-[9px] sm:text-[10px] lg:text-xs font-medium text-gray-700 text-center whitespace-nowrap leading-tight px-0.5">{{ __('booking.select_tour') }}</span>
                     </div>
+                    <div class="w-6 sm:w-12 md:w-16 lg:w-24 h-1 bg-gray-200 step-line mt-4 sm:mt-5 lg:mt-6 flex-shrink-0"></div>
+                </div>
 
-                    <!-- Step 2: Tour Type & Date -->
-                    <div class="flex items-start flex-1 min-w-0" id="step2-indicator">
-                        <div class="flex flex-col items-center flex-1 min-w-0">
-                            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm lg:text-base border-4 border-white shadow-lg step-circle flex-shrink-0">
-                                2
-                            </div>
-                            <span class="mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-gray-500 text-center whitespace-nowrap leading-tight">{{ __('booking.select_date') }}</span>
+                <!-- Step 2: Tour Type & Date -->
+                <div class="flex items-start flex-shrink-0" id="step2-indicator">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm lg:text-base border-2 sm:border-4 border-white shadow-lg step-circle flex-shrink-0">
+                            2
                         </div>
-                        <div class="flex-1 h-1 bg-gray-200 mx-1 sm:mx-2 lg:mx-4 step-line mt-5 lg:mt-6 flex-shrink"></div>
+                        <span class="mt-1 sm:mt-2 text-[9px] sm:text-[10px] lg:text-xs font-medium text-gray-500 text-center whitespace-nowrap leading-tight px-0.5">{{ __('booking.select_date') }}</span>
                     </div>
+                    <div class="w-6 sm:w-12 md:w-16 lg:w-24 h-1 bg-gray-200 step-line mt-4 sm:mt-5 lg:mt-6 flex-shrink-0"></div>
+                </div>
 
-                    <!-- Step 3: Bus & Gifts -->
-                    <div class="flex items-start flex-1 min-w-0" id="step3-indicator">
-                        <div class="flex flex-col items-center flex-1 min-w-0">
-                            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm lg:text-base border-4 border-white shadow-lg step-circle flex-shrink-0">
-                                3
-                            </div>
-                            <span class="mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-gray-500 text-center whitespace-nowrap leading-tight">{{ __('booking.bus_services') }}</span>
+                <!-- Step 3: Bus & Gifts -->
+                <div class="flex items-start flex-shrink-0" id="step3-indicator">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm lg:text-base border-2 sm:border-4 border-white shadow-lg step-circle flex-shrink-0">
+                            3
                         </div>
-                        <div class="flex-1 h-1 bg-gray-200 mx-1 sm:mx-2 lg:mx-4 step-line mt-5 lg:mt-6 flex-shrink"></div>
+                        <span class="mt-1 sm:mt-2 text-[9px] sm:text-[10px] lg:text-xs font-medium text-gray-500 text-center whitespace-nowrap leading-tight px-0.5">{{ __('booking.bus_services') }}</span>
                     </div>
+                    <div class="w-6 sm:w-12 md:w-16 lg:w-24 h-1 bg-gray-200 step-line mt-4 sm:mt-5 lg:mt-6 flex-shrink-0"></div>
+                </div>
 
-                    <!-- Step 4: Summary -->
-                    <div class="flex items-start flex-1 min-w-0" id="step4-indicator">
-                        <div class="flex flex-col items-center flex-1 min-w-0">
-                            <div class="w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-sm lg:text-base border-4 border-white shadow-lg step-circle flex-shrink-0">
-                                4
-                            </div>
-                            <span class="mt-2 text-[10px] sm:text-xs lg:text-sm font-medium text-gray-500 text-center whitespace-nowrap leading-tight">{{ __('booking.summary') }}</span>
+                <!-- Step 4: Summary -->
+                <div class="flex items-start flex-shrink-0" id="step4-indicator">
+                    <div class="flex flex-col items-center">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 rounded-full bg-gray-300 text-gray-600 flex items-center justify-center font-bold text-xs sm:text-sm lg:text-base border-2 sm:border-4 border-white shadow-lg step-circle flex-shrink-0">
+                            4
                         </div>
-                        <!-- Empty spacer to match step 3 structure -->
-                        <div class="flex-1 h-1 mx-1 sm:mx-2 lg:mx-4 mt-5 lg:mt-6 flex-shrink invisible"></div>
+                        <span class="mt-1 sm:mt-2 text-[9px] sm:text-[10px] lg:text-xs font-medium text-gray-500 text-center whitespace-nowrap leading-tight px-0.5">{{ __('booking.summary') }}</span>
                     </div>
                 </div>
             </div>
@@ -125,7 +121,14 @@
                                                 data-tour-slug="{{ $tour->slug }}"
                                                 onclick="selectTour({{ $tour->id }}, '{{ $tour->slug }}', '{{ addslashes($tour->name) }}', this)">
                                             <div class="flex-1 min-w-0">
-                                                <div class="font-semibold text-gray-900 mb-1">{{ $tour->name }}</div>
+                                                <div class="flex items-center justify-between mb-1">
+                                                    <div class="font-semibold text-gray-900">{{ $tour->name }}</div>
+                                                    @if($tour->price)
+                                                        <div class="text-sm font-bold text-amber-600 ml-2 whitespace-nowrap">
+                                                            {{ number_format($tour->price, 0, ',', '.') }} VND
+                                                        </div>
+                                                    @endif
+                                                </div>
                                                 <div class="text-xs text-gray-500">{{ $tour->days }} {{ __('tours_index.days') }} / {{ $tour->nights }} {{ __('tours_index.nights') }}</div>
                                                 @if($tour->description)
                                                     <div class="text-xs text-gray-600 mt-1 line-clamp-2">{{ Str::limit($tour->description, 100) }}</div>
@@ -700,9 +703,11 @@
                 initBusDatePickers();
             }, 100);
         }
-        if (step === 4) {
+        
+        // Update booking summary on each step
+        setTimeout(() => {
             updateBookingSummary();
-        }
+        }, 100);
     }
 
     function previousStep(step) {
@@ -710,6 +715,9 @@
         document.getElementById(`step${step}`).classList.remove('hidden');
         updateStepIndicator(currentStep, step);
         currentStep = step;
+        
+        // Update booking summary on each step
+        updateBookingSummary();
     }
 
     function updateStepIndicator(fromStep, toStep) {
@@ -763,7 +771,10 @@
             const tourInfo = await response.json();
             if (tourInfo.price) {
                 bookingData.tourPrice = parseFloat(tourInfo.price) || 0;
-                document.getElementById('tourPriceDisplay').textContent = formatPrice(bookingData.tourPrice) + ' VND';
+                const adults = parseInt(document.getElementById('adultsCount').value) || 1;
+                document.getElementById('tourPriceDisplay').textContent = formatPrice(bookingData.tourPrice * adults) + ' VND';
+                calculateTotal();
+                updateBookingSummary();
             }
         } catch (error) {
             console.error('Error loading tour info:', error);
@@ -839,6 +850,9 @@
                             element.dataset.value = formattedDateISO;
                             // Update display value
                             element.value = formattedDate;
+                            // Update booking data
+                            bookingData.startDate = formattedDateISO;
+                            updateBookingSummary();
                             
                             if (element.id === 'tourStartDate') {
                                 checkStep2Complete();
@@ -890,6 +904,7 @@
                             const month = String(date.getMonth() + 1).padStart(2, '0');
                             const day = String(date.getDate()).padStart(2, '0');
                             const formattedDateISO = `${year}-${month}-${day}`;
+                            updateBookingSummary();
                             element.dataset.value = formattedDateISO;
                             element.value = formattedDate;
                         }
@@ -959,6 +974,7 @@
         const giftNameElement = element.querySelector('span');
         bookingData.selectedGiftName = giftNameElement ? giftNameElement.textContent.trim() : null;
         calculateTotal();
+        updateBookingSummary();
     }
 
     // Bus Service Functions (similar to tours/show.blade.php)
@@ -978,6 +994,7 @@
             bookingData.returnBusPickupLocation = null;
         }
         calculateTotal();
+        updateBookingSummary();
     }
 
     async function loadBusStartingPoints() {
@@ -1108,6 +1125,7 @@
         bookingData[direction === 'outbound' ? 'outboundBusPickupLocation' : 'returnBusPickupLocation'] = pickupLocation;
         
         calculateTotal();
+        updateBookingSummary();
     }
 
     // Calculate Total (same logic as tour detail page)
@@ -1373,6 +1391,17 @@
             calculateTotal();
         });
     });
+
+    // Auto scroll to booking form when coming from slider
+    if (window.location.hash === '#booking' || sessionStorage.getItem('scrollToBooking') === 'true') {
+        setTimeout(() => {
+            const bookingForm = document.querySelector('.relative.container');
+            if (bookingForm) {
+                bookingForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+            sessionStorage.removeItem('scrollToBooking');
+        }, 100);
+    }
 </script>
 @endpush
 @endsection
