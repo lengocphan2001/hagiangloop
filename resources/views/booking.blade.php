@@ -170,23 +170,23 @@
 
                 <!-- Step 2: Tour Type & Date -->
                 <div id="step2" class="step-content hidden p-6 lg:p-10">
-                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mb-8">
-                        <div class="flex items-start sm:items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
-                                    <span class="text-xl sm:text-2xl font-bold text-white">2</span>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 2: {{ __('booking.select_date') }}</h2>
-                                <p class="text-sm sm:text-base text-gray-500 mt-1 break-words">{{ __('booking.select_date_description') }}</p>
+                    <div class="flex items-center gap-3 sm:gap-4 mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
+                                <span class="text-xl sm:text-2xl font-bold text-white">2</span>
                             </div>
                         </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 2: {{ __('booking.select_date') }}</h2>
+                            <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.select_date_description') }}</p>
+                        </div>
+                    </div>
+                    <div class="mb-8">
                         <button onclick="previousStep(1)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
+                            <span>{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
@@ -292,11 +292,13 @@
                                 <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.bus_services_gifts_description') }}</p>
                             </div>
                         </div>
+                    </div>
+                    <div class="mb-8">
                         <button onclick="previousStep(2)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
+                            <span>{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
@@ -400,23 +402,23 @@
 
                 <!-- Step 4: Summary & Checkout -->
                 <div id="step4" class="step-content hidden p-6 lg:p-10">
-                    <div class="flex items-center justify-between gap-3 sm:gap-4 mb-8">
-                        <div class="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
-                            <div class="flex-shrink-0">
-                                <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
-                                    <span class="text-xl sm:text-2xl font-bold text-white">4</span>
-                                </div>
-                            </div>
-                            <div class="flex-1 min-w-0">
-                                <h2 class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
-                                <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.summary_description') }}</p>
+                    <div class="flex items-center gap-3 sm:gap-4 mb-8">
+                        <div class="flex-shrink-0">
+                            <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
+                                <span class="text-xl sm:text-2xl font-bold text-white">4</span>
                             </div>
                         </div>
+                        <div class="flex-1 min-w-0">
+                            <h2 class="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 break-words">{{ __('booking.step') }} 4: {{ __('booking.summary') }}</h2>
+                            <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.summary_description') }}</p>
+                        </div>
+                    </div>
+                    <div class="mb-8">
                         <button onclick="previousStep(3)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
-                            <span class="hidden sm:inline">{{ __('booking.previous') }}</span>
+                            <span>{{ __('booking.previous') }}</span>
                         </button>
                     </div>
 
@@ -432,7 +434,7 @@
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-900">{{ __('checkout.booking_details') }}</h3>
                                 </div>
-                                <div id="bookingSummaryDetails" class="space-y-4">
+                                <div id="bookingSummaryDetails" class="space-y-3 text-center sm:text-left">
                                     <!-- Summary will be populated dynamically -->
                                 </div>
                             </div>
@@ -596,6 +598,25 @@
     }
     .scrollbar-thin::-webkit-scrollbar-thumb:hover {
         background: #f472b6;
+    }
+    /* Ensure text doesn't overlap on mobile */
+    #bookingSummaryDetails > div {
+        min-width: 0;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        width: 100%;
+    }
+    #bookingSummaryDetails span,
+    #bookingSummaryDetails div {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        max-width: 100%;
+        min-width: 0;
+    }
+    #bookingSummaryDetails .break-words {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        hyphens: auto;
     }
 </style>
 @endpush
@@ -1186,17 +1207,17 @@
         const busServicesLabel = translations.bus_services || 'Bus Services';
         
         let html = `
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
-                <span class="text-gray-600">${tourLabel}:</span>
-                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${selectedTourData?.name || translations.not_available}</span>
+            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
+                <div class="text-gray-600 mb-1">${tourLabel}:</div>
+                <div class="font-semibold text-gray-900 break-words w-full">${selectedTourData?.name || translations.not_available}</div>
             </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
-                <span class="text-gray-600">${startDateLabel}:</span>
-                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${startDate || translations.not_available}</span>
+            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
+                <div class="text-gray-600 mb-1">${startDateLabel}:</div>
+                <div class="font-semibold text-gray-900 break-words w-full">${startDate || translations.not_available}</div>
             </div>
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
-                <span class="text-gray-600">${adultsLabel}:</span>
-                <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${adults}</span>
+            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
+                <div class="text-gray-600 mb-1">${adultsLabel}:</div>
+                <div class="font-semibold text-gray-900 break-words w-full">${adults}</div>
             </div>
         `;
         
@@ -1217,14 +1238,14 @@
                 const outboundPickupLocation = bookingData.outboundBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-3 border-b border-gray-200 pl-4">
-                        <div class="mb-2">
-                            <span class="text-gray-600 font-medium block mb-1">${outboundLabel}:</span>
-                            <div class="ml-0 space-y-1">
-                                <div class="font-semibold text-gray-900 break-words">${outboundServiceName || translations.not_available}</div>
-                                ${outboundPoint ? `<div class="text-xs text-gray-500 break-words">${outboundPoint}</div>` : ''}
-                                ${outboundDepartureTime ? `<div class="text-xs text-gray-500 break-words">${outboundDepartureTime}</div>` : ''}
-                                ${outboundPickupLocation ? `<div class="text-xs text-gray-500 break-words">${outboundPickupLocation}</div>` : ''}
+                    <div class="py-3 border-b border-gray-200 text-center sm:text-left">
+                        <div class="w-full">
+                            <span class="text-gray-600 font-medium block mb-2">${outboundLabel}:</span>
+                            <div class="w-full space-y-1.5">
+                                <div class="font-semibold text-gray-900 break-words w-full">${outboundServiceName || translations.not_available}</div>
+                                ${outboundPoint ? `<div class="text-xs text-gray-500 break-words w-full">${outboundPoint}</div>` : ''}
+                                ${outboundDepartureTime ? `<div class="text-xs text-gray-500 break-words w-full">${outboundDepartureTime}</div>` : ''}
+                                ${outboundPickupLocation ? `<div class="text-xs text-gray-500 break-words w-full">${outboundPickupLocation}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1239,14 +1260,14 @@
                 const returnPickupLocation = bookingData.returnBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-3 border-b border-gray-200 pl-4">
-                        <div class="mb-2">
-                            <span class="text-gray-600 font-medium block mb-1">${returnLabel}:</span>
-                            <div class="ml-0 space-y-1">
-                                <div class="font-semibold text-gray-900 break-words">${returnServiceName || translations.not_available}</div>
-                                ${returnPoint ? `<div class="text-xs text-gray-500 break-words">${returnPoint}</div>` : ''}
-                                ${returnDepartureTime ? `<div class="text-xs text-gray-500 break-words">${returnDepartureTime}</div>` : ''}
-                                ${returnPickupLocation ? `<div class="text-xs text-gray-500 break-words">${returnPickupLocation}</div>` : ''}
+                    <div class="py-3 border-b border-gray-200 text-center sm:text-left">
+                        <div class="w-full">
+                            <span class="text-gray-600 font-medium block mb-2">${returnLabel}:</span>
+                            <div class="w-full space-y-1.5">
+                                <div class="font-semibold text-gray-900 break-words w-full">${returnServiceName || translations.not_available}</div>
+                                ${returnPoint ? `<div class="text-xs text-gray-500 break-words w-full">${returnPoint}</div>` : ''}
+                                ${returnDepartureTime ? `<div class="text-xs text-gray-500 break-words w-full">${returnDepartureTime}</div>` : ''}
+                                ${returnPickupLocation ? `<div class="text-xs text-gray-500 break-words w-full">${returnPickupLocation}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1266,9 +1287,9 @@
         // Gift Section
         if (bookingData.selectedGift) {
             html += `
-                <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center py-2 border-b border-gray-200 gap-1">
-                    <span class="text-gray-600">${giftLabel}:</span>
-                    <span class="font-semibold text-gray-900 break-words text-right sm:text-left">${bookingData.selectedGiftName || translations.not_available}</span>
+                <div class="py-2 border-b border-gray-200 text-center sm:text-left">
+                    <div class="text-gray-600 mb-1">${giftLabel}:</div>
+                    <div class="font-semibold text-gray-900 break-words w-full">${bookingData.selectedGiftName || translations.not_available}</div>
                 </div>
             `;
         }

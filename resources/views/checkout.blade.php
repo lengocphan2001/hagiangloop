@@ -241,11 +241,11 @@
 
                             <div class="flex flex-col sm:flex-row gap-4 w-full">
                                 <button type="submit" 
-                                    class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 cursor-pointer">
+                                    class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 sm:py-3 px-6 rounded-lg transition-colors duration-200 cursor-pointer min-h-[48px] sm:min-h-0">
                                     {{ __('checkout.confirm_order') }}
                                 </button>
                                 <a href="{{ route('tours.show', $tour->slug) }}" 
-                                    class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
+                                    class="px-6 py-4 sm:py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer min-h-[48px] sm:min-h-0 flex items-center justify-center">
                                     {{ __('common.back') }}
                                 </a>
                             </div>

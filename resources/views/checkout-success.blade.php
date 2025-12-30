@@ -62,13 +62,13 @@
                 </div>
 
                 <!-- Actions -->
-                <div class="flex gap-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
                     <a href="{{ route('tours.index') }}" 
-                        class="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg transition-colors">
+                        class="px-6 py-4 sm:py-3 bg-teal-500 hover:bg-teal-600 text-white font-semibold rounded-lg transition-colors min-h-[48px] sm:min-h-0 flex items-center justify-center break-words">
                         Browse More Tours
                     </a>
                     <a href="{{ route('home') }}" 
-                        class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                        class="px-6 py-4 sm:py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors min-h-[48px] sm:min-h-0 flex items-center justify-center break-words">
                         Back to Home
                     </a>
                 </div>
