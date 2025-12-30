@@ -1,5 +1,4 @@
-<footer class="relative text-white mt-auto overflow-hidden min-h-[60vh] md:min-h-auto bg-gray-900"
-    style="background-image: url('{{ asset('images/slider2.webp') }}'); background-size: contain; background-position: center; background-repeat: no-repeat; background-attachment: scroll;">
+<footer class="relative text-white mt-auto overflow-hidden min-h-[60vh] md:min-h-auto bg-gray-900">
     <div class="absolute inset-0 bg-black/60 z-0"></div>
 
     <div class="relative z-10 max-w-6xl mx-auto p-6 lg:px-8 space-y-10">

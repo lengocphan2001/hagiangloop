@@ -81,6 +81,15 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="price">Price (VND) <span class="text-danger">*</span></label>
+                    <input type="number" name="price" id="price" class="form-control @error('price') is-invalid @enderror" 
+                           value="{{ old('price') }}" min="0" step="1000" required>
+                    @error('price')
+                        <span class="invalid-feedback">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="form-group">
                     <label for="note">Note</label>
                     <x-forms.tinymce-editor name="note" id="note" :value="old('note')" />
                 </div>

@@ -321,29 +321,29 @@
 
     <!-- Features Section -->
     <!-- About / Tour Highlight Section -->
-    <section id="about" class="mt-4 py-16 lg:py-20 bg-white">
-        <div class="w-5/7 max-w-[1500px] ml-auto lg:w-full lg:mx-auto lg:px-8 mt-4"
+    <section id="about" class="mt-4 py-16 lg:py-20 bg-white border-gray-200">
+        <div class="w-full mx-auto lg:w-full lg:mx-auto lg:px-8 mt-4 px-4"
             x-data="{
                 slides: [
                     {
                         title: 'Quan Ba Twin Mountain - Fairy Mountain',
                         desc: 'In addition to the Quan Ba Heaven Gate, the Twin Mountains leave a deep impression on every visitor—an iconic masterpiece sculpted by nature.',
-                        image: '{{ asset('images/discovertours/980-songlung2_1699348959.jpg.webp') }}'
+                        image: '{{ asset('images/discovertours/model1.webp') }}'
                     },
                     {
                         title: 'Skyline Over The Loop',
                         desc: 'Misty ridges, layered peaks, and golden light at dawn paint an unforgettable panorama across Ha Giang.',
-                        image: '{{ asset('images/discovertours/dis_tour3_1699346015.jpg.webp') }}'
+                        image: '{{ asset('images/discovertours/model2.jpg') }}'
                     },
                     {
                         title: 'Terraced Fields Season',
                         desc: 'Emerald rice terraces wrap the valleys, inviting you to ride through serene villages and sweeping curves.',
-                        image: '{{ asset('images/discovertours/dis_tour4_1699346018.jpg.webp') }}'
+                        image: '{{ asset('images/discovertours/model3.jpg') }}'
                     },
                     {
                         title: 'Valley In The Clouds',
                         desc: 'Rolling hills and drifting clouds reveal the Loop’s gentle side—a perfect pause between thrilling passes.',
-                        image: '{{ asset('images/discovertours/du-lich-ha-giang-5_1699348959.jpg.webp') }}'
+                        image: '{{ asset('images/discovertours/model4.jpg') }}'
                     }
                 ],
                 current: 0,
@@ -370,7 +370,7 @@
                             </div>
 
                             <a href="{{ route('tours.index') }}"
-                                class="inline-block px-8 py-4 bg-amber-300 text-gray-900 font-semibold uppercase tracking-wide hover:bg-amber-200 transition shadow-sm w-fit">
+                                class="inline-block px-8 py-4 bg-amber-300 text-gray-900 font-semibold uppercase tracking-wide hover:bg-amber-200 transition shadow-sm w-fit cursor-pointer">
                                 Discover Tour
                             </a>
                         </div>
@@ -379,13 +379,13 @@
                     <!-- Fixed nav buttons -->
                     <div class="absolute bottom-6 left-6 sm:bottom-8 sm:left-8 flex items-center space-x-3 sm:space-x-4">
                         <button @click="prev"
-                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition">
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition cursor-pointer">
                             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                             </svg>
                         </button>
                         <button @click="next"
-                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition">
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full border border-gray-300 flex items-center justify-center hover:bg-black hover:text-white transition cursor-pointer">
                             <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -408,7 +408,7 @@
                     <div class="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 flex items-center space-x-2">
                         <template x-for="(slide, index) in slides" :key="`dot-${index}`">
                             <button @click="current = index"
-                                class="w-2 h-2 rounded-full"
+                                class="w-2 h-2 rounded-full cursor-pointer"
                                 :class="current === index ? 'bg-white' : 'bg-white/50'"></button>
                         </template>
                     </div>
@@ -418,7 +418,7 @@
     </section>
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
-    <section class="pb-16">
+    <section class="pb-16 border-t border-gray-200 py-16">
         <div class="container mx-auto px-4 lg:px-6">
             <div class="text-center mb-12">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
@@ -431,17 +431,14 @@
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 @foreach($latestNews as $item)
-                    <article class="news-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100 group cursor-pointer"
-                             data-aos="fade-up" 
-                             data-aos-delay="{{ $loop->index * 100 }}"
-                             data-aos-duration="600"
+                    <article class="news-card bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-gray-100 hover:border-amber-300 hover:-translate-y-1 group cursor-pointer"
                              onclick="window.location.href='{{ route('news.show', $item->slug) }}'">
                         <!-- Featured Image -->
                         @if($item->featured_image)
                             <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                                 <img src="{{ Storage::url($item->featured_image) }}" 
                                      alt="{{ $item->title }}" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                     class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                             </div>
                         @else
@@ -463,7 +460,7 @@
                                 </div>
                             @endif
 
-                            <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h3 class="text-xl font-bold text-gray-900 mb-3 break-words">
                                 {{ $item->title }}
                             </h3>
 
@@ -475,7 +472,7 @@
                                     </svg>
                                     {{ $item->views }} views
                                 </span>
-                                <span class="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                                <span class="text-blue-600 font-semibold flex items-center gap-1">
                                     Read More
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -489,7 +486,7 @@
 
             <!-- View All News Link -->
             <div class="text-center mt-12">
-                <a href="{{ route('news.index') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transform transition-all duration-300 hover:scale-105 shadow-lg">
+                <a href="{{ route('news.index') }}" class="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors duration-300 shadow-lg cursor-pointer">
                     View All News
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -502,7 +499,7 @@
 
     <!-- FAQs Section -->
     @if(isset($faqs) && $faqs->count() > 0)
-    <section class="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white">
+    <section class="py-16 lg:py-24 bg-gradient-to-br from-gray-50 to-white border-t border-b border-gray-200">
         <div class="container mx-auto px-4 lg:px-6 max-w-6xl">
             <div class="text-center mb-12 lg:mb-16">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">

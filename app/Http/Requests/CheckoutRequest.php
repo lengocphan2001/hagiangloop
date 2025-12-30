@@ -52,6 +52,7 @@ class CheckoutRequest extends FormRequest
             'customer_email' => 'required|email|max:255',
             'customer_phone' => 'required|string|max:20',
             'customer_address' => 'nullable|string|max:500',
+            'customer_country' => 'required|string|max:100',
             'tour_start_date' => [
                 'required',
                 'date',

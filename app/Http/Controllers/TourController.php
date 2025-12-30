@@ -44,23 +44,19 @@ class TourController extends Controller
     }
 
     /**
-     * Get tour types for a specific tour (API).
+     * Get tour info for a specific tour (API).
      */
-    public function getTourTypes($id)
+    public function getTourInfo($id)
     {
         $tour = Tour::where('id', $id)
             ->where('is_active', true)
-            ->with(['tourTypes' => function($query) {
-                $query->where('is_active', true)->orderBy('sort_order');
-            }])
             ->firstOrFail();
 
-        return response()->json($tour->tourTypes->map(function($type) {
-            return [
-                'id' => $type->id,
-                'name' => $type->name,
-                'price' => $type->price,
-            ];
-        }));
+        return response()->json([
+            'id' => $tour->id,
+            'name' => $tour->name,
+            'slug' => $tour->slug,
+            'price' => $tour->price,
+        ]);
     }
 }

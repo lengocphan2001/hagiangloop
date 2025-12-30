@@ -53,7 +53,7 @@ Route::prefix('api')->group(function () {
     Route::get('/bus-services/starting-points', [App\Http\Controllers\Api\BusServiceController::class, 'getStartingPoints'])->name('api.bus-services.starting-points');
     Route::get('/bus-services/return-destinations', [App\Http\Controllers\Api\BusServiceController::class, 'getReturnDestinations'])->name('api.bus-services.return-destinations');
     Route::get('/accommodations', [App\Http\Controllers\Api\AccommodationController::class, 'index'])->name('api.accommodations');
-    Route::get('/tours/{id}/types', [App\Http\Controllers\TourController::class, 'getTourTypes'])->name('api.tours.types');
+    Route::get('/tours/{id}/info', [App\Http\Controllers\TourController::class, 'getTourInfo'])->name('api.tours.info');
 });
 
 // Auth routes (sẽ được implement sau)

@@ -24,5 +24,8 @@ return [
     'no_gifts' => 'No gifts available',
     'accommodation' => 'ACCOMMODATION (during the loop)',
     'no_accommodations' => 'No accommodations available',
+    'price' => 'Price',
+    'price_per_person' => 'Price per person',
+    'total_price' => 'Total price',
 ];
 

@@ -163,16 +163,28 @@
                                 </div>
 
                                 <div class="w-full min-w-0">
-                                    <label for="customer_address" class="block text-sm font-medium text-gray-700 mb-2">
-                                        {{ __('common.address') }} ({{ __('common.optional') }})
+                                    <label for="customer_country" class="block text-sm font-medium text-gray-700 mb-2">
+                                        {{ __('checkout.country') }} <span class="text-red-500">*</span>
                                     </label>
-                                    <input type="text" name="customer_address" id="customer_address" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none @error('customer_address') border-red-500 @enderror"
-                                        value="{{ old('customer_address') }}">
-                                    @error('customer_address')
+                                    <input type="text" name="customer_country" id="customer_country" 
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none @error('customer_country') border-red-500 @enderror"
+                                        value="{{ old('customer_country') }}" required>
+                                    @error('customer_country')
                                         <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                     @enderror
                                 </div>
+                            </div>
+
+                            <div class="mb-4 w-full">
+                                <label for="customer_address" class="block text-sm font-medium text-gray-700 mb-2">
+                                    {{ __('common.address') }} ({{ __('common.optional') }})
+                                </label>
+                                <input type="text" name="customer_address" id="customer_address" 
+                                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none @error('customer_address') border-red-500 @enderror"
+                                    value="{{ old('customer_address') }}">
+                                @error('customer_address')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
                             </div>
 
                             @if($adults > 1)
@@ -229,11 +241,11 @@
 
                             <div class="flex flex-col sm:flex-row gap-4 w-full">
                                 <button type="submit" 
-                                    class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200">
+                                    class="flex-1 bg-teal-500 hover:bg-teal-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 cursor-pointer">
                                     {{ __('checkout.confirm_order') }}
                                 </button>
                                 <a href="{{ route('tours.show', $tour->slug) }}" 
-                                    class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                                    class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors cursor-pointer">
                                     {{ __('common.back') }}
                                 </a>
                             </div>

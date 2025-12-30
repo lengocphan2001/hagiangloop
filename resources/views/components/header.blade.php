@@ -146,7 +146,7 @@
                 </a>
 
                 <!-- Search Icon -->
-                <button class="p-2 transition-colors duration-200 ml-4"
+                <button class="p-2 transition-colors duration-200 ml-4 cursor-pointer"
                     :class="scrolled ? 'text-white hover:text-gray-200' : 'text-white hover:text-gray-300'">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -156,13 +156,13 @@
 
                 <!-- BOOKING Button -->
                 <a href="{{ route('booking.index') }}"
-                    class="px-8 py-3 bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ml-4">
+                    class="px-8 py-3 bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ml-4 cursor-pointer">
                     {{ __('common.booking') }}
                 </a>
             </div>
 
             <!-- Mobile Menu Button -->
-            <button @click="open = !open" class="md:hidden p-2 rounded-lg transition-colors duration-200 flex-shrink-0 text-white hover:bg-white/20">
+            <button @click="open = !open" class="md:hidden p-2 rounded-lg transition-colors duration-200 flex-shrink-0 text-white hover:bg-white/20 cursor-pointer">
                 <svg x-show="!open" class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
                     </path>

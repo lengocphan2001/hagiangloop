@@ -32,17 +32,14 @@
         @if($news->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
                 @foreach($news as $item)
-                    <article class="news-card bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100 group cursor-pointer"
-                             data-aos="fade-up" 
-                             data-aos-delay="{{ $loop->index * 100 }}"
-                             data-aos-duration="600"
+                    <article class="news-card bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-gray-100 hover:border-amber-300 hover:-translate-y-1 group cursor-pointer"
                              onclick="window.location.href='{{ route('news.show', $item->slug) }}'">
                         <!-- Featured Image -->
                         @if($item->featured_image)
                             <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">
                                 <img src="{{ Storage::url($item->featured_image) }}" 
                                      alt="{{ $item->title }}" 
-                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                     class="w-full h-full object-cover">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
                             </div>
                         @else
@@ -64,7 +61,7 @@
                                 </div>
                             @endif
 
-                            <h2 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors break-words">
+                            <h2 class="text-xl font-bold text-gray-900 mb-3 break-words">
                                 {{ $item->title }}
                             </h2>
 
@@ -78,7 +75,7 @@
                                     </svg>
                                     {{ $item->views }} {{ __('news.views') }}
                                 </span>
-                                <span class="text-blue-600 font-semibold group-hover:text-blue-700 transition-colors flex items-center gap-1">
+                                <span class="text-blue-600 font-semibold flex items-center gap-1">
                                     {{ __('news.read_more') }}
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
@@ -109,13 +106,6 @@
 @push('styles')
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <style>
-    .news-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .news-card:hover {
-        transform: translateY(-8px);
-    }
 
     .line-clamp-3 {
         display: -webkit-box;

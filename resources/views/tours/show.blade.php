@@ -14,7 +14,7 @@
             <div class="max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
                 <div class="inline-block mb-6 flex items-center justify-center" data-aos="fade-down" data-aos-duration="600">
                     <span
-                        class="bg-gradient-to-r from-purple-400 to-pink-400 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm border border-purple-300/30">
+                        class="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm border border-amber-300/30">
                         {{ $tour->duration }}
                     </span>
                 </div>
@@ -26,28 +26,15 @@
                     data-aos-duration="800" data-aos-delay="200">
                     {{ $tour->days }} Days / {{ $tour->nights }} Nights Adventure
                 </p>
-                @if ($tour->price)
-                    <div class="mb-8 text-center w-full" data-aos="fade-up" data-aos-duration="800" data-aos-delay="300">
-                        <span
-                            class="text-5xl font-bold bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">{{ number_format($tour->price, 0) }}</span>
-                        <span class="text-2xl text-black"> VND</span>
-                    </div>
-                @endif
-                @if ($tour->description)
-                    <p class="text-lg text-black max-w-2xl mx-auto mb-8 text-center w-full" data-aos="fade-up"
-                        data-aos-duration="800" data-aos-delay="400">
-                        {{ $tour->description }}
-                    </p>
-                @endif
 
                 <div class="flex flex-wrap justify-center items-center gap-4 w-full relative z-20" data-aos="fade-up"
                     data-aos-duration="800" data-aos-delay="500">
                     <a href="#itinerary"
-                        class="relative z-20 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        class="relative z-20 bg-gradient-to-r from-amber-500 to-amber-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-amber-600 hover:to-amber-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer">
                         View Itinerary
                     </a>
                     <a href="#booking"
-                        class="relative z-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl">
+                        class="relative z-20 bg-gradient-to-r from-indigo-500 to-purple-500 text-white px-8 py-4 rounded-lg font-semibold hover:from-indigo-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl cursor-pointer">
                         Book Now
                     </a>
                 </div>
@@ -113,7 +100,7 @@
                                 data-day="{{ $day->day_number }}">
                                 <!-- Day Accordion Header -->
                                 <button onclick="toggleDayAccordion({{ $day->day_number }})"
-                                    class="day-accordion-header w-full flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 transition-colors duration-200 text-left"
+                                    class="day-accordion-header w-full flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 transition-colors duration-200 text-left cursor-pointer"
                                     data-day="{{ $day->day_number }}">
                                     <div class="flex items-center gap-3 flex-1 min-w-0">
                                         <div
@@ -370,34 +357,10 @@
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.tour') }}</h3>
                                 </div>
-                                @if($tour->tourTypes && $tour->tourTypes->count() > 0)
-                                    <div class="relative mb-3">
-                                        <button type="button" id="tourTypeBtn" 
-                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
-                                            <span id="tourTypeText" class="text-gray-700">{{ __('tours.select_tour_type') }}</span>
-                                            <svg class="w-5 h-5 text-gray-400 transition-transform" id="tourTypeIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                            </svg>
-                                        </button>
-                                        <div id="tourTypeDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-                                            <div class="py-1" id="tourTypeOptions">
-                                                @foreach($tour->tourTypes as $type)
-                                                    <button type="button" class="w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center justify-between tour-type-option" 
-                                                            data-id="{{ $type->id }}" 
-                                                            data-name="{{ $type->name }}" 
-                                                            data-price="{{ $type->price }}"
-                                                            onclick="selectTourType({{ $type->id }}, '{{ $type->name }}', {{ $type->price }}, this)">
-                                                        <span>{{ $type->name }}</span>
-                                                        <span class="font-semibold text-pink-600">{{ number_format($type->price, 0, ',', '.') }}₫</span>
-                                                    </button>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                        <input type="hidden" id="selectedTourTypeId" value="">
-                                    </div>
-                                    <div id="selectedTourTypeDisplay" class="hidden">
-                                        <p class="text-sm text-gray-500 line-through" id="tourPriceOriginal"></p>
-                                        <p class="text-2xl font-bold text-red-600" id="tourPrice"></p>
+                                @if($tour->price)
+                                    <div class="mb-3">
+                                        <p class="text-sm text-gray-600 mb-1">{{ __('tours.price_per_person') }}</p>
+                                        <p class="text-2xl font-bold text-red-600" id="tourPriceDisplay">{{ number_format($tour->price, 0, ',', '.') }} VND</p>
                                     </div>
                                 @endif
                             </div>
@@ -411,7 +374,7 @@
                                     <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.start_date') }}</h3>
                                 </div>
                                 <input type="text" id="tourStartDate" 
-                                    class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
                                     placeholder="{{ __('tours.select_date') }}"
                                     readonly>
                             </div>
@@ -420,10 +383,10 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
                                     <input type="checkbox" id="useBusService" 
-                                        class="w-5 h-5 text-pink-500 border-gray-300 rounded focus:ring-pink-500 cursor-pointer"
+                                        class="w-5 h-5 text-amber-500 border-gray-300 rounded focus:ring-amber-500 cursor-pointer"
                                         onchange="toggleBusService()">
                                     <label for="useBusService" class="flex items-center gap-2 cursor-pointer flex-1">
-                                        <svg class="w-5 h-5 text-pink-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                                             <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
                                             <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
                                         </svg>
@@ -444,7 +407,7 @@
                                 <div class="mb-3 relative">
                                     <!-- Custom Dropdown Button -->
                                     <button type="button" id="busStartingPointBtn" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
                                         <span id="busStartingPointText" class="text-gray-700">Select starting point</span>
                                         <svg class="w-5 h-5 text-gray-400 transition-transform" id="busStartingPointIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -461,7 +424,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input type="text" id="busDepartureDate" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
                                         placeholder="Chọn ngày khởi hành"
                                         readonly>
                                 </div>
@@ -481,7 +444,7 @@
                                 <div class="mb-3 relative">
                                     <!-- Custom Dropdown Button -->
                                     <button type="button" id="busReturnDestinationBtn" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-pink-400 transition-colors">
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
                                         <span id="busReturnDestinationText" class="text-gray-700">Select return destination</span>
                                         <svg class="w-5 h-5 text-gray-400 transition-transform" id="busReturnDestinationIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
@@ -498,7 +461,7 @@
                                 </div>
                                 <div class="mb-3">
                                     <input type="text" id="busReturnDate" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none cursor-pointer"
+                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
                                         placeholder="Chọn ngày về"
                                         readonly>
                                 </div>
@@ -516,7 +479,7 @@
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.gifts') }}</h3>
                                 </div>
-                                <div id="giftOptions" class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-pink-300 scrollbar-track-gray-100">
+                                <div id="giftOptions" class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-gray-100">
                                     <!-- Gift options will be loaded here -->
                                 </div>
                             </div>
@@ -545,7 +508,7 @@
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">{{ __('tours.adults') }}</label>
                                     <input type="number" id="adultsCount" min="1" value="1" 
-                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 outline-none">
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
                                 </div>
                             </div>
 
@@ -559,7 +522,7 @@
  
                             <!-- Action Button -->
                             <button onclick="checkAvailability()"
-                                class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200">
+                                class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200 cursor-pointer">
                                 {{ __('tours.continue_checkout') }}
                             </button>
                         </div>
@@ -575,7 +538,7 @@
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4 text-white">
                     <h3 class="text-2xl font-bold">Tour Photos</h3>
-                    <button onclick="closeTourGallery()" class="text-white hover:text-gray-300 transition-colors p-2">
+                    <button onclick="closeTourGallery()" class="text-white hover:text-gray-300 transition-colors p-2 cursor-pointer">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M6 18L18 6M6 6l12 12"></path>
@@ -587,7 +550,7 @@
                 <div class="flex-1 relative flex items-center justify-center min-h-0 mb-4">
                     <!-- Previous Button -->
                     <button id="prevBtn" onclick="changeTourImage(-1)"
-                        class="absolute left-4 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all">
+                        class="absolute left-4 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all cursor-pointer">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7">
                             </path>
@@ -600,7 +563,7 @@
 
                     <!-- Next Button -->
                     <button id="nextBtn" onclick="changeTourImage(1)"
-                        class="absolute right-4 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all">
+                        class="absolute right-4 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all cursor-pointer">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
                             </path>
@@ -722,7 +685,7 @@
             }
 
             .air-datepicker-header {
-                background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+                background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
                 border-radius: 0.5rem 0.5rem 0 0;
                 color: white;
             }
@@ -752,31 +715,31 @@
             }
 
             .air-datepicker-cell.-day-:hover {
-                background: #fce7f3;
-                border-color: #ec4899;
+                background: #fef3c7;
+                border-color: #f59e0b;
             }
 
             .air-datepicker-cell.-selected-,
             .air-datepicker-cell.-selected-.-current- {
-                background: #ec4899;
-                border-color: #ec4899;
+                background: #f59e0b;
+                border-color: #f59e0b;
                 color: white;
                 font-weight: 600;
             }
 
             .air-datepicker-cell.-selected-:hover {
-                background: #db2777;
-                border-color: #db2777;
+                background: #d97706;
+                border-color: #d97706;
             }
 
             .air-datepicker-cell.-current- {
-                border-color: #ec4899;
-                color: #ec4899;
+                border-color: #f59e0b;
+                color: #f59e0b;
                 font-weight: 600;
             }
 
             .air-datepicker-cell.-current-:hover {
-                background: #fce7f3;
+                background: #fef3c7;
             }
 
             .air-datepicker-cell.-disabled- {
@@ -1338,7 +1301,6 @@
             // Booking Form Logic
             let bookingData = {
                 tourPrice: {{ $tour->price ?? 0 }},
-                tourTypeId: null,
                 outboundBus: null,
                 returnBus: null,
                 outboundBusPrice: 0,
@@ -1388,55 +1350,6 @@
                 });
             }
 
-            function selectTourType(typeId, typeName, typePrice, element) {
-                // Update button text
-                if (tourTypeText) {
-                    tourTypeText.textContent = typeName;
-                }
-                
-                // Update hidden input
-                if (selectedTourTypeId) {
-                    selectedTourTypeId.value = typeId;
-                }
-                
-                // Update booking data
-                bookingData.tourPrice = typePrice;
-                bookingData.tourTypeId = typeId;
-                
-                // Update price display
-                const tourPriceElement = document.getElementById('tourPrice');
-                const tourPriceOriginalElement = document.getElementById('tourPriceOriginal');
-                
-                if (tourPriceElement) {
-                    tourPriceElement.textContent = formatPrice(typePrice) + ' VND';
-                }
-                
-                if (tourPriceOriginalElement && selectedTourTypeDisplay) {
-                    // Show the selected tour type display
-                    selectedTourTypeDisplay.classList.remove('hidden');
-                }
-                
-                // Remove selected class from all options
-                document.querySelectorAll('.tour-type-option').forEach(option => {
-                    option.classList.remove('bg-pink-50', 'text-pink-600');
-                });
-                
-                // Add selected class to current option
-                if (element) {
-                    element.classList.add('bg-pink-50', 'text-pink-600');
-                }
-                
-                // Close dropdown
-                if (tourTypeDropdown) {
-                    tourTypeDropdown.classList.add('hidden');
-                }
-                if (tourTypeIcon) {
-                    tourTypeIcon.style.transform = 'rotate(0deg)';
-                }
-                
-                // Recalculate total
-                calculateTotal();
-            }
 
             // Load bus services
             async function loadBusServices(direction, containerId) {
@@ -1472,15 +1385,15 @@
 
                     filteredServices.forEach(service => {
                         const busOption = document.createElement('div');
-                        busOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors';
+                        busOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-amber-500 transition-colors';
                         busOption.onclick = () => selectBusService(direction, service.id, busOption);
                         
-                        const isRecommended = service.is_recommended ? '<span class="bg-pink-500 text-white px-2 py-1 rounded text-xs font-semibold ml-2">RECOMMENDED</span>' : '';
+                        const isRecommended = service.is_recommended ? '<span class="bg-amber-500 text-white px-2 py-1 rounded text-xs font-semibold ml-2">RECOMMENDED</span>' : '';
                         
                         busOption.innerHTML = `
                             <div class="flex items-start gap-3">
                                 <input type="radio" name="bus_${direction}" value="${service.id}" 
-                                    class="mt-1 text-pink-500 focus:ring-pink-500 flex-shrink-0" 
+                                    class="mt-1 text-amber-500 focus:ring-amber-500 flex-shrink-0" 
                                     onchange="selectBusService('${direction}', ${service.id}, this.closest('div'))">
                                 ${service.image ? `<img src="${service.image}" alt="${service.name}" class="w-20 h-16 object-cover rounded flex-shrink-0">` : '<div class="w-20 h-16 bg-gray-200 rounded flex-shrink-0"></div>'}
                                 <div class="flex-1 min-w-0">
@@ -1489,7 +1402,7 @@
                                         ${isRecommended}
                                     </div>
                                     <p class="text-sm text-gray-600 mt-1 break-words">${service.pick_up_location}</p>
-                                    <p class="text-lg font-bold text-pink-600 mt-2">${formatPrice(service.price)} VND</p>
+                                    <p class="text-lg font-bold text-amber-600 mt-2">${formatPrice(service.price)} VND</p>
                                 </div>
                             </div>
                         `;
@@ -1509,13 +1422,13 @@
                 // Remove selected class from all options
                 const container = direction === 'outbound' ? 'outboundBusOptions' : 'returnBusOptions';
                 document.querySelectorAll(`#${container} > div`).forEach(div => {
-                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.remove('border-amber-500', 'bg-amber-50');
                     div.classList.add('border-gray-300');
                 });
 
                 // Add selected class to current option
                 element.classList.remove('border-gray-300');
-                element.classList.add('border-pink-500', 'bg-pink-50');
+                element.classList.add('border-amber-500', 'bg-amber-50');
 
                 // Store selected bus
                 bookingData[direction === 'outbound' ? 'outboundBus' : 'returnBus'] = serviceId;
@@ -1538,13 +1451,13 @@
 
                     gifts.forEach(gift => {
                         const giftOption = document.createElement('div');
-                        giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-pink-500 transition-colors flex-shrink-0 w-32';
+                        giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-amber-500 transition-colors flex-shrink-0 w-32';
                         giftOption.onclick = () => selectGift(gift.id, giftOption);
                         
                         giftOption.innerHTML = `
                             <div class="flex flex-col items-center gap-2">
                                 <input type="radio" name="gift" value="${gift.id}" 
-                                    class="text-pink-500 focus:ring-pink-500" 
+                                    class="text-amber-500 focus:ring-amber-500" 
                                     onchange="selectGift(${gift.id}, this.closest('div'))">
                                 ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-full h-24 object-cover rounded">` : '<div class="w-full h-24 bg-gray-200 rounded"></div>'}
                                 <span class="font-semibold text-gray-900 text-center text-xs break-words">${gift.name}</span>
@@ -1565,13 +1478,13 @@
 
                 // Remove selected class from all options
                 document.querySelectorAll('#giftOptions > div').forEach(div => {
-                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.remove('border-amber-500', 'bg-amber-50');
                     div.classList.add('border-gray-300');
                 });
 
                 // Add selected class to current option
                 element.classList.remove('border-gray-300');
-                element.classList.add('border-pink-500', 'bg-pink-50');
+                element.classList.add('border-amber-500', 'bg-amber-50');
 
                 // Store selected gift
                 bookingData.selectedGift = giftId;
@@ -1594,7 +1507,7 @@
 
                     accommodations.forEach(accommodation => {
                         const accommodationOption = document.createElement('div');
-                        accommodationOption.className = 'flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-pink-500 transition-colors';
+                        accommodationOption.className = 'flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition-colors';
                         accommodationOption.onclick = () => selectAccommodation(accommodation.id, accommodationOption);
                         
                         const priceText = accommodation.price_per_night > 0 
@@ -1607,7 +1520,7 @@
                         
                         accommodationOption.innerHTML = `
                             <input type="radio" name="accommodation" value="${accommodation.id}" 
-                                class="text-pink-500 focus:ring-pink-500" 
+                                class="text-amber-500 focus:ring-amber-500" 
                                 onchange="selectAccommodation(${accommodation.id}, this.closest('div'))">
                             <div class="flex-1">
                                 <div class="font-semibold text-gray-900 text-sm">${accommodation.name}</div>
@@ -1630,13 +1543,13 @@
 
                 // Remove selected class from all options
                 document.querySelectorAll('#accommodationOptions > div').forEach(div => {
-                    div.classList.remove('border-pink-500', 'bg-pink-50');
+                    div.classList.remove('border-amber-500', 'bg-amber-50');
                     div.classList.add('border-gray-300');
                 });
 
                 // Add selected class to current option
                 element.classList.remove('border-gray-300');
-                element.classList.add('border-pink-500', 'bg-pink-50');
+                element.classList.add('border-amber-500', 'bg-amber-50');
 
                 // Store selected accommodation and fetch price
                 bookingData.selectedAccommodation = accommodationId;
@@ -1661,12 +1574,12 @@
             async function calculateTotal() {
                 let total = 0;
 
-                // Tour price (fixed, not affected by number of people)
-                const adults = parseInt(document.getElementById('adultsCount').value) || 0;
+                // Tour price multiplied by number of adults
+                const adults = parseInt(document.getElementById('adultsCount').value) || 1;
                 bookingData.adults = adults;
 
-                // Tour price is fixed, not multiplied by number of people
-                total += bookingData.tourPrice;
+                // Tour price multiplied by number of adults
+                total += bookingData.tourPrice * adults;
 
                 // Outbound bus price (only if bus service is enabled, fixed price not multiplied by number of people)
                 const useBusService = document.getElementById('useBusService')?.checked;
@@ -1704,6 +1617,13 @@
                     const accommodationPrice = parseFloat(bookingData.accommodationPrice) || 0;
                     total += accommodationPrice;
                 }
+
+                // Update tour price display (per person)
+                const tourPriceDisplay = document.getElementById('tourPriceDisplay');
+                if (tourPriceDisplay) {
+                    tourPriceDisplay.textContent = formatPrice(bookingData.tourPrice) + ' VND';
+                }
+                
 
                 // Update total display
                 document.getElementById('bookingTotal').textContent = formatPrice(total) + ' VND';
@@ -1757,7 +1677,7 @@
                     startingPoints.forEach(point => {
                         const button = document.createElement('button');
                         button.type = 'button';
-                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center gap-2';
+                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors flex items-center gap-2';
                         button.onclick = () => selectStartingPoint(point, button);
                         button.innerHTML = `
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1791,7 +1711,7 @@
                     returnDestinations.forEach(destination => {
                         const button = document.createElement('button');
                         button.type = 'button';
-                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-pink-50 hover:text-pink-600 transition-colors flex items-center gap-2';
+                        button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors flex items-center gap-2';
                         button.onclick = () => selectReturnDestination(destination, button);
                         button.innerHTML = `
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -1877,11 +1797,11 @@
                     });
                     // Clear bus option selections styling
                     document.querySelectorAll('#outboundBusOptions > div').forEach(div => {
-                        div.classList.remove('border-pink-500', 'bg-pink-50');
+                        div.classList.remove('border-amber-500', 'bg-amber-50');
                         div.classList.add('border-gray-300');
                     });
                     document.querySelectorAll('#returnBusOptions > div').forEach(div => {
-                        div.classList.remove('border-pink-500', 'bg-pink-50');
+                        div.classList.remove('border-amber-500', 'bg-amber-50');
                         div.classList.add('border-gray-300');
                     });
                     // Recalculate total

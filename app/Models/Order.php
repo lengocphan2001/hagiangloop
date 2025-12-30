@@ -14,6 +14,7 @@ class Order extends Model
         'customer_email',
         'customer_phone',
         'customer_address',
+        'customer_country',
         'additional_passengers',
         'tour_start_date',
         'adults_count',

@@ -22,5 +22,10 @@ return [
     'no_return_destinations' => 'Không có điểm đến',
     'no_bus_services' => 'Không có dịch vụ bus cho địa điểm đã chọn',
     'no_gifts' => 'Không có quà tặng',
+    'accommodation' => 'CHỖ Ở (trong suốt hành trình)',
+    'no_accommodations' => 'Không có chỗ ở',
+    'price' => 'Giá',
+    'price_per_person' => 'Giá mỗi người',
+    'total_price' => 'Tổng giá',
 ];
 

@@ -31,6 +31,7 @@ class UpdateTourRequest extends FormRequest
             'nights' => 'required|integer|min:0',
             'days' => 'required|integer|min:1',
             'description' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
             'note' => 'nullable|string',
             'thumbnail_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
             'detail_images' => 'nullable|array',
