@@ -1408,6 +1408,7 @@
                 const content = document.getElementById(`content-${dayNumber}`);
                 const chevron = document.getElementById(`chevron-${dayNumber}`);
                 const header = document.querySelector(`[data-day="${dayNumber}"].day-accordion-header`);
+                const dayItem = document.getElementById(`day-${dayNumber}`);
 
                 if (!content || !chevron) return;
 
@@ -1437,6 +1438,18 @@
                     chevron.style.transform = 'rotate(0deg)';
                     if (header) {
                         header.classList.add('bg-gray-50');
+                    }
+
+                    // Scroll to the clicked day so content starts at the click position (avoid being hidden by fixed header)
+                    // Use a small offset for the fixed header height.
+                    const scrollTarget = header || dayItem;
+                    if (scrollTarget) {
+                        requestAnimationFrame(() => {
+                            const headerOffset = 110; // adjust if header height changes
+                            const elementTop = scrollTarget.getBoundingClientRect().top + window.pageYOffset;
+                            const offsetTop = Math.max(0, elementTop - headerOffset);
+                            window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                        });
                     }
                 } else {
                     // Close this day - chevron points up (180deg)
