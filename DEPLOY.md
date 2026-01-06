@@ -143,6 +143,12 @@ composer install --optimize-autoloader --no-dev
 npm install
 npm run build
 
+# IMPORTANT: ensure Vite is in production mode (remove dev-server marker)
+rm -f public/hot
+
+# Clear app caches so clients get fresh HTML that points to the latest Vite assets
+php artisan optimize:clear
+
 # Thoát khỏi user www-data
 exit
 ```
