@@ -334,9 +334,9 @@
 
                         @if ($tour->note)
                             <div class="mx-auto">
-                                <div class="bg-white mt-8">
+                                <div class="bg-white mt-8 px-4 lg:px-0">
                                     <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">Tour Notes</h3>
-                                    <div class="prose prose-lg max-w-none text-gray-700">
+                                    <div class="prose prose-sm lg:prose-lg max-w-none text-gray-700 break-words overflow-wrap-anywhere">
                                         {!! $tour->note !!}
                                     </div>
                                 </div>
@@ -1081,6 +1081,33 @@
                     right: 6px;
                     width: 20px;
                     height: 20px;
+                }
+
+                /* Tour note mobile fixes */
+                .prose {
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    word-break: break-word;
+                }
+
+                .prose p,
+                .prose li,
+                .prose td,
+                .prose th {
+                    word-wrap: break-word;
+                    overflow-wrap: break-word;
+                    word-break: break-word;
+                }
+
+                .prose img {
+                    max-width: 100%;
+                    height: auto;
+                }
+
+                .prose table {
+                    display: block;
+                    overflow-x: auto;
+                    -webkit-overflow-scrolling: touch;
                 }
             }
         </style>
