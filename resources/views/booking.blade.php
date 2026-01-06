@@ -7,7 +7,7 @@
 @section('title', __('booking.title') . ' - Ha Giang Loop Tours')
 
 @section('content')
-<section id="booking" class="relative py-8 lg:py-12 min-h-screen overflow-hidden bg-white">
+<section id="booking" class="relative py-8 lg:py-12 min-h-screen overflow-x-hidden overflow-y-visible bg-white">
     <div class="container mx-auto px-4 lg:px-6 py-4 max-w-7xl">
         <!-- Header -->
         <div class="text-center mb-8 lg:mb-12">
@@ -108,7 +108,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                 </svg>
                             </button>
-                            <div id="tourSelectDropdown" class="hidden absolute z-[60] w-full mt-1 bg-white border-2 border-gray-300 rounded-lg shadow-xl overflow-hidden max-h-96 overflow-y-auto">
+                            <div id="tourSelectDropdown" class="hidden absolute z-[60] w-full mt-1 bg-white border-2 border-gray-300 rounded-lg shadow-xl overflow-hidden max-h-[60vh] sm:max-h-96 overflow-y-auto">
                                 <div class="py-1" id="tourSelectOptions">
                                     @foreach($tours as $tour)
                                         <button type="button" class="w-full px-4 py-3 text-left text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors flex items-start gap-3 tour-option cursor-pointer" 
