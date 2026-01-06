@@ -47,28 +47,28 @@ class FAQController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(FAQ $fAQ)
+    public function show(FAQ $faq)
     {
-        return view('admin.faqs.show', compact('fAQ'));
+        return view('admin.faqs.show', compact('faq'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(FAQ $fAQ)
+    public function edit(FAQ $faq)
     {
-        return view('admin.faqs.edit', compact('fAQ'));
+        return view('admin.faqs.edit', compact('faq'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateFAQRequest $request, FAQ $fAQ)
+    public function update(UpdateFAQRequest $request, FAQ $faq)
     {
         $validated = $request->validated();
         $validated['is_active'] = $request->has('is_active');
 
-        $fAQ->update($validated);
+        $faq->update($validated);
 
         return redirect()->route('admin.faqs.index')
             ->with('success', 'FAQ updated successfully.');
@@ -77,9 +77,9 @@ class FAQController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(FAQ $fAQ)
+    public function destroy(FAQ $faq)
     {
-        $fAQ->delete();
+        $faq->delete();
 
         return redirect()->route('admin.faqs.index')
             ->with('success', 'FAQ deleted successfully.');

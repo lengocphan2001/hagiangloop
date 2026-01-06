@@ -221,6 +221,19 @@
                                     readonly>
                             </div>
 
+                            <!-- Accommodation Section -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-3">
+                                    <svg class="w-5 h-5 inline mr-2 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                    </svg>
+                                    {{ __('tours.accommodation') }}
+                                </label>
+                                <div id="accommodationOptions" class="space-y-3">
+                                    <!-- Accommodation options will be loaded here -->
+                                </div>
+                            </div>
+
                             <!-- People Count -->
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-3">
@@ -682,6 +695,9 @@
         returnBusPickupLocation: null,
         selectedGift: null,
         selectedGiftName: null,
+        selectedAccommodation: null,
+        accommodationPrice: 0,
+        accommodationName: null,
         adults: 2
     };
 
@@ -705,6 +721,7 @@
             // Initialize date picker when step 2 is shown (same as tour detail page)
             setTimeout(() => {
                 initDatePickers();
+                loadAccommodations();
             }, 300);
         }
         if (step === 3) {
@@ -942,6 +959,78 @@
         }
     }
 
+    // Load Accommodations
+    async function loadAccommodations() {
+        try {
+            const response = await fetch('{{ route("api.accommodations") }}');
+            const accommodations = await response.json();
+            
+            const container = document.getElementById('accommodationOptions');
+            container.innerHTML = '';
+
+            if (accommodations.length === 0) {
+                container.innerHTML = '<p class="text-sm text-gray-500">{{ __('tours.no_accommodations') }}</p>';
+                return;
+            }
+
+            accommodations.forEach(accommodation => {
+                const accommodationOption = document.createElement('div');
+                accommodationOption.className = 'flex items-center gap-3 p-4 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-amber-400 transition-colors';
+                accommodationOption.dataset.accommodationId = accommodation.id;
+                accommodationOption.dataset.accommodationPrice = accommodation.price_per_night || 0;
+                accommodationOption.dataset.accommodationName = accommodation.name || '';
+                accommodationOption.onclick = () => selectAccommodation(accommodation.id, accommodationOption);
+                
+                const priceText = accommodation.price_per_night > 0 
+                    ? `${formatPrice(accommodation.price_per_night)}₫/night`
+                    : '(No fees)';
+                
+                const capacityText = accommodation.capacity_min === accommodation.capacity_max
+                    ? `${accommodation.capacity_min} people`
+                    : `${accommodation.capacity_min}-${accommodation.capacity_max} people`;
+                
+                accommodationOption.innerHTML = `
+                    <input type="radio" name="accommodation" value="${accommodation.id}" 
+                        class="text-amber-500 focus:ring-amber-500" 
+                        onchange="selectAccommodation(${accommodation.id}, this.closest('div'))">
+                    <div class="flex-1">
+                        <div class="font-semibold text-gray-900">${accommodation.name}</div>
+                        ${accommodation.bed_type ? `<div class="text-sm text-gray-600 mt-1">${accommodation.bed_type}</div>` : ''}
+                        <div class="text-sm text-gray-500 mt-1">${capacityText} - ${priceText}</div>
+                    </div>
+                `;
+                container.appendChild(accommodationOption);
+            });
+        } catch (error) {
+            console.error('Error loading accommodations:', error);
+        }
+    }
+
+    // Select accommodation
+    async function selectAccommodation(accommodationId, element) {
+        // Update radio button
+        const radio = element.querySelector('input[type="radio"]');
+        if (radio) radio.checked = true;
+
+        // Remove selected class from all options
+        document.querySelectorAll('#accommodationOptions > div').forEach(div => {
+            div.classList.remove('border-amber-500', 'bg-amber-50');
+            div.classList.add('border-gray-300');
+        });
+
+        // Add selected class to current option
+        element.classList.remove('border-gray-300');
+        element.classList.add('border-amber-500', 'bg-amber-50');
+
+        // Store selected accommodation and price from dataset
+        bookingData.selectedAccommodation = accommodationId;
+        bookingData.accommodationPrice = parseFloat(element.dataset.accommodationPrice) || 0;
+        bookingData.accommodationName = element.dataset.accommodationName || null;
+        
+        calculateTotal();
+        updateBookingSummary();
+    }
+
     // Load Gifts
     async function loadGifts() {
         try {
@@ -1169,9 +1258,11 @@
         // Gift is free, no price to add
 
         // Accommodation price (fixed price per room for the entire tour, NOT multiplied by nights or number of people)
+        // Note: The price is per night, but we're treating it as a fixed price for the entire tour duration
         if (bookingData.selectedAccommodation && bookingData.accommodationPrice > 0) {
             const accommodationPrice = parseFloat(bookingData.accommodationPrice) || 0;
             total += accommodationPrice;
+            console.log('Accommodation price:', accommodationPrice);
         }
 
         // Update tour price display (per person * adults)
@@ -1284,6 +1375,16 @@
             }
         }
         
+        // Accommodation Section
+        if (bookingData.selectedAccommodation) {
+            html += `
+                <div class="py-2 border-b border-gray-200 text-center sm:text-left">
+                    <div class="text-gray-600 mb-1">{{ __('tours.accommodation') }}:</div>
+                    <div class="font-semibold text-gray-900 break-words w-full">${bookingData.accommodationName || translations.not_available}</div>
+                </div>
+            `;
+        }
+        
         // Gift Section
         if (bookingData.selectedGift) {
             html += `
@@ -1325,6 +1426,9 @@
         }
         if (bookingData.selectedGift) {
             params.append('gift', bookingData.selectedGift);
+        }
+        if (bookingData.selectedAccommodation) {
+            params.append('accommodation', bookingData.selectedAccommodation);
         }
 
         window.location.href = `{{ route('checkout.show') }}?${params.toString()}`;
