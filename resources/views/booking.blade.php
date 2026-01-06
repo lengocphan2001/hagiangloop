@@ -330,11 +330,11 @@
                             <div id="busServiceSection" class="hidden mt-6 space-y-6">
                                 <!-- Outbound Bus -->
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-3">{{ __('tours.select_starting_point') }}</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2 leading-tight">{{ __('tours.select_starting_point') }}</label>
                                     <div class="mb-3 relative">
                                         <button type="button" id="busStartingPointBtn" 
-                                            class="w-full px-4 py-3 text-left border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
-                                            <span id="busStartingPointText" class="text-gray-700">{{ __('tours.select_starting_point') }}</span>
+                                            class="w-full min-h-[48px] px-4 py-3 text-left border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
+                                            <span id="busStartingPointText" class="text-gray-700">{{ __('common.select') }}</span>
                                             <svg class="w-5 h-5 text-gray-400 transition-transform" id="busStartingPointIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                             </svg>
@@ -353,11 +353,11 @@
 
                                 <!-- Return Bus -->
                                 <div>
-                                    <label class="block text-sm font-medium text-gray-700 mb-3">{{ __('tours.choose_return_destination') }}</label>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2 leading-tight">{{ __('tours.choose_return_destination') }}</label>
                                     <div class="mb-3 relative">
                                         <button type="button" id="busReturnDestinationBtn" 
-                                            class="w-full px-4 py-3 text-left border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
-                                            <span id="busReturnDestinationText" class="text-gray-700">{{ __('tours.choose_return_destination') }}</span>
+                                            class="w-full min-h-[48px] px-4 py-3 text-left border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
+                                            <span id="busReturnDestinationText" class="text-gray-700">{{ __('common.select') }}</span>
                                             <svg class="w-5 h-5 text-gray-400 transition-transform" id="busReturnDestinationIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
                                             </svg>
@@ -761,6 +761,16 @@
     };
 
     // Step Navigation
+    function scrollToStepTop(step) {
+        const stepEl = document.getElementById(`step${step}`);
+        if (!stepEl) return;
+
+        // Fixed header offset (header is fixed top)
+        const headerOffset = 110;
+        const top = stepEl.getBoundingClientRect().top + window.pageYOffset - headerOffset;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+    }
+
     function nextStep(step) {
         if (step === 2 && !selectedTourId) {
             alert('{{ __('booking.select_a_tour') }}');
@@ -775,6 +785,9 @@
         document.getElementById(`step${step}`).classList.remove('hidden');
         updateStepIndicator(currentStep, step);
         currentStep = step;
+
+        // Always scroll back to the step container top to avoid browser auto-scrolling to focused inputs (mobile issue).
+        requestAnimationFrame(() => scrollToStepTop(step));
 
         if (step === 2) {
             // Initialize date picker when step 2 is shown (same as tour detail page)
@@ -795,6 +808,8 @@
             setTimeout(() => {
                 initBusDatePickers();
             }, 100);
+            // Ensure we stay at the top of step 3 even if datepicker or inputs steal focus.
+            setTimeout(() => scrollToStepTop(3), 150);
         }
         
         // Update booking summary on each step
@@ -808,6 +823,8 @@
         document.getElementById(`step${step}`).classList.remove('hidden');
         updateStepIndicator(currentStep, step);
         currentStep = step;
+
+        requestAnimationFrame(() => scrollToStepTop(step));
         
         // Update booking summary on each step
         updateBookingSummary();
