@@ -162,7 +162,7 @@ sudo nano /var/www/mon88.click/.env
 Cấu hình các giá trị sau trong file `.env`:
 
 ```env
-APP_NAME="Hà Giang Loop Tours"
+APP_NAME="Ha Giang Loop Tours"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false

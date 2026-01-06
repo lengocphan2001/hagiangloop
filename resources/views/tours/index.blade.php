@@ -4,7 +4,7 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', __('tours_index.title') . ' - Hà Giang Loop Tours')
+@section('title', __('tours_index.title') . ' - Ha Giang Loop Tours')
 
 @section('content')
 <!-- Hero Section -->
@@ -17,7 +17,7 @@
                 </span>
             </div>
             <h1 class="text-5xl lg:text-7xl font-bold text-black mb-6 hero-title" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
-                {{ __('tours_index.discover_ha_giang') }} <span class="">Hà Giang</span>
+                {{ __('tours_index.discover_ha_giang') }} <span class="">Ha Giang</span>
             </h1>
             <p class="text-xl lg:text-2xl text-black mb-8 hero-subtitle" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
                 {{ __('tours_index.subtitle') }}
@@ -32,7 +32,7 @@
         @if($tours->count() > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10 items-stretch">
                 @foreach($tours as $index => $tour)
-                    <article class="tour-card bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-gray-100 hover:border-amber-300 hover:-translate-y-1 group cursor-pointer"
+                    <article class="tour-card bg-white rounded-3xl overflow-hidden transition-all duration-300 border border-gray-300 hover:border-gray-300 hover:-translate-y-1 group cursor-pointer"
                              onclick="window.location.href='{{ route('tours.show', $tour->slug) }}'">
                         <!-- Featured Image -->
                         <div class="relative h-64 overflow-hidden bg-gradient-to-br from-gray-100 to-gray-200">

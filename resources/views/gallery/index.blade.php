@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thư Hồng Gallery - Hà Giang Loop Tours</title>
-    <meta name="description" content="Khám phá những khoảnh khắc đẹp nhất của Hà Giang qua bộ sưu tập ảnh Thư Hồng">
+    <title>Thư Hồng Gallery - Ha Giang Loop Tours</title>
+    <meta name="description" content="Khám phá những khoảnh khắc đẹp nhất của Ha Giang qua bộ sưu tập ảnh Thư Hồng">
     
     <!-- Tailwind CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

@@ -1,4 +1,4 @@
-# Hà Giang Loop - Project Setup Summary
+# Ha Giang Loop - Project Setup Summary
 
 ## ✅ Đã hoàn thành
 

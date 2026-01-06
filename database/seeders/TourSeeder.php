@@ -35,7 +35,7 @@ class TourSeeder extends Seeder
         $day1 = $tour4N3D->days()->create([
             'day_number' => 1,
             'title' => 'Ngày 1',
-            'route' => 'Hà Giang-Quản Bạ-Yên Minh',
+            'route' => 'Ha Giang-Quản Bạ-Yên Minh',
             'breakfast_time' => '08:00',
             'departure_time' => '10:30',
             'notes' => 'ăn sáng tại Alley Homestay và soạn đồ đạc bắt đầu cuộc hành trình',
@@ -95,7 +95,7 @@ class TourSeeder extends Seeder
         $day4 = $tour4N3D->days()->create([
             'day_number' => 4,
             'title' => 'Ngày 4',
-            'route' => 'Yên Minh-Quản Bạ-Hà Giang',
+            'route' => 'Yên Minh-Quản Bạ-Ha Giang',
             'breakfast_time' => '08:00',
             'departure_time' => '09:00',
             'notes' => 'ăn sáng',
@@ -131,7 +131,7 @@ class TourSeeder extends Seeder
         $day1_3N2D = $tour3N2D->days()->create([
             'day_number' => 1,
             'title' => 'Ngày 1',
-            'route' => 'Hà Giang-Quản Bạ-Yên Minh',
+            'route' => 'Ha Giang-Quản Bạ-Yên Minh',
             'breakfast_time' => '08:00',
             'departure_time' => '10:30',
             'notes' => 'ăn sáng tại Alley Homestay và soạn đồ đạc bắt đầu cuộc hành trình',
@@ -170,7 +170,7 @@ class TourSeeder extends Seeder
         $day3_3N2D = $tour3N2D->days()->create([
             'day_number' => 3,
             'title' => 'Ngày 3',
-            'route' => 'Mèo Vạc-Yên Minh-Hà Giang',
+            'route' => 'Mèo Vạc-Yên Minh-Ha Giang',
             'breakfast_time' => '08:00',
             'departure_time' => '09:00',
             'notes' => 'ăn sáng',
@@ -208,7 +208,7 @@ class TourSeeder extends Seeder
         $day1_2N1D = $tour2N1D->days()->create([
             'day_number' => 1,
             'title' => 'Ngày 1',
-            'route' => 'Hà Giang-Quản Bạ-Yên Minh-Đồng Văn',
+            'route' => 'Ha Giang-Quản Bạ-Yên Minh-Đồng Văn',
             'breakfast_time' => '08:00',
             'departure_time' => '10:30',
             'notes' => 'ăn sáng tại Alley Homestay và soạn đồ đạc bắt đầu cuộc hành trình',
@@ -228,7 +228,7 @@ class TourSeeder extends Seeder
         $day2_2N1D = $tour2N1D->days()->create([
             'day_number' => 2,
             'title' => 'Ngày 2',
-            'route' => 'Đồng Văn-Mèo Vạc-Yên Minh-Hà Giang',
+            'route' => 'Đồng Văn-Mèo Vạc-Yên Minh-Ha Giang',
             'breakfast_time' => '08:00',
             'departure_time' => '09:00',
             'notes' => 'ăn sáng',

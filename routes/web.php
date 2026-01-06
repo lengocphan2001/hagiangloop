@@ -17,7 +17,29 @@ Route::get('/', function () {
         ->orderBy('created_at', 'asc')
         ->get();
     
-    return view('home', compact('latestNews', 'faqs'));
+    $homeSlidesRaw = App\Models\HomeSlide::active()
+        ->orderBy('sort_order')
+        ->orderBy('created_at', 'asc')
+        ->get();
+    
+    $defaultImage = asset('images/discovertours/model1.webp');
+    $homeSlides = $homeSlidesRaw->map(function($slide) use ($defaultImage) {
+        $slide->image_url = $slide->image ? \Illuminate\Support\Facades\Storage::url($slide->image) : $defaultImage;
+        return $slide;
+    });
+    
+    $homeSlidesArray = $homeSlides->map(function($slide) {
+        return [
+            'id' => $slide->id,
+            'title' => $slide->title,
+            'desc' => $slide->description ?? '',
+            'image' => $slide->image_url ?? '',
+            'link' => $slide->link ?? null,
+            'link_text' => $slide->link_text ?? 'Discover Tour'
+        ];
+    })->toArray();
+    
+    return view('home', compact('latestNews', 'faqs', 'homeSlides', 'homeSlidesArray'));
 })->name('home');
 
 // Page routes
@@ -96,6 +118,9 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     
     // FAQs management
     Route::resource('faqs', App\Http\Controllers\Admin\FAQController::class);
+    
+    // Home Slides management
+    Route::resource('home-slides', App\Http\Controllers\Admin\HomeSlideController::class);
     
     // Orders management
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');

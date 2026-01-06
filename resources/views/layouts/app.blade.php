@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', config('app.name', 'Hà Giang Loop Tours'))</title>
-    <meta name="description" content="@yield('description', 'Khám phá vẻ đẹp Hà Giang với các tour du lịch chất lượng cao')">
+    <title>@yield('title', config('app.name', 'Ha Giang Loop Tours'))</title>
+    <meta name="description" content="@yield('description', 'Khám phá vẻ đẹp Ha Giang với các tour du lịch chất lượng cao')">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -77,7 +77,7 @@
         @include('components.footer')
 
         <!-- Floating Action Buttons - Fixed positions to prevent layout shift -->
-        <div class="fixed bottom-6 right-6" style="width: 3.5rem; z-index: 9999; position: fixed; isolation: isolate;">
+        <div class="fixed bottom-6 right-6 floating-actions" style="width: 3.5rem; z-index: 9999; position: fixed; isolation: isolate;">
             <!-- Scroll to Top Button (bottom, fixed position) -->
             <button 
                 id="scrollTopBtn"
@@ -88,6 +88,17 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
                 </svg>
             </button>
+
+            <a href="{{ route('booking.index') }}#booking" 
+                class="floating-btn absolute bottom-[14.5rem] right-0 w-12 h-12 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 text-white flex items-center justify-center shadow-xl cursor-pointer group"
+                style="transition: none !important; transform: none !important;">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                </svg>
+                <span class="absolute -top-8 right-0 bg-gray-900 text-white text-xs px-2 py-1 rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                    {{ __('common.booking') }}
+                </span>
+            </a>
 
             <!-- Gmail Button (fixed position) -->
             <a href="mailto:alleyhomestay@gmail.com" 
@@ -454,9 +465,36 @@
             }
         }
 
-        /* Disable all animations and transitions for floating buttons */
-        .floating-btn,
-        .floating-btn *,
+        /* Floating Booking Button - Pulse animation */
+        .floating-btn[href*="booking"] {
+            animation: pulse-booking 2s ease-in-out infinite !important;
+        }
+        
+        @keyframes pulse-booking {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(251, 146, 60, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(251, 146, 60, 0);
+            }
+        }
+        
+        /* Floating buttons safe-area + mobile spacing */
+        .floating-actions {
+            right: calc(1.5rem + env(safe-area-inset-right));
+            bottom: calc(1.5rem + env(safe-area-inset-bottom));
+        }
+
+        @media (max-width: 640px) {
+            .floating-actions {
+                right: calc(1rem + env(safe-area-inset-right));
+                bottom: calc(1rem + env(safe-area-inset-bottom));
+            }
+        }
+        
+        /* Disable all animations and transitions for floating buttons (except booking) */
+        .floating-btn:not([href*="booking"]),
+        .floating-btn:not([href*="booking"]) *,
         #scrollTopBtn,
         #scrollTopBtn * {
             transition: none !important;
@@ -465,7 +503,7 @@
             will-change: auto !important;
         }
 
-        .floating-btn:hover,
+        .floating-btn:not([href*="booking"]):hover,
         #scrollTopBtn:hover {
             transition: none !important;
             animation: none !important;

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - Hà Giang Loop')
+@section('title', 'Dashboard - Ha Giang Loop')
 
 @section('content')
     <div class="min-h-screen bg-gray-50 py-12">

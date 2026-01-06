@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('tour_id')->constrained()->onDelete('cascade');
             $table->integer('day_number'); // 1, 2, 3, 4
             $table->string('title'); // Ngày 1, Ngày 2, etc.
-            $table->string('route')->nullable(); // Hà Giang-Quản Bạ-Yên Minh
+            $table->string('route')->nullable(); // Ha Giang-Quản Bạ-Yên Minh
             $table->time('breakfast_time')->nullable(); // 8:00
             $table->time('departure_time')->nullable(); // 9:00, 10:30
             $table->text('notes')->nullable(); // ăn sáng tại Alley Homestay và soạn đồ đạc

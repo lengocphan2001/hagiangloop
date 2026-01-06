@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('checkout.title') . ' - Hà Giang Loop Tours')
+@section('title', __('checkout.title') . ' - Ha Giang Loop Tours')
 
 @section('content')
 <section class="py-8 lg:py-12 bg-gray-50 overflow-x-hidden">

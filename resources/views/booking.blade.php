@@ -4,10 +4,10 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', __('booking.title') . ' - Hà Giang Loop Tours')
+@section('title', __('booking.title') . ' - Ha Giang Loop Tours')
 
 @section('content')
-<section class="relative py-8 lg:py-12 min-h-screen overflow-hidden bg-white">
+<section id="booking" class="relative py-8 lg:py-12 min-h-screen overflow-hidden bg-white">
     <div class="container mx-auto px-4 lg:px-6 py-4 max-w-7xl">
         <!-- Header -->
         <div class="text-center mb-8 lg:mb-12">
@@ -170,6 +170,14 @@
 
                 <!-- Step 2: Tour Type & Date -->
                 <div id="step2" class="step-content hidden p-6 lg:p-10">
+                    <div class="mb-8">
+                        <button onclick="previousStep(1)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            <span>{{ __('booking.previous') }}</span>
+                        </button>
+                    </div>
                     <div class="flex items-center gap-3 sm:gap-4 mb-8">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg">
@@ -181,14 +189,7 @@
                             <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.select_date_description') }}</p>
                         </div>
                     </div>
-                    <div class="mb-8">
-                        <button onclick="previousStep(1)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            <span>{{ __('booking.previous') }}</span>
-                        </button>
-                    </div>
+                    
 
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
                         <!-- Left Column: Tour Type & Date -->
@@ -260,15 +261,8 @@
                                 </div>
                                 <h3 class="text-xl font-bold text-gray-900">{{ __('booking.summary') }}</h3>
                             </div>
-                            <div id="selectedTourPreview" class="space-y-4">
-                                <div class="text-center py-12">
-                                    <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-200 flex items-center justify-center">
-                                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                        </svg>
-                                    </div>
-                                    <p class="text-gray-500">{{ __('booking.select_a_tour') }}</p>
-                                </div>
+                            <div id="step2SummaryPreview" class="space-y-3">
+                                <!-- Summary will be populated dynamically -->
                             </div>
                         </div>
                     </div>
@@ -293,6 +287,14 @@
 
                 <!-- Step 3: Bus Services & Gifts -->
                 <div id="step3" class="step-content hidden p-6 lg:p-10">
+                    <div class="mb-8">
+                        <button onclick="previousStep(2)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            <span>{{ __('booking.previous') }}</span>
+                        </button>
+                    </div>
                     <div class="flex items-center justify-between gap-3 sm:gap-4 mb-8">
                         <div class="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
                             <div class="flex-shrink-0">
@@ -306,14 +308,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="mb-8">
-                        <button onclick="previousStep(2)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            <span>{{ __('booking.previous') }}</span>
-                        </button>
-                    </div>
+                    
 
                     <div class="space-y-8">
                         <!-- Bus Service Option -->
@@ -415,6 +410,14 @@
 
                 <!-- Step 4: Summary & Checkout -->
                 <div id="step4" class="step-content hidden p-6 lg:p-10">
+                    <div class="mb-8">
+                        <button onclick="previousStep(3)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                            </svg>
+                            <span>{{ __('booking.previous') }}</span>
+                        </button>
+                    </div>
                     <div class="flex items-center gap-3 sm:gap-4 mb-8">
                         <div class="flex-shrink-0">
                             <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-green-500 to-emerald-500 flex items-center justify-center shadow-lg">
@@ -426,19 +429,12 @@
                             <p class="text-xs sm:text-sm lg:text-base text-gray-500 mt-1 break-words">{{ __('booking.summary_description') }}</p>
                         </div>
                     </div>
-                    <div class="mb-8">
-                        <button onclick="previousStep(3)" class="flex items-center gap-2 px-4 py-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors cursor-pointer">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            <span>{{ __('booking.previous') }}</span>
-                        </button>
-                    </div>
+                    
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
                         <!-- Summary Details -->
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 lg:p-8 border-2 border-gray-200 shadow-lg">
+                        <div class="lg:col-span-2 space-y-6 w-full">
+                            <div class="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-4 sm:p-6 lg:p-8 border-2 border-gray-200 shadow-lg w-full overflow-hidden">
                                 <div class="flex items-center gap-3 mb-6">
                                     <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-500 flex items-center justify-center">
                                         <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -447,7 +443,7 @@
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-900">{{ __('checkout.booking_details') }}</h3>
                                 </div>
-                                <div id="bookingSummaryDetails" class="space-y-3 text-center sm:text-left">
+                                <div id="bookingSummaryDetails" class="space-y-3 text-left w-full overflow-hidden">
                                     <!-- Summary will be populated dynamically -->
                                 </div>
                             </div>
@@ -612,24 +608,87 @@
     .scrollbar-thin::-webkit-scrollbar-thumb:hover {
         background: #f472b6;
     }
-    /* Ensure text doesn't overlap on mobile */
+    /* Ensure text doesn't overlap - Force proper wrapping */
+    #bookingSummaryDetails {
+        text-align: left !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+    
     #bookingSummaryDetails > div {
-        min-width: 0;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        width: 100%;
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        text-align: left !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        box-sizing: border-box !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        overflow: hidden !important;
     }
+    
     #bookingSummaryDetails span,
-    #bookingSummaryDetails div {
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-        max-width: 100%;
-        min-width: 0;
+    #bookingSummaryDetails div,
+    #bookingSummaryDetails p {
+        text-align: left !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
     }
-    #bookingSummaryDetails .break-words {
-        word-break: break-word;
-        overflow-wrap: break-word;
-        hyphens: auto;
+    
+    #bookingSummaryDetails .text-gray-600 {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    #bookingSummaryDetails .font-semibold {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        word-wrap: break-word !important;
+        overflow-wrap: break-word !important;
+        white-space: normal !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+    }
+    
+    /* Mobile specific fixes */
+    @media (max-width: 640px) {
+        #bookingSummaryDetails {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        
+        #bookingSummaryDetails > div {
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+        
+        #bookingSummaryDetails .text-gray-600,
+        #bookingSummaryDetails .font-semibold {
+            font-size: 14px !important;
+            line-height: 1.5 !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
     }
 </style>
 @endpush
@@ -723,6 +782,10 @@
                 initDatePickers();
                 loadAccommodations();
             }, 300);
+            // Update summary immediately when entering step 2
+            setTimeout(() => {
+                updateStep2Summary();
+            }, 350);
         }
         if (step === 3) {
             loadGifts();
@@ -817,6 +880,11 @@
         document.getElementById('selectedTourDetails').textContent = tourDetails || '';
         preview.classList.remove('hidden');
         
+        // Update Step 2 summary if we're on step 2
+        if (currentStep === 2) {
+            updateStep2Summary();
+        }
+        
         // Enable next button
         document.getElementById('step1-next').disabled = false;
     }
@@ -886,6 +954,7 @@
                             
                             if (element.id === 'tourStartDate') {
                                 checkStep2Complete();
+                                updateStep2Summary();
                             }
                         } else {
                             element.dataset.value = '';
@@ -1029,6 +1098,7 @@
         
         calculateTotal();
         updateBookingSummary();
+        updateStep2Summary();
     }
 
     // Load Gifts
@@ -1282,6 +1352,97 @@
         return new Intl.NumberFormat('vi-VN').format(price);
     }
 
+    // Update Step 2 Summary Preview
+    function updateStep2Summary() {
+        const container = document.getElementById('step2SummaryPreview');
+        if (!container) return;
+
+        let html = '';
+
+        // Tour Selection
+        if (selectedTourData && selectedTourData.name) {
+            html += `
+                <div class="p-3 bg-white rounded-lg border border-gray-200">
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs text-gray-500 mb-1">{{ __('checkout.tour') }}</div>
+                            <div class="font-semibold text-sm text-gray-900 break-words">${selectedTourData.name}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            html += `
+                <div class="text-center py-8">
+                    <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-gray-200 flex items-center justify-center">
+                        <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-sm text-gray-500">{{ __('booking.select_a_tour') }}</p>
+                </div>
+            `;
+        }
+
+        // Date Selection
+        const startDateInput = document.getElementById('tourStartDate');
+        const startDate = startDateInput?.dataset.value || startDateInput?.value || '';
+        if (startDate) {
+            const formattedDate = startDateInput?.value || startDate;
+            html += `
+                <div class="p-3 bg-white rounded-lg border border-gray-200">
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs text-gray-500 mb-1">{{ __('checkout.start_date') }}</div>
+                            <div class="font-semibold text-sm text-gray-900">${formattedDate}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // People Count
+        const adults = document.getElementById('adultsCount')?.value || '1';
+        html += `
+            <div class="p-3 bg-white rounded-lg border border-gray-200">
+                <div class="flex items-start gap-2">
+                    <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                    </svg>
+                    <div class="flex-1 min-w-0">
+                        <div class="text-xs text-gray-500 mb-1">{{ __('checkout.adults') }}</div>
+                        <div class="font-semibold text-sm text-gray-900">${adults}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Accommodation
+        if (bookingData.selectedAccommodation && bookingData.accommodationName) {
+            html += `
+                <div class="p-3 bg-white rounded-lg border border-gray-200">
+                    <div class="flex items-start gap-2">
+                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                        </svg>
+                        <div class="flex-1 min-w-0">
+                            <div class="text-xs text-gray-500 mb-1">{{ __('tours.accommodation') }}</div>
+                            <div class="font-semibold text-sm text-gray-900 break-words">${bookingData.accommodationName}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        container.innerHTML = html;
+    }
+
     // Update Booking Summary
     function updateBookingSummary() {
         const container = document.getElementById('bookingSummaryDetails');
@@ -1298,17 +1459,17 @@
         const busServicesLabel = translations.bus_services || 'Bus Services';
         
         let html = `
-            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
-                <div class="text-gray-600 mb-1">${tourLabel}:</div>
-                <div class="font-semibold text-gray-900 break-words w-full">${selectedTourData?.name || translations.not_available}</div>
+            <div class="py-2 border-b border-gray-200 text-left w-full box-border">
+                <div class="text-gray-600 mb-1 block w-full break-words">${tourLabel}:</div>
+                <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${selectedTourData?.name || translations.not_available}</div>
             </div>
-            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
-                <div class="text-gray-600 mb-1">${startDateLabel}:</div>
-                <div class="font-semibold text-gray-900 break-words w-full">${startDate || translations.not_available}</div>
+            <div class="py-2 border-b border-gray-200 text-left w-full box-border">
+                <div class="text-gray-600 mb-1 block w-full break-words">${startDateLabel}:</div>
+                <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${startDate || translations.not_available}</div>
             </div>
-            <div class="py-2 border-b border-gray-200 text-center sm:text-left">
-                <div class="text-gray-600 mb-1">${adultsLabel}:</div>
-                <div class="font-semibold text-gray-900 break-words w-full">${adults}</div>
+            <div class="py-2 border-b border-gray-200 text-left w-full box-border">
+                <div class="text-gray-600 mb-1 block w-full break-words">${adultsLabel}:</div>
+                <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${adults}</div>
             </div>
         `;
         
@@ -1329,14 +1490,14 @@
                 const outboundPickupLocation = bookingData.outboundBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-3 border-b border-gray-200 text-center sm:text-left">
+                    <div class="py-3 border-b border-gray-200 text-left w-full box-border">
                         <div class="w-full">
-                            <span class="text-gray-600 font-medium block mb-2">${outboundLabel}:</span>
+                            <span class="text-gray-600 font-medium block mb-2 text-left w-full break-words">${outboundLabel}:</span>
                             <div class="w-full space-y-1.5">
-                                <div class="font-semibold text-gray-900 break-words w-full">${outboundServiceName || translations.not_available}</div>
-                                ${outboundPoint ? `<div class="text-xs text-gray-500 break-words w-full">${outboundPoint}</div>` : ''}
-                                ${outboundDepartureTime ? `<div class="text-xs text-gray-500 break-words w-full">${outboundDepartureTime}</div>` : ''}
-                                ${outboundPickupLocation ? `<div class="text-xs text-gray-500 break-words w-full">${outboundPickupLocation}</div>` : ''}
+                                <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${outboundServiceName || translations.not_available}</div>
+                                ${outboundPoint ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${outboundPoint}</div>` : ''}
+                                ${outboundDepartureTime ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${outboundDepartureTime}</div>` : ''}
+                                ${outboundPickupLocation ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${outboundPickupLocation}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1351,14 +1512,14 @@
                 const returnPickupLocation = bookingData.returnBusPickupLocation || '';
                 
                 html += `
-                    <div class="py-3 border-b border-gray-200 text-center sm:text-left">
+                    <div class="py-3 border-b border-gray-200 text-left w-full box-border">
                         <div class="w-full">
-                            <span class="text-gray-600 font-medium block mb-2">${returnLabel}:</span>
+                            <span class="text-gray-600 font-medium block mb-2 text-left w-full break-words">${returnLabel}:</span>
                             <div class="w-full space-y-1.5">
-                                <div class="font-semibold text-gray-900 break-words w-full">${returnServiceName || translations.not_available}</div>
-                                ${returnPoint ? `<div class="text-xs text-gray-500 break-words w-full">${returnPoint}</div>` : ''}
-                                ${returnDepartureTime ? `<div class="text-xs text-gray-500 break-words w-full">${returnDepartureTime}</div>` : ''}
-                                ${returnPickupLocation ? `<div class="text-xs text-gray-500 break-words w-full">${returnPickupLocation}</div>` : ''}
+                                <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${returnServiceName || translations.not_available}</div>
+                                ${returnPoint ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${returnPoint}</div>` : ''}
+                                ${returnDepartureTime ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${returnDepartureTime}</div>` : ''}
+                                ${returnPickupLocation ? `<div class="text-xs text-gray-500 block w-full text-left whitespace-normal break-words">${returnPickupLocation}</div>` : ''}
                             </div>
                         </div>
                     </div>
@@ -1378,9 +1539,9 @@
         // Accommodation Section
         if (bookingData.selectedAccommodation) {
             html += `
-                <div class="py-2 border-b border-gray-200 text-center sm:text-left">
-                    <div class="text-gray-600 mb-1">{{ __('tours.accommodation') }}:</div>
-                    <div class="font-semibold text-gray-900 break-words w-full">${bookingData.accommodationName || translations.not_available}</div>
+                <div class="py-2 border-b border-gray-200 text-left w-full box-border">
+                    <div class="text-gray-600 mb-1 block w-full break-words">{{ __('tours.accommodation') }}:</div>
+                    <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${bookingData.accommodationName || translations.not_available}</div>
                 </div>
             `;
         }
@@ -1388,9 +1549,9 @@
         // Gift Section
         if (bookingData.selectedGift) {
             html += `
-                <div class="py-2 border-b border-gray-200 text-center sm:text-left">
-                    <div class="text-gray-600 mb-1">${giftLabel}:</div>
-                    <div class="font-semibold text-gray-900 break-words w-full">${bookingData.selectedGiftName || translations.not_available}</div>
+                <div class="py-2 border-b border-gray-200 text-left w-full box-border">
+                    <div class="text-gray-600 mb-1 block w-full break-words">${giftLabel}:</div>
+                    <div class="font-semibold text-gray-900 block w-full text-left whitespace-normal break-words">${bookingData.selectedGiftName || translations.not_available}</div>
                 </div>
             `;
         }
@@ -1506,15 +1667,24 @@
                 tourPriceDisplay.textContent = formatPrice(bookingData.tourPrice * adults) + ' VND';
             }
             calculateTotal();
+            updateStep2Summary();
         });
     });
 
-    // Auto scroll to booking form when coming from slider
+    // Auto scroll to booking form when coming from header button or slider
     if (window.location.hash === '#booking' || sessionStorage.getItem('scrollToBooking') === 'true') {
         setTimeout(() => {
-            const bookingForm = document.querySelector('.relative.container');
-            if (bookingForm) {
-                bookingForm.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            const bookingSection = document.getElementById('booking');
+            if (bookingSection) {
+                // Calculate offset for fixed header (adjust based on your header height)
+                const headerOffset = 100;
+                const elementPosition = bookingSection.getBoundingClientRect().top;
+                const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
             }
             sessionStorage.removeItem('scrollToBooking');
         }, 100);

@@ -4,7 +4,7 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', $tour->name . ' - Hà Giang Loop Tours')
+@section('title', $tour->name . ' - Ha Giang Loop Tours')
 
 @section('content')
     <!-- Hero Section with Tour Info -->
@@ -591,7 +591,7 @@
         <div class="container mx-auto px-4 lg:px-6">
             <div class="max-w-4xl mx-auto text-center">
                 <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Ready to Start Your Adventure?</h2>
-                <p class="text-xl text-gray-600 mb-8">Book your tour now and experience the beauty of Hà Giang</p>
+                <p class="text-xl text-gray-600 mb-8">Book your tour now and experience the beauty of Ha Giang</p>
                 <div class="flex flex-wrap justify-center gap-4">
                     <a href="https://wa.me/84968410676?text=Hello! I'm interested in {{ urlencode($tour->name) }}"
                         target="_blank"

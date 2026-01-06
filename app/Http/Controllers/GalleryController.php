@@ -24,7 +24,7 @@ class GalleryController extends Controller
             "Mỗi ngày bên em là một món quà mà anh luôn trân trọng",
             "Anh muốn cùng em đi qua mọi nẻo đường của cuộc sống",
             "Em là lý do khiến mỗi ngày của anh tràn đầy niềm vui",
-            "Tình yêu của anh dành cho em như những ngọn núi Hà Giang - vững chãi và bền bỉ",
+            "Tình yêu của anh dành cho em như những ngọn núi Ha Giang - vững chãi và bền bỉ",
             "Em là ngôi sao sáng nhất trên bầu trời đêm của anh",
             "Anh cảm ơn em vì đã đến và làm cuộc sống anh trở nên đẹp đẽ",
             "Mỗi khoảnh khắc bên em đều là những kỷ niệm đáng nhớ",

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', ($newsItem->meta_title ?? $newsItem->title) . ' - Hà Giang Loop Tours')
+@section('title', ($newsItem->meta_title ?? $newsItem->title) . ' - Ha Giang Loop Tours')
 
 @section('description', $newsItem->meta_description ?? $newsItem->excerpt)
 

@@ -4,7 +4,7 @@ return [
     'tagline' => 'Khám phá những khoảnh khắc yên bình, đón nhận sự hiếu khách chân thành – Chào mừng đến với Mama\'s Homestay',
     'contact' => 'Liên hệ',
     'address' => 'Địa chỉ',
-    'address_value' => 'Số 136 đường Nguyễn Trãi, Hà Giang, Việt Nam',
+    'address_value' => 'Số 136 đường Nguyễn Trãi, Ha Giang, Việt Nam',
     'see_above' => 'Xem ở trên',
     'google_map' => 'Bản đồ Google',
     'hotline_whatsapp' => 'Hotline Whatsapp 24/7',

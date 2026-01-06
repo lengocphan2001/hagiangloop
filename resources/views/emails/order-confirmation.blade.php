@@ -220,7 +220,7 @@
         <div style="text-align: center; margin-top: 20px; padding-top: 15px; border-top: 1px solid #e5e7eb;">
             <p style="margin: 0; color: #6b7280; font-size: 14px;">
                 {{ __('emails.best_regards') }},<br>
-                <strong>Hà Giang Loop Tours</strong>
+                <strong>Ha Giang Loop Tours</strong>
             </p>
         </div>
     </div>

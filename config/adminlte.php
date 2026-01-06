@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'Hà Giang Loop',
+    'title' => 'Ha Giang Loop',
     'title_prefix' => '',
     'title_postfix' => ' | Admin Panel',
 
@@ -423,6 +423,23 @@ return [
                 [
                     'text' => 'Add New FAQ',
                     'url' => 'admin/faqs/create',
+                    'icon' => 'fas fa-plus',
+                ],
+            ],
+        ],
+        [
+            'text' => 'Home Slides',
+            'icon' => 'fas fa-fw fa-images',
+            'active' => ['admin/home-slides*'],
+            'submenu' => [
+                [
+                    'text' => 'List Slides',
+                    'url' => 'admin/home-slides',
+                    'icon' => 'fas fa-list',
+                ],
+                [
+                    'text' => 'Add New Slide',
+                    'url' => 'admin/home-slides/create',
                     'icon' => 'fas fa-plus',
                 ],
             ],

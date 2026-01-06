@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('common.home') . ' - Hà Giang Loop Tours')
+@section('title', __('common.home') . ' - Ha Giang Loop Tours')
 
 @section('content')
     <!-- Journey Highlight Section (fullwidth bg + floating card) -->
@@ -323,36 +323,15 @@
     <!-- About / Tour Highlight Section -->
     <section id="about" class="mt-4 py-16 lg:py-20 bg-white border-gray-200">
         <div class="w-full mx-auto lg:w-full lg:mx-auto lg:px-8 mt-4 px-4"
-            x-data="{
-                slides: [
-                    {
-                        title: 'Quan Ba Twin Mountain - Fairy Mountain',
-                        desc: 'In addition to the Quan Ba Heaven Gate, the Twin Mountains leave a deep impression on every visitor—an iconic masterpiece sculpted by nature.',
-                        image: '{{ asset('images/discovertours/model1.webp') }}'
-                    },
-                    {
-                        title: 'Skyline Over The Loop',
-                        desc: 'Misty ridges, layered peaks, and golden light at dawn paint an unforgettable panorama across Ha Giang.',
-                        image: '{{ asset('images/discovertours/model2.jpg') }}'
-                    },
-                    {
-                        title: 'Terraced Fields Season',
-                        desc: 'Emerald rice terraces wrap the valleys, inviting you to ride through serene villages and sweeping curves.',
-                        image: '{{ asset('images/discovertours/model3.jpg') }}'
-                    },
-                    {
-                        title: 'Valley In The Clouds',
-                        desc: 'Rolling hills and drifting clouds reveal the Loop’s gentle side—a perfect pause between thrilling passes.',
-                        image: '{{ asset('images/discovertours/model4.jpg') }}'
-                    }
-                ],
+            x-data='{
+                slides: @json($homeSlidesArray),
                 current: 0,
                 timer: null,
-                next() { this.current = (this.current + 1) % this.slides.length; },
-                prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length; },
-                startAuto() { this.stopAuto(); this.timer = setInterval(() => this.next(), 4500); },
+                next() { this.current = (this.current + 1) % this.slides.length },
+                prev() { this.current = (this.current - 1 + this.slides.length) % this.slides.length },
+                startAuto() { this.stopAuto(); this.timer = setInterval(() => this.next(), 4500) },
                 stopAuto() { if (this.timer) { clearInterval(this.timer); this.timer = null; } }
-            }"
+            }'
             x-init="startAuto()"
             @mouseenter="stopAuto()"
             @mouseleave="startAuto()">
@@ -369,10 +348,17 @@
                                 <p class="text-sm md:text-base lg:text-lg text-gray-700 leading-relaxed" x-text="slide.desc"></p>
                             </div>
 
-                            <a href="{{ route('tours.index') }}"
-                                class="inline-block px-8 py-4 bg-amber-300 text-gray-900 font-semibold uppercase tracking-wide hover:bg-amber-200 transition shadow-sm w-fit cursor-pointer">
-                                Discover Tour
-                            </a>
+                            <template x-if="slide.link">
+                                <a :href="slide.link"
+                                    class="inline-block px-8 py-4 bg-amber-300 text-gray-900 font-semibold uppercase tracking-wide hover:bg-amber-200 transition shadow-sm w-fit cursor-pointer"
+                                    x-text="slide.link_text || 'Discover Tour'"></a>
+                            </template>
+                            <template x-if="!slide.link">
+                                <a href="{{ route('tours.index') }}"
+                                    class="inline-block px-8 py-4 bg-amber-300 text-gray-900 font-semibold uppercase tracking-wide hover:bg-amber-200 transition shadow-sm w-fit cursor-pointer">
+                                    Discover Tour
+                                </a>
+                            </template>
                         </div>
                     </template>
 
@@ -425,7 +411,7 @@
                     Latest <span class="t">News</span>
                 </h2>
                 <p class="text-xl text-gray-600 max-w-2xl mx-auto">
-                    Stay updated with the latest news and stories from Hà Giang
+                    Stay updated with the latest news and stories from Ha Giang
                 </p>
             </div>
             
