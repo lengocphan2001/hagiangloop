@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('news.title') . ' - Ha Giang Loop Tours')
+@section('title', __('news.title') . ' - Alley Homestay - Ha Giang Loop')
 
 @section('content')
 <!-- Hero Section -->

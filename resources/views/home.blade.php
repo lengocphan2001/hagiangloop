@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('common.home') . ' - Ha Giang Loop Tours')
+@section('title', __('common.home') . ' - Alley Homestay - Ha Giang Loop')
 
 @section('content')
     <!-- Journey Highlight Section (fullwidth bg + floating card) -->
@@ -402,6 +402,63 @@
             </div>
         </div>
     </section>
+    <!-- Featured Tours Section -->
+    @if(isset($featuredTours) && $featuredTours->count() > 0)
+    <section class="py-16 border-t border-gray-200 bg-white">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+                    Popular <span class="t">Tours</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Choose your next Ha Giang Loop experience
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+                @foreach($featuredTours as $tour)
+                    <article class="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-amber-300 transition-all duration-300 hover:-translate-y-1 shadow-sm cursor-pointer"
+                        onclick="window.location.href='{{ route('tours.show', $tour->slug) }}'">
+                        <div class="relative h-60 bg-gray-100">
+                            @if($tour->thumbnail_image)
+                                <img src="{{ Storage::url($tour->thumbnail_image) }}" alt="{{ $tour->name }}"
+                                    class="w-full h-full object-cover">
+                            @else
+                                <img src="{{ asset('images/discovertours/model1.webp') }}" alt="{{ $tour->name }}"
+                                    class="w-full h-full object-cover">
+                            @endif
+                            <div class="absolute top-3 left-3 bg-white/90 text-gray-900 text-xs font-semibold px-3 py-1 rounded-full">
+                                {{ $tour->days }}D/{{ $tour->nights }}N
+                            </div>
+                        </div>
+
+                        <div class="p-5">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2 line-clamp-2">{{ $tour->name }}</h3>
+                            <p class="text-amber-600 font-bold text-lg mb-4">
+                                {{ number_format($tour->price, 0, ',', '.') }} VND
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-gray-500">View details</span>
+                                <span class="text-amber-600 font-semibold">Book now</span>
+                            </div>
+                        </div>
+                    </article>
+                @endforeach
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="{{ route('tours.index') }}"
+                    class="inline-flex items-center gap-2 px-8 py-4 bg-amber-500 text-white rounded-lg font-semibold hover:bg-amber-600 transition-colors duration-300 shadow-lg cursor-pointer">
+                    View All Tours
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+    @endif
+
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
     <section class="pb-16 border-t border-gray-200 py-16">

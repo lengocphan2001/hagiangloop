@@ -155,7 +155,7 @@
                 </button>
 
                 <!-- BOOKING Button -->
-                <a href="{{ route('booking.index') }}#booking"
+                <a href="{{ route('booking.index') }}"
                     class="px-8 py-3 bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 ml-4 cursor-pointer">
                     {{ __('common.booking') }}
                 </a>
@@ -237,7 +237,7 @@
                         class="block text-white font-medium text-lg py-3 border-b border-white/10 hover:text-amber-300 transition-colors {{ request()->routeIs('contact.*') ? 'text-amber-300' : '' }}">
                         {{ __('common.contact') }}
                     </a>
-                    <a href="{{ route('booking.index') }}#booking" 
+                    <a href="{{ route('booking.index') }}"
                         @click="open = false"
                         class="block bg-orange-400 hover:bg-orange-500 text-gray-900 font-semibold uppercase text-base text-center py-4 rounded-lg transition-all duration-300 hover:shadow-lg transform hover:scale-105 mt-6">
                         {{ __('common.booking') }}

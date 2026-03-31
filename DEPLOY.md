@@ -1,10 +1,10 @@
-# Hướng dẫn Deploy Laravel lên VPS Ubuntu - mon88.click
+# Hướng dẫn Deploy Laravel lên VPS Ubuntu - alleyhomestayhagiangloop.com
 
 ## 📋 Yêu cầu hệ thống
 
 - Ubuntu 20.04/22.04 LTS
 - Root hoặc sudo access
-- Domain: mon88.click đã trỏ về IP VPS
+- Domain: alleyhomestayhagiangloop.com đã trỏ về IP VPS
 - Tối thiểu 1GB RAM, 20GB storage
 
 ---
@@ -87,7 +87,7 @@ composer --version
 
 ```bash
 # Cài đặt Node.js 20.x (LTS)
-curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
 sudo apt install -y nodejs
 
 # Kiểm tra phiên bản
@@ -120,8 +120,8 @@ sudo systemctl status nginx
 sudo adduser --disabled-password --gecos "" www-data
 
 # Tạo thư mục cho project
-sudo mkdir -p /var/www/mon88.click
-sudo chown -R www-data:www-data /var/www/mon88.click
+sudo mkdir -p /var/www/alleyhomestayhagiangloop.com
+sudo chown -R www-data:www-data /var/www/alleyhomestayhagiangloop.com
 ```
 
 ---
@@ -133,10 +133,10 @@ sudo chown -R www-data:www-data /var/www/mon88.click
 sudo su - www-data
 
 # Clone project (thay YOUR_REPO_URL bằng URL repository của bạn)
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 git clone YOUR_REPO_URL .
 
-# Hoặc nếu bạn upload code qua SCP/SFTP, giải nén vào /var/www/mon88.click
+# Hoặc nếu bạn upload code qua SCP/SFTP, giải nén vào /var/www/alleyhomestayhagiangloop.com
 
 # Cài đặt dependencies
 composer install --optimize-autoloader --no-dev
@@ -159,20 +159,20 @@ exit
 
 ```bash
 # Copy file .env.example
-sudo cp /var/www/mon88.click/.env.example /var/www/mon88.click/.env
+sudo cp /var/www/alleyhomestayhagiangloop.com/.env.example /var/www/alleyhomestayhagiangloop.com/.env
 
 # Chỉnh sửa file .env
-sudo nano /var/www/mon88.click/.env
+sudo nano /var/www/alleyhomestayhagiangloop.com/.env
 ```
 
 Cấu hình các giá trị sau trong file `.env`:
 
 ```env
-APP_NAME="Ha Giang Loop Tours"
+APP_NAME="Alley Homestay - Ha Giang Loop"
 APP_ENV=production
 APP_KEY=
 APP_DEBUG=false
-APP_URL=https://mon88.click
+APP_URL=https://alleyhomestayhagiangloop.com
 
 LOG_CHANNEL=stack
 LOG_DEPRECATIONS_CHANNEL=null
@@ -192,7 +192,7 @@ MAIL_PORT=1025
 MAIL_USERNAME=null
 MAIL_PASSWORD=null
 MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="noreply@mon88.click"
+MAIL_FROM_ADDRESS="noreply@alleyhomestayhagiangloop.com"
 MAIL_FROM_NAME="${APP_NAME}"
 
 # Cấu hình filesystem
@@ -207,7 +207,7 @@ QUEUE_CONNECTION=sync
 Sau đó tạo APP_KEY:
 
 ```bash
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 sudo php artisan key:generate
 ```
 
@@ -217,10 +217,10 @@ sudo php artisan key:generate
 
 ```bash
 # Cấp quyền cho storage và bootstrap/cache
-sudo chown -R www-data:www-data /var/www/mon88.click
-sudo chmod -R 755 /var/www/mon88.click
-sudo chmod -R 775 /var/www/mon88.click/storage
-sudo chmod -R 775 /var/www/mon88.click/bootstrap/cache
+sudo chown -R www-data:www-data /var/www/alleyhomestayhagiangloop.com
+sudo chmod -R 755 /var/www/alleyhomestayhagiangloop.com
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/storage
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/bootstrap/cache
 ```
 
 ---
@@ -228,7 +228,7 @@ sudo chmod -R 775 /var/www/mon88.click/bootstrap/cache
 ## 🗃️ Bước 11: Chạy migrations và seeders
 
 ```bash
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 sudo php artisan migrate --force
 sudo php artisan db:seed --force
 ```
@@ -239,7 +239,7 @@ sudo php artisan db:seed --force
 
 ```bash
 # Tạo file cấu hình Nginx
-sudo nano /etc/nginx/sites-available/mon88.click
+sudo nano /etc/nginx/sites-available/alleyhomestayhagiangloop.com
 ```
 
 Thêm nội dung sau:
@@ -248,8 +248,8 @@ Thêm nội dung sau:
 server {
     listen 80;
     listen [::]:80;
-    server_name mon88.click www.mon88.click;
-    root /var/www/mon88.click/public;
+    server_name alleyhomestayhagiangloop.com www.alleyhomestayhagiangloop.com;
+    root /var/www/alleyhomestayhagiangloop.com/public;
 
     add_header X-Frame-Options "SAMEORIGIN";
     add_header X-Content-Type-Options "nosniff";
@@ -283,7 +283,7 @@ Kích hoạt site:
 
 ```bash
 # Tạo symbolic link
-sudo ln -s /etc/nginx/sites-available/mon88.click /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/alleyhomestayhagiangloop.com /etc/nginx/sites-enabled/
 
 # Xóa default site (nếu có)
 sudo rm /etc/nginx/sites-enabled/default
@@ -304,7 +304,7 @@ sudo systemctl restart nginx
 sudo apt install -y certbot python3-certbot-nginx
 
 # Lấy chứng chỉ SSL
-sudo certbot --nginx -d mon88.click -d www.mon88.click
+sudo certbot --nginx -d alleyhomestayhagiangloop.com -d www.alleyhomestayhagiangloop.com
 
 # Certbot sẽ tự động:
 # - Tạo chứng chỉ SSL
@@ -326,7 +326,7 @@ Sau khi chạy certbot, file cấu hình Nginx sẽ được tự động cập 
 sudo crontab -e -u www-data
 
 # Thêm dòng sau (chạy mỗi phút)
-* * * * * cd /var/www/mon88.click && php artisan schedule:run >> /dev/null 2>&1
+* * * * * cd /var/www/alleyhomestayhagiangloop.com && php artisan schedule:run >> /dev/null 2>&1
 ```
 
 ---
@@ -352,7 +352,7 @@ sudo ufw status
 ## 🚀 Bước 16: Tối ưu hóa Laravel cho Production
 
 ```bash
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 
 # Cache config
 sudo php artisan config:cache
@@ -402,16 +402,16 @@ sudo systemctl restart php8.2-fpm
 
 1. **Kiểm tra website:**
    ```bash
-   curl -I https://mon88.click
+   curl -I https://alleyhomestayhagiangloop.com
    ```
 
 2. **Kiểm tra SSL:**
-   - Truy cập: https://www.ssllabs.com/ssltest/analyze.html?d=mon88.click
+   - Truy cập: https://www.ssllabs.com/ssltest/analyze.html?d=alleyhomestayhagiangloop.com
 
 3. **Kiểm tra logs nếu có lỗi:**
    ```bash
    # Laravel logs
-   sudo tail -f /var/www/mon88.click/storage/logs/laravel.log
+   sudo tail -f /var/www/alleyhomestayhagiangloop.com/storage/logs/laravel.log
    
    # Nginx error logs
    sudo tail -f /var/log/nginx/error.log
@@ -426,7 +426,7 @@ sudo systemctl restart php8.2-fpm
 
 ### Clear cache khi cần:
 ```bash
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 sudo php artisan cache:clear
 sudo php artisan config:clear
 sudo php artisan route:clear
@@ -442,7 +442,7 @@ sudo php artisan view:cache
 
 ### Cập nhật code:
 ```bash
-cd /var/www/mon88.click
+cd /var/www/alleyhomestayhagiangloop.com
 sudo git pull origin main
 sudo composer install --optimize-autoloader --no-dev
 sudo npm install
@@ -455,10 +455,10 @@ sudo php artisan view:cache
 
 ### Kiểm tra permissions:
 ```bash
-sudo chown -R www-data:www-data /var/www/mon88.click
-sudo chmod -R 755 /var/www/mon88.click
-sudo chmod -R 775 /var/www/mon88.click/storage
-sudo chmod -R 775 /var/www/mon88.click/bootstrap/cache
+sudo chown -R www-data:www-data /var/www/alleyhomestayhagiangloop.com
+sudo chmod -R 755 /var/www/alleyhomestayhagiangloop.com
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/storage
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/bootstrap/cache
 ```
 
 ---
@@ -478,17 +478,17 @@ ls -la /var/run/php/php8.2-fpm.sock
 ### Lỗi 500 Internal Server Error:
 ```bash
 # Kiểm tra Laravel logs
-sudo tail -f /var/www/mon88.click/storage/logs/laravel.log
+sudo tail -f /var/www/alleyhomestayhagiangloop.com/storage/logs/laravel.log
 
 # Kiểm tra permissions
-sudo chmod -R 775 /var/www/mon88.click/storage
-sudo chmod -R 775 /var/www/mon88.click/bootstrap/cache
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/storage
+sudo chmod -R 775 /var/www/alleyhomestayhagiangloop.com/bootstrap/cache
 ```
 
 ### Lỗi Permission Denied:
 ```bash
-sudo chown -R www-data:www-data /var/www/mon88.click
-sudo chmod -R 755 /var/www/mon88.click
+sudo chown -R www-data:www-data /var/www/alleyhomestayhagiangloop.com
+sudo chmod -R 755 /var/www/alleyhomestayhagiangloop.com
 ```
 
 ### SSL không hoạt động:
@@ -544,7 +544,7 @@ sudo systemctl restart nginx
    mysqldump -u hagiangloop_user -p'your_password' hagiangloop > $BACKUP_DIR/db_$DATE.sql
    
    # Backup files
-   tar -czf $BACKUP_DIR/files_$DATE.tar.gz /var/www/mon88.click
+   tar -czf $BACKUP_DIR/files_$DATE.tar.gz /var/www/alleyhomestayhagiangloop.com
    
    # Xóa backup cũ hơn 7 ngày
    find $BACKUP_DIR -type f -mtime +7 -delete
@@ -569,7 +569,7 @@ sudo systemctl restart nginx
 ## 📞 Hỗ trợ
 
 Nếu gặp vấn đề trong quá trình deploy, kiểm tra:
-1. Laravel logs: `/var/www/mon88.click/storage/logs/laravel.log`
+1. Laravel logs: `/var/www/alleyhomestayhagiangloop.com/storage/logs/laravel.log`
 2. Nginx logs: `/var/log/nginx/error.log`
 3. PHP-FPM logs: `/var/log/php8.2-fpm.log`
 

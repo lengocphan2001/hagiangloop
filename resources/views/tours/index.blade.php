@@ -4,7 +4,7 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', __('tours_index.title') . ' - Ha Giang Loop Tours')
+@section('title', __('tours_index.title') . ' - Alley Homestay - Ha Giang Loop')
 
 @section('content')
 <!-- Hero Section -->

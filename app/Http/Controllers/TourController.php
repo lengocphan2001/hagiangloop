@@ -57,6 +57,7 @@ class TourController extends Controller
             'name' => $tour->name,
             'slug' => $tour->slug,
             'price' => $tour->price,
+            'nights' => $tour->nights,
         ]);
     }
 }

@@ -4,15 +4,15 @@
     use Illuminate\Support\Facades\Storage;
 @endphp
 
-@section('title', $tour->name . ' - Ha Giang Loop Tours')
+@section('title', $tour->name . ' - Alley Homestay - Ha Giang Loop')
 
 @section('content')
     <!-- Hero Section with Tour Info -->
-    <section
-        class="relative overflow-hidden tour-detail-hero-section">
+    <section class="relative overflow-hidden tour-detail-hero-section">
         <div class="container mx-auto px-4 lg:px-6 relative z-10 py-10 lg:py-16">
             <div class="max-w-4xl mx-auto text-center flex flex-col items-center justify-center">
-                <div class="inline-block mb-6 flex items-center justify-center" data-aos="fade-down" data-aos-duration="600">
+                <div class="inline-block mb-6 flex items-center justify-center" data-aos="fade-down"
+                    data-aos-duration="600">
                     <span
                         class="bg-gradient-to-r from-amber-400 to-amber-500 text-white px-6 py-2 rounded-full font-bold text-lg shadow-lg backdrop-blur-sm border border-amber-300/30">
                         {{ $tour->duration }}
@@ -22,8 +22,8 @@
                     data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
                     {{ $tour->name }}
                 </h1>
-                <p class="text-xl lg:text-2xl text-black mb-8 text-center w-full" data-aos="fade-up"
-                    data-aos-duration="800" data-aos-delay="200">
+                <p class="text-xl lg:text-2xl text-black mb-8 text-center w-full" data-aos="fade-up" data-aos-duration="800"
+                    data-aos-delay="200">
                     {{ $tour->days }} Days / {{ $tour->nights }} Nights Adventure
                 </p>
 
@@ -58,8 +58,7 @@
                                     @if ($tour->thumbnail_image)
                                         <div class="relative">
                                             <img src="{{ Storage::url($tour->thumbnail_image) }}" alt="{{ $tour->name }}"
-                                                class="w-full rounded-lg shadow-xl object-cover"
-                                                id="thumbnailImage">
+                                                class="w-full rounded-lg shadow-xl object-cover" id="thumbnailImage">
                                         </div>
                                     @endif
 
@@ -68,16 +67,14 @@
                                         <div class="flex flex-col" id="detailImageContainer">
                                             <div class="relative group cursor-pointer flex-shrink-0"
                                                 onclick="openTourGallery({{ json_encode(array_map(fn($img) => Storage::url($img), $tour->detail_images)) }}, 0)">
-                                                <img src="{{ Storage::url($tour->detail_images[0]) }}"
-                                                    alt="{{ $tour->name }}"
+                                                <img src="{{ Storage::url($tour->detail_images[0]) }}" alt="{{ $tour->name }}"
                                                     class="w-full h-48 md:h-56 rounded-lg shadow-xl object-cover">
                                                 <div
                                                     class="absolute inset-0 bg-black/40 group-hover:bg-black/50 transition-colors rounded-lg flex items-center justify-center">
                                                     <div class="text-center text-white">
                                                         <svg class="w-8 h-8 mx-auto mb-2" fill="none" stroke="currentColor"
                                                             viewBox="0 0 24 24">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                stroke-width="2"
+                                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                                 d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
                                                             </path>
                                                         </svg>
@@ -92,7 +89,8 @@
                             </div>
                         @endif
                         <div class="text-start mb-8">
-                            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">{{ __('tours.tour_itinerary') }}</h2>
+                            <h2 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4">{{ __('tours.tour_itinerary') }}
+                            </h2>
                         </div>
                         @foreach ($tour->tourDays as $dayIndex => $day)
                             <div id="day-{{ $day->day_number }}"
@@ -112,16 +110,14 @@
                                                 {{ $day->title }}
                                             </h3>
                                             @if ($day->route)
-                                                <p
-                                                    class="text-xs lg:text-sm text-gray-600 flex items-center truncate mt-0.5">
+                                                <p class="text-xs lg:text-sm text-gray-600 flex items-center truncate mt-0.5">
                                                     <svg class="w-3 h-3 lg:w-4 lg:h-4 mr-1.5 text-amber-500 flex-shrink-0"
                                                         fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2"
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                             d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
                                                         </path>
-                                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                                            stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                     </svg>
                                                     <span class="truncate">{{ $day->route }}</span>
                                                 </p>
@@ -150,8 +146,7 @@
                                                         @if ($day->breakfast_time)
                                                             <div class="flex items-start md:items-center gap-2 min-w-0">
                                                                 <svg class="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5 md:mt-0"
-                                                                    fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
+                                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2"
                                                                         d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
@@ -159,41 +154,40 @@
                                                                 </svg>
                                                                 <div class="min-w-0 flex-1">
                                                                     <p class="text-xs text-gray-500 mb-0.5">Breakfast</p>
-                                                                    <p
-                                                                        class="font-semibold text-gray-900 text-sm md:text-base">
-                                                                        {{ $day->breakfast_time->format('H:i') }}</p>
+                                                                    <p class="font-semibold text-gray-900 text-sm md:text-base">
+                                                                        {{ $day->breakfast_time->format('H:i') }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         @endif
                                                         @if ($day->departure_time)
                                                             <div class="flex items-start md:items-center gap-2 min-w-0">
                                                                 <svg class="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5 md:mt-0"
-                                                                    fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
+                                                                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
                                                                     </path>
                                                                 </svg>
                                                                 <div class="min-w-0 flex-1">
                                                                     <p class="text-xs text-gray-500 mb-0.5">Departure</p>
-                                                                    <p
-                                                                        class="font-semibold text-gray-900 text-sm md:text-base">
-                                                                        {{ $day->departure_time->format('H:i') }}</p>
+                                                                    <p class="font-semibold text-gray-900 text-sm md:text-base">
+                                                                        {{ $day->departure_time->format('H:i') }}
+                                                                    </p>
                                                                 </div>
                                                             </div>
                                                         @endif
                                                         @if ($day->notes)
                                                             <div class="md:col-span-3 flex items-start gap-2 pt-2 md:pt-0">
-                                                                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5"
-                                                                    fill="none" stroke="currentColor"
-                                                                    viewBox="0 0 24 24">
+                                                                <svg class="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" fill="none"
+                                                                    stroke="currentColor" viewBox="0 0 24 24">
                                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                                         stroke-width="2"
                                                                         d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
                                                                     </path>
                                                                 </svg>
                                                                 <p class="text-sm text-gray-700 flex-1 break-words">
-                                                                    {{ $day->notes }}</p>
+                                                                    {{ $day->notes }}
+                                                                </p>
                                                             </div>
                                                         @endif
                                                     </div>
@@ -214,33 +208,33 @@
                                                             <div class="flex-shrink-0 relative z-10">
                                                                 <div
                                                                     class="w-8 h-8 rounded-full flex items-center justify-center shadow-sm location-marker 
-                                                        {{ $location->type === 'meal' ? 'bg-green-500' : ($location->type === 'accommodation' ? 'bg-blue-500' : 'bg-amber-500') }}">
+                                                                    {{ $location->type === 'meal' ? 'bg-green-500' : ($location->type === 'accommodation' ? 'bg-blue-500' : 'bg-amber-500') }}">
                                                                     @if ($location->type === 'meal')
                                                                         <svg class="w-4 h-4 text-white" fill="none"
                                                                             stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2"
                                                                                 d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
                                                                             </path>
                                                                         </svg>
                                                                     @elseif($location->type === 'accommodation')
                                                                         <svg class="w-4 h-4 text-white" fill="none"
                                                                             stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2"
                                                                                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
                                                                             </path>
                                                                         </svg>
                                                                     @else
                                                                         <svg class="w-4 h-4 text-white" fill="none"
                                                                             stroke="currentColor" viewBox="0 0 24 24">
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
+                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2"
                                                                                 d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
                                                                             </path>
-                                                                            <path stroke-linecap="round"
-                                                                                stroke-linejoin="round" stroke-width="2"
-                                                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                                stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+                                                                            </path>
                                                                         </svg>
                                                                     @endif
                                                                 </div>
@@ -255,19 +249,18 @@
                                                             <div class="flex-grow min-w-0 pb-2">
                                                                 <div class="flex items-center gap-2 flex-wrap mb-1">
                                                                     <h4 class="text-base font-semibold text-gray-900">
-                                                                        {{ $location->name }}</h4>
+                                                                        {{ $location->name }}
+                                                                    </h4>
                                                                     <span
                                                                         class="px-2 py-0.5 rounded-full text-xs font-medium 
-                                                            {{ $location->type === 'meal' ? 'bg-green-100 text-green-700' : ($location->type === 'accommodation' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700') }}">
+                                                                        {{ $location->type === 'meal' ? 'bg-green-100 text-green-700' : ($location->type === 'accommodation' ? 'bg-blue-100 text-blue-700' : 'bg-amber-100 text-amber-700') }}">
                                                                         {{ ucfirst($location->type) }}
                                                                     </span>
                                                                     @if ($location->arrival_time)
-                                                                        <span
-                                                                            class="text-gray-500 text-xs flex items-center">
+                                                                        <span class="text-gray-500 text-xs flex items-center">
                                                                             <svg class="w-3 h-3 mr-0.5" fill="none"
                                                                                 stroke="currentColor" viewBox="0 0 24 24">
-                                                                                <path stroke-linecap="round"
-                                                                                    stroke-linejoin="round"
+                                                                                <path stroke-linecap="round" stroke-linejoin="round"
                                                                                     stroke-width="2"
                                                                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z">
                                                                                 </path>
@@ -279,7 +272,8 @@
 
                                                                 @if ($location->description && $location->description)
                                                                     <p class="text-xs text-gray-600 mb-2 line-clamp-1">
-                                                                        {{ $location->description }}</p>
+                                                                        {{ $location->description }}
+                                                                    </p>
                                                                 @endif
 
                                                                 <!-- Compact Images Gallery -->
@@ -313,10 +307,11 @@
                                                                                 </div>
                                                                             @endforeach
                                                                             @if (count($detailImagesArray) > 2)
-                                                                                <div class="flex-shrink-0 w-16 h-16 rounded bg-gradient-to-br from-amber-400 to-green-400 flex items-center justify-center cursor-pointer text-white text-xs font-bold"
-                                                                                    onclick="openImageGallery({{ json_encode(array_map(function ($img) {return asset('storage/' . $img);}, $detailImagesArray)) }})">
-                                                                                    +{{ count($detailImagesArray) - 2 }}
-                                                                                </div>
+                                                                                                                <div class="flex-shrink-0 w-16 h-16 rounded bg-gradient-to-br from-amber-400 to-green-400 flex items-center justify-center cursor-pointer text-white text-xs font-bold"
+                                                                                                                    onclick="openImageGallery({{ json_encode(array_map(function ($img) {
+                                                                                return asset('storage/' . $img); }, $detailImagesArray)) }})">
+                                                                                                                    +{{ count($detailImagesArray) - 2 }}
+                                                                                                                </div>
                                                                             @endif
                                                                         @endif
                                                                     </div>
@@ -353,14 +348,17 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.tour') }}</h3>
                                 </div>
                                 @if($tour->price)
                                     <div class="mb-3">
                                         <p class="text-sm text-gray-600 mb-1">{{ __('tours.price_per_person') }}</p>
-                                        <p class="text-2xl font-bold text-red-600" id="tourPriceDisplay">{{ number_format($tour->price, 0, ',', '.') }} VND</p>
+                                        <p class="text-2xl font-bold text-red-600" id="tourPriceDisplay">
+                                            {{ number_format($tour->price, 0, ',', '.') }} VND</p>
                                     </div>
                                 @endif
                             </div>
@@ -369,28 +367,36 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.start_date') }}</h3>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.start_date') }}
+                                    </h3>
                                 </div>
-                                <input type="text" id="tourStartDate" 
+                                <input type="text" id="tourStartDate"
                                     class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
-                                    placeholder="{{ __('tours.select_date') }}"
-                                    readonly>
+                                    placeholder="{{ __('tours.select_date') }}" readonly>
                             </div>
 
                             <!-- Bus Service Option -->
                             <div class="mb-6">
                                 <div class="flex items-center gap-3 p-3 border border-gray-300 rounded-lg">
-                                    <input type="checkbox" id="useBusService" 
+                                    <input type="checkbox" id="useBusService"
                                         class="w-5 h-5 text-amber-500 border-gray-300 rounded focus:ring-amber-500 cursor-pointer"
                                         onchange="toggleBusService()">
                                     <label for="useBusService" class="flex items-center gap-2 cursor-pointer flex-1">
-                                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"></path>
-                                            <path d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z"></path>
+                                        <svg class="w-5 h-5 text-amber-500 flex-shrink-0" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M8 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM15 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z">
+                                            </path>
+                                            <path
+                                                d="M3 4a1 1 0 00-1 1v10a1 1 0 001 1h1.05a2.5 2.5 0 014.9 0H10a1 1 0 001-1V5a1 1 0 00-1-1H3zM14 7a1 1 0 00-1 1v6.05A2.5 2.5 0 0115.95 16H17a1 1 0 001-1v-5a1 1 0 00-.293-.707l-2-2A1 1 0 0015 7h-1z">
+                                            </path>
                                         </svg>
-                                        <span class="font-semibold text-gray-900 text-sm sm:text-base">{{ __('tours.use_bus_service') }}</span>
+                                        <span
+                                            class="font-semibold text-gray-900 text-sm sm:text-base">{{ __('tours.use_bus_service') }}</span>
                                     </label>
                                 </div>
                             </div>
@@ -399,35 +405,43 @@
                             <div id="busServiceSection" class="mb-6 hidden">
                                 <div class="mb-6">
                                     <div class="flex items-center gap-2 mb-3">
-                                        <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd"></path>
                                         </svg>
-                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.select_starting_point') }}</h3>
+                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">
+                                            {{ __('tours.select_starting_point') }}</h3>
                                     </div>
-                                <div class="mb-3 relative">
-                                    <!-- Custom Dropdown Button -->
-                                    <button type="button" id="busStartingPointBtn" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
-                                        <span id="busStartingPointText" class="text-gray-700">Select starting point</span>
-                                        <svg class="w-5 h-5 text-gray-400 transition-transform" id="busStartingPointIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </button>
-                                    <!-- Dropdown Menu -->
-                                    <div id="busStartingPointDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
-                                        <div class="py-1" id="busStartingPointOptions">
-                                            <!-- Options will be loaded from API -->
-                                            <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
+                                    <div class="mb-3 relative">
+                                        <!-- Custom Dropdown Button -->
+                                        <button type="button" id="busStartingPointBtn"
+                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
+                                            <span id="busStartingPointText" class="text-gray-700">Select starting
+                                                point</span>
+                                            <svg class="w-5 h-5 text-gray-400 transition-transform"
+                                                id="busStartingPointIcon" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <!-- Dropdown Menu -->
+                                        <div id="busStartingPointDropdown"
+                                            class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
+                                            <div class="py-1" id="busStartingPointOptions">
+                                                <!-- Options will be loaded from API -->
+                                                <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
+                                            </div>
                                         </div>
+                                        <input type="hidden" id="busStartingPoint" value="">
                                     </div>
-                                    <input type="hidden" id="busStartingPoint" value="">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" id="busDepartureDate" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
-                                        placeholder="Chọn ngày khởi hành"
-                                        readonly>
-                                </div>
+                                    <div class="mb-3">
+                                        <input type="text" id="busDepartureDate"
+                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
+                                            placeholder="Chọn ngày khởi hành" readonly>
+                                    </div>
                                     <div id="outboundBusOptions" class="space-y-3">
                                         <!-- Outbound bus options will be loaded here -->
                                     </div>
@@ -435,36 +449,44 @@
 
                                 <!-- Bus Service - Return -->
                                 <div class="mb-6">
-                                <div class="flex items-center gap-2 mb-3">
-                                    <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                                    </svg>
-                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.choose_return_destination') }}</h3>
-                                </div>
-                                <div class="mb-3 relative">
-                                    <!-- Custom Dropdown Button -->
-                                    <button type="button" id="busReturnDestinationBtn" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
-                                        <span id="busReturnDestinationText" class="text-gray-700">Select return destination</span>
-                                        <svg class="w-5 h-5 text-gray-400 transition-transform" id="busReturnDestinationIcon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <svg class="w-5 h-5 text-black flex-shrink-0" fill="currentColor"
+                                            viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd"
+                                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                                clip-rule="evenodd"></path>
                                         </svg>
-                                    </button>
-                                    <!-- Dropdown Menu -->
-                                    <div id="busReturnDestinationDropdown" class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
-                                        <div class="py-1" id="busReturnDestinationOptions">
-                                            <!-- Options will be loaded from API -->
-                                            <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
-                                        </div>
+                                        <h3 class="font-bold text-gray-900 text-sm sm:text-base">
+                                            {{ __('tours.choose_return_destination') }}</h3>
                                     </div>
-                                    <input type="hidden" id="busReturnDestination" value="">
-                                </div>
-                                <div class="mb-3">
-                                    <input type="text" id="busReturnDate" 
-                                        class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
-                                        placeholder="Chọn ngày về"
-                                        readonly>
-                                </div>
+                                    <div class="mb-3 relative">
+                                        <!-- Custom Dropdown Button -->
+                                        <button type="button" id="busReturnDestinationBtn"
+                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none bg-white flex items-center justify-between cursor-pointer hover:border-amber-400 transition-colors">
+                                            <span id="busReturnDestinationText" class="text-gray-700">Select return
+                                                destination</span>
+                                            <svg class="w-5 h-5 text-gray-400 transition-transform"
+                                                id="busReturnDestinationIcon" fill="none" stroke="currentColor"
+                                                viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M19 9l-7 7-7-7"></path>
+                                            </svg>
+                                        </button>
+                                        <!-- Dropdown Menu -->
+                                        <div id="busReturnDestinationDropdown"
+                                            class="hidden absolute z-50 w-full mt-1 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden max-h-60 overflow-y-auto">
+                                            <div class="py-1" id="busReturnDestinationOptions">
+                                                <!-- Options will be loaded from API -->
+                                                <div class="px-4 py-2 text-sm text-gray-500 text-center">Loading...</div>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="busReturnDestination" value="">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input type="text" id="busReturnDate"
+                                            class="w-full px-3 sm:px-4 py-2.5 sm:py-2 text-sm sm:text-base border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none cursor-pointer"
+                                            placeholder="Chọn ngày về" readonly>
+                                    </div>
                                     <div id="returnBusOptions" class="space-y-3">
                                         <!-- Return bus options will be loaded here -->
                                     </div>
@@ -475,11 +497,14 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.gifts') }}</h3>
                                 </div>
-                                <div id="giftOptions" class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-gray-100">
+                                <div id="giftOptions"
+                                    class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-amber-300 scrollbar-track-gray-100">
                                     <!-- Gift options will be loaded here -->
                                 </div>
                             </div>
@@ -488,9 +513,12 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
-                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.accommodation') }}</h3>
+                                    <h3 class="font-bold text-gray-900 text-sm sm:text-base">{{ __('tours.accommodation') }}
+                                    </h3>
                                 </div>
                                 <div id="accommodationOptions" class="space-y-2">
                                     <!-- Accommodation options will be loaded here -->
@@ -501,13 +529,15 @@
                             <div class="mb-6">
                                 <div class="flex items-center gap-2 mb-3">
                                     <svg class="w-5 h-5 text-black" fill="currentColor" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                                        <path fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                            clip-rule="evenodd"></path>
                                     </svg>
                                     <h3 class="font-bold text-gray-900">{{ __('tours.people') }}</h3>
                                 </div>
                                 <div>
                                     <label class="block text-sm text-gray-600 mb-1">{{ __('tours.adults') }}</label>
-                                    <input type="number" id="adultsCount" min="1" value="1" 
+                                    <input type="number" id="adultsCount" min="1" value="1"
                                         class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none">
                                 </div>
                             </div>
@@ -519,7 +549,7 @@
                                     <span class="text-2xl font-bold text-red-600" id="bookingTotal">0 VND</span>
                                 </div>
                             </div>
- 
+
                             <!-- Action Button -->
                             <button onclick="checkAvailability()"
                                 class="w-full bg-teal-500 hover:bg-teal-600 text-white font-semibold py-4 px-4 rounded-lg transition-colors duration-200 cursor-pointer">
@@ -538,10 +568,11 @@
                 <!-- Header -->
                 <div class="flex items-center justify-between mb-4 text-white">
                     <h3 class="text-2xl font-bold">Tour Photos</h3>
-                    <button onclick="closeTourGallery()" class="text-white hover:text-gray-300 transition-colors p-2 cursor-pointer">
+                    <button onclick="closeTourGallery()"
+                        class="text-white hover:text-gray-300 transition-colors p-2 cursor-pointer">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12"></path>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                            </path>
                         </svg>
                     </button>
                 </div>
@@ -635,8 +666,7 @@
                             @endphp
                             @if ($firstLocation && $firstLocation->thumbnail_image)
                                 <div class="relative h-48 overflow-hidden">
-                                    <img src="{{ asset('storage/' . $firstLocation->thumbnail_image) }}"
-                                        alt="{{ $otherTour->name }}"
+                                    <img src="{{ asset('storage/' . $firstLocation->thumbnail_image) }}" alt="{{ $otherTour->name }}"
                                         class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                                 </div>
                             @endif
@@ -991,7 +1021,7 @@
             .location-item:hover {
                 transform: translateY(-2px) scale(1.01);
             }
-            
+
             .location-item:active {
                 transform: translateY(-2px) scale(1.01);
             }
@@ -1063,6 +1093,7 @@
                     opacity: 0;
                     transform: translateY(-10px);
                 }
+
                 to {
                     opacity: 1;
                     transform: translateY(0);
@@ -1071,6 +1102,7 @@
 
             /* Ensure text doesn't overlap on mobile */
             @media (max-width: 640px) {
+
                 input[type="date"],
                 select {
                     font-size: 14px;
@@ -1089,7 +1121,7 @@
             .tinymce-content * {
                 box-sizing: border-box;
             }
-            
+
             .tinymce-content {
                 font-family: Helvetica, Arial, sans-serif !important;
                 font-size: 16px !important;
@@ -1098,7 +1130,7 @@
                 /* Reset any Tailwind resets */
                 all: revert;
             }
-            
+
             .tinymce-content h1,
             .tinymce-content h2,
             .tinymce-content h3,
@@ -1110,7 +1142,7 @@
                 font-weight: 700;
                 color: #111827;
             }
-            
+
             .tinymce-content h1 {
                 font-size: 2.25em !important;
                 font-weight: 700 !important;
@@ -1119,6 +1151,7 @@
                 margin-bottom: 0.8888889em !important;
                 line-height: 1.1111111 !important;
             }
+
             .tinymce-content h2 {
                 font-size: 1.5em !important;
                 font-weight: 700 !important;
@@ -1127,6 +1160,7 @@
                 margin-bottom: 1em !important;
                 line-height: 1.3333333 !important;
             }
+
             .tinymce-content h3 {
                 font-size: 1.25em !important;
                 font-weight: 700 !important;
@@ -1135,6 +1169,7 @@
                 margin-bottom: 0.6em !important;
                 line-height: 1.6 !important;
             }
+
             .tinymce-content h4 {
                 font-size: 1.125em !important;
                 font-weight: 600 !important;
@@ -1143,6 +1178,7 @@
                 margin-bottom: 0.4444444em !important;
                 line-height: 1.5555556 !important;
             }
+
             .tinymce-content h5 {
                 font-size: 1em !important;
                 font-weight: 600 !important;
@@ -1151,6 +1187,7 @@
                 margin-bottom: 0.5em !important;
                 line-height: 1.5 !important;
             }
+
             .tinymce-content h6 {
                 font-size: 0.875em !important;
                 font-weight: 600 !important;
@@ -1159,7 +1196,7 @@
                 margin-bottom: 0.5em !important;
                 line-height: 1.5 !important;
             }
-            
+
             /* Custom classes from TinyMCE */
             .tinymce-content .title {
                 font-size: 2.25em !important;
@@ -1169,13 +1206,13 @@
                 margin-bottom: 1em !important;
                 line-height: 1.2 !important;
             }
-            
+
             .tinymce-content .description {
                 font-size: 16px !important;
                 line-height: 1.75 !important;
                 color: #374151 !important;
             }
-            
+
             .tinymce-content .description h2 {
                 font-size: 1.5em !important;
                 font-weight: 700 !important;
@@ -1184,24 +1221,24 @@
                 margin-bottom: 1em !important;
                 line-height: 1.3333333 !important;
             }
-            
+
             .tinymce-content .description p {
                 margin-top: 1.25em !important;
                 margin-bottom: 1.25em !important;
             }
-            
+
             .tinymce-content .description ul {
                 margin-top: 1.25em !important;
                 margin-bottom: 1.25em !important;
                 padding-left: 1.625em !important;
             }
-            
+
             .tinymce-content .description ul ul {
                 margin-top: 0.5em !important;
                 margin-bottom: 0.5em !important;
                 padding-left: 1.25em !important;
             }
-            
+
             .tinymce-content .description img {
                 max-width: 100% !important;
                 height: auto !important;
@@ -1209,15 +1246,17 @@
                 margin: 2em 0 !important;
                 display: block !important;
             }
-            
+
             .tinymce-content .description p img {
                 margin: 0 !important;
             }
+
             .tinymce-content p {
                 margin-top: 1.25em !important;
                 margin-bottom: 1.25em !important;
                 display: block !important;
             }
+
             .tinymce-content ul,
             .tinymce-content ol {
                 margin-top: 1.25em !important;
@@ -1226,33 +1265,41 @@
                 display: block !important;
                 list-style-position: outside !important;
             }
+
             .tinymce-content ul {
                 list-style-type: disc !important;
             }
+
             .tinymce-content ol {
                 list-style-type: decimal !important;
             }
+
             .tinymce-content li {
                 margin-top: 0.5em !important;
                 margin-bottom: 0.5em !important;
                 display: list-item !important;
             }
+
             .tinymce-content strong,
             .tinymce-content b {
                 font-weight: 600 !important;
                 color: #111827 !important;
             }
+
             .tinymce-content em,
             .tinymce-content i {
                 font-style: italic !important;
             }
+
             .tinymce-content a {
                 color: #f59e0b !important;
                 text-decoration: underline !important;
             }
+
             .tinymce-content a:hover {
                 color: #d97706 !important;
             }
+
             .tinymce-content img {
                 max-width: 100% !important;
                 height: auto !important;
@@ -1260,6 +1307,7 @@
                 margin: 2em 0 !important;
                 display: block !important;
             }
+
             .tinymce-content blockquote {
                 border-left: 0.25rem solid #e5e7eb !important;
                 padding-left: 1em !important;
@@ -1268,6 +1316,7 @@
                 color: #111827 !important;
                 display: block !important;
             }
+
             .tinymce-content code {
                 color: #111827 !important;
                 font-weight: 600 !important;
@@ -1277,6 +1326,7 @@
                 border-radius: 0.25rem !important;
                 font-family: monospace !important;
             }
+
             .tinymce-content pre {
                 color: #e5e7eb !important;
                 background-color: #1f2937 !important;
@@ -1289,6 +1339,7 @@
                 padding: 0.8571429em 1.1428571em !important;
                 display: block !important;
             }
+
             .tinymce-content pre code {
                 background-color: transparent !important;
                 border-width: 0 !important;
@@ -1300,6 +1351,7 @@
                 font-family: inherit !important;
                 line-height: inherit !important;
             }
+
             .tinymce-content table {
                 width: 100% !important;
                 table-layout: auto !important;
@@ -1311,10 +1363,12 @@
                 border-collapse: collapse !important;
                 display: table !important;
             }
+
             .tinymce-content thead {
                 border-bottom: 1px solid #d1d5db !important;
                 display: table-header-group !important;
             }
+
             .tinymce-content thead th {
                 color: #111827 !important;
                 font-weight: 600 !important;
@@ -1324,9 +1378,11 @@
                 padding-left: 0.5714286em !important;
                 display: table-cell !important;
             }
+
             .tinymce-content tbody {
                 display: table-row-group !important;
             }
+
             .tinymce-content tbody td {
                 vertical-align: baseline !important;
                 padding-top: 0.5714286em !important;
@@ -1335,16 +1391,17 @@
                 padding-left: 0.5714286em !important;
                 display: table-cell !important;
             }
+
             .tinymce-content tbody tr {
                 border-bottom: 1px solid #e5e7eb !important;
                 display: table-row !important;
             }
-            
+
             /* Ensure divs and other elements display correctly */
             .tinymce-content div {
                 display: block !important;
             }
-            
+
             /* Preserve inline styles from TinyMCE */
             .tinymce-content [style] {
                 /* Allow inline styles to override */
@@ -1355,7 +1412,7 @@
                 .tinymce-content {
                     font-size: 14px !important;
                 }
-                
+
                 .tinymce-content table {
                     display: block !important;
                     overflow-x: auto !important;
@@ -1384,7 +1441,7 @@
                 firstDay: 1
             };
 
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 // Initialize AOS
                 if (typeof AOS !== 'undefined') {
                     AOS.init({
@@ -1575,7 +1632,7 @@
             }
 
             // Close modal on ESC key
-            document.addEventListener('keydown', function(e) {
+            document.addEventListener('keydown', function (e) {
                 if (e.key === 'Escape') {
                     closeImageModal();
                     closeTourGallery();
@@ -1613,17 +1670,17 @@
 
             if (tourTypeBtn && tourTypeDropdown) {
                 // Toggle dropdown
-                tourTypeBtn.addEventListener('click', function(e) {
+                tourTypeBtn.addEventListener('click', function (e) {
                     e.stopPropagation();
                     const isHidden = tourTypeDropdown.classList.contains('hidden');
-                    
+
                     // Close all other dropdowns
                     document.querySelectorAll('[id$="Dropdown"]').forEach(dropdown => {
                         if (dropdown !== tourTypeDropdown) {
                             dropdown.classList.add('hidden');
                         }
                     });
-                    
+
                     if (isHidden) {
                         tourTypeDropdown.classList.remove('hidden');
                         tourTypeIcon.style.transform = 'rotate(180deg)';
@@ -1634,7 +1691,7 @@
                 });
 
                 // Close dropdown when clicking outside
-                document.addEventListener('click', function(e) {
+                document.addEventListener('click', function (e) {
                     if (!tourTypeBtn.contains(e.target) && !tourTypeDropdown.contains(e.target)) {
                         tourTypeDropdown.classList.add('hidden');
                         tourTypeIcon.style.transform = 'rotate(0deg)';
@@ -1656,7 +1713,7 @@
 
                     const response = await fetch(`{{ route('api.bus-services') }}?direction=${direction}`);
                     const services = await response.json();
-                    
+
                     // Filter services based on selected point
                     let filteredServices = services;
                     if (filterValue) {
@@ -1666,7 +1723,7 @@
                             filteredServices = services.filter(s => s.return_destination === filterValue);
                         }
                     }
-                    
+
                     const container = document.getElementById(containerId);
                     container.innerHTML = '';
 
@@ -1679,25 +1736,25 @@
                         const busOption = document.createElement('div');
                         busOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-amber-500 transition-colors';
                         busOption.onclick = () => selectBusService(direction, service.id, busOption);
-                        
+
                         const isRecommended = service.is_recommended ? '<span class="bg-amber-500 text-white px-2 py-1 rounded text-xs font-semibold ml-2">RECOMMENDED</span>' : '';
-                        
+
                         busOption.innerHTML = `
-                            <div class="flex items-start gap-3">
-                                <input type="radio" name="bus_${direction}" value="${service.id}" 
-                                    class="mt-1 text-amber-500 focus:ring-amber-500 flex-shrink-0" 
-                                    onchange="selectBusService('${direction}', ${service.id}, this.closest('div'))">
-                                ${service.image ? `<img src="${service.image}" alt="${service.name}" class="w-20 h-16 object-cover rounded flex-shrink-0">` : '<div class="w-20 h-16 bg-gray-200 rounded flex-shrink-0"></div>'}
-                                <div class="flex-1 min-w-0">
-                                    <div class="flex items-start gap-2 flex-wrap">
-                                        <span class="font-semibold text-gray-900 break-words flex-1 min-w-0">${service.name}: ${service.departure_time}</span>
-                                        ${isRecommended}
+                                    <div class="flex items-start gap-3">
+                                        <input type="radio" name="bus_${direction}" value="${service.id}" 
+                                            class="mt-1 text-amber-500 focus:ring-amber-500 flex-shrink-0" 
+                                            onchange="selectBusService('${direction}', ${service.id}, this.closest('div'))">
+                                        ${service.image ? `<img src="${service.image}" alt="${service.name}" class="w-20 h-16 object-cover rounded flex-shrink-0">` : '<div class="w-20 h-16 bg-gray-200 rounded flex-shrink-0"></div>'}
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-start gap-2 flex-wrap">
+                                                <span class="font-semibold text-gray-900 break-words flex-1 min-w-0">${service.name}: ${service.departure_time}</span>
+                                                ${isRecommended}
+                                            </div>
+                                            <p class="text-sm text-gray-600 mt-1 break-words">${service.pick_up_location}</p>
+                                            <p class="text-lg font-bold text-amber-600 mt-2">${formatPrice(service.price)} VND</p>
+                                        </div>
                                     </div>
-                                    <p class="text-sm text-gray-600 mt-1 break-words">${service.pick_up_location}</p>
-                                    <p class="text-lg font-bold text-amber-600 mt-2">${formatPrice(service.price)} VND</p>
-                                </div>
-                            </div>
-                        `;
+                                `;
                         container.appendChild(busOption);
                     });
                 } catch (error) {
@@ -1732,7 +1789,7 @@
                 try {
                     const response = await fetch('{{ route("api.gifts") }}');
                     const gifts = await response.json();
-                    
+
                     const container = document.getElementById('giftOptions');
                     container.innerHTML = '';
 
@@ -1745,16 +1802,16 @@
                         const giftOption = document.createElement('div');
                         giftOption.className = 'border border-gray-300 rounded-lg p-3 cursor-pointer hover:border-amber-500 transition-colors flex-shrink-0 w-32';
                         giftOption.onclick = () => selectGift(gift.id, giftOption);
-                        
+
                         giftOption.innerHTML = `
-                            <div class="flex flex-col items-center gap-2">
-                                <input type="radio" name="gift" value="${gift.id}" 
-                                    class="text-amber-500 focus:ring-amber-500" 
-                                    onchange="selectGift(${gift.id}, this.closest('div'))">
-                                ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-full h-24 object-cover rounded">` : '<div class="w-full h-24 bg-gray-200 rounded"></div>'}
-                                <span class="font-semibold text-gray-900 text-center text-xs break-words">${gift.name}</span>
-                            </div>
-                        `;
+                                    <div class="flex flex-col items-center gap-2">
+                                        <input type="radio" name="gift" value="${gift.id}" 
+                                            class="text-amber-500 focus:ring-amber-500" 
+                                            onchange="selectGift(${gift.id}, this.closest('div'))">
+                                        ${gift.image ? `<img src="${gift.image}" alt="${gift.name}" class="w-full h-24 object-cover rounded">` : '<div class="w-full h-24 bg-gray-200 rounded"></div>'}
+                                        <span class="font-semibold text-gray-900 text-center text-xs break-words">${gift.name}</span>
+                                    </div>
+                                `;
                         container.appendChild(giftOption);
                     });
                 } catch (error) {
@@ -1788,7 +1845,7 @@
                 try {
                     const response = await fetch('{{ route("api.accommodations") }}');
                     const accommodations = await response.json();
-                    
+
                     const container = document.getElementById('accommodationOptions');
                     container.innerHTML = '';
 
@@ -1801,25 +1858,25 @@
                         const accommodationOption = document.createElement('div');
                         accommodationOption.className = 'flex items-center gap-3 p-3 border border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 transition-colors';
                         accommodationOption.onclick = () => selectAccommodation(accommodation.id, accommodationOption);
-                        
-                        const priceText = accommodation.price_per_night > 0 
+
+                        const priceText = accommodation.price_per_night > 0
                             ? `${accommodation.price_per_night.toLocaleString('vi-VN')}₫/night`
                             : '(No fees)';
-                        
+
                         const capacityText = accommodation.capacity_min === accommodation.capacity_max
                             ? `${accommodation.capacity_min} people`
                             : `${accommodation.capacity_min}-${accommodation.capacity_max} people`;
-                        
+
                         accommodationOption.innerHTML = `
-                            <input type="radio" name="accommodation" value="${accommodation.id}" 
-                                class="text-amber-500 focus:ring-amber-500" 
-                                onchange="selectAccommodation(${accommodation.id}, this.closest('div'))">
-                            <div class="flex-1">
-                                <div class="font-semibold text-gray-900 text-sm">${accommodation.name}</div>
-                                ${accommodation.bed_type ? `<div class="text-xs text-gray-600">${accommodation.bed_type}</div>` : ''}
-                                <div class="text-xs text-gray-500">${capacityText} - ${priceText}</div>
-                            </div>
-                        `;
+                                    <input type="radio" name="accommodation" value="${accommodation.id}" 
+                                        class="text-amber-500 focus:ring-amber-500" 
+                                        onchange="selectAccommodation(${accommodation.id}, this.closest('div'))">
+                                    <div class="flex-1">
+                                        <div class="font-semibold text-gray-900 text-sm">${accommodation.name}</div>
+                                        ${accommodation.bed_type ? `<div class="text-xs text-gray-600">${accommodation.bed_type}</div>` : ''}
+                                        <div class="text-xs text-gray-500">${capacityText} - ${priceText}</div>
+                                    </div>
+                                `;
                         container.appendChild(accommodationOption);
                     });
                 } catch (error) {
@@ -1915,7 +1972,7 @@
                 if (tourPriceDisplay) {
                     tourPriceDisplay.textContent = formatPrice(bookingData.tourPrice) + ' VND';
                 }
-                
+
 
                 // Update total display
                 document.getElementById('bookingTotal').textContent = formatPrice(total) + ' VND';
@@ -1930,7 +1987,7 @@
             function toggleDropdown(dropdownId, iconId) {
                 const dropdown = document.getElementById(dropdownId);
                 const icon = document.getElementById(iconId);
-                
+
                 // Close all other dropdowns
                 document.querySelectorAll('[id$="Dropdown"]').forEach(dd => {
                     if (dd.id !== dropdownId) {
@@ -1957,7 +2014,7 @@
                 try {
                     const response = await fetch('{{ route("api.bus-services.starting-points") }}');
                     const startingPoints = await response.json();
-                    
+
                     const container = document.getElementById('busStartingPointOptions');
                     container.innerHTML = '';
 
@@ -1972,12 +2029,12 @@
                         button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors flex items-center gap-2';
                         button.onclick = () => selectStartingPoint(point, button);
                         button.innerHTML = `
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span>${point}</span>
-                        `;
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <span>${point}</span>
+                                `;
                         container.appendChild(button);
                     });
                 } catch (error) {
@@ -1991,7 +2048,7 @@
                 try {
                     const response = await fetch('{{ route("api.bus-services.return-destinations") }}');
                     const returnDestinations = await response.json();
-                    
+
                     const container = document.getElementById('busReturnDestinationOptions');
                     container.innerHTML = '';
 
@@ -2006,12 +2063,12 @@
                         button.className = 'w-full px-4 py-2.5 text-left text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600 transition-colors flex items-center gap-2';
                         button.onclick = () => selectReturnDestination(destination, button);
                         button.innerHTML = `
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                            </svg>
-                            <span>${destination}</span>
-                        `;
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    </svg>
+                                    <span>${destination}</span>
+                                `;
                         container.appendChild(button);
                     });
                 } catch (error) {
@@ -2025,15 +2082,15 @@
                 const textSpan = document.getElementById('busStartingPointText');
                 const dropdown = document.getElementById('busStartingPointDropdown');
                 const icon = document.getElementById('busStartingPointIcon');
-                
+
                 hiddenInput.value = value;
                 textSpan.textContent = element.textContent.trim();
                 textSpan.classList.remove('text-gray-700');
                 textSpan.classList.add('text-gray-900', 'font-medium');
-                
+
                 dropdown.classList.add('hidden');
                 icon.style.transform = 'rotate(0deg)';
-                
+
                 // Trigger change event
                 hiddenInput.dispatchEvent(new Event('change'));
             }
@@ -2043,21 +2100,21 @@
                 const textSpan = document.getElementById('busReturnDestinationText');
                 const dropdown = document.getElementById('busReturnDestinationDropdown');
                 const icon = document.getElementById('busReturnDestinationIcon');
-                
+
                 hiddenInput.value = value;
                 textSpan.textContent = element.textContent.trim();
                 textSpan.classList.remove('text-gray-700');
                 textSpan.classList.add('text-gray-900', 'font-medium');
-                
+
                 dropdown.classList.add('hidden');
                 icon.style.transform = 'rotate(0deg)';
-                
+
                 // Trigger change event
                 hiddenInput.dispatchEvent(new Event('change'));
             }
 
             // Close dropdowns when clicking outside
-            document.addEventListener('click', function(event) {
+            document.addEventListener('click', function (event) {
                 if (!event.target.closest('[id$="Btn"]') && !event.target.closest('[id$="Dropdown"]')) {
                     document.querySelectorAll('[id$="Dropdown"]').forEach(dropdown => {
                         dropdown.classList.add('hidden');
@@ -2072,7 +2129,7 @@
             function toggleBusService() {
                 const checkbox = document.getElementById('useBusService');
                 const busSection = document.getElementById('busServiceSection');
-                
+
                 if (checkbox.checked) {
                     busSection.classList.remove('hidden');
                 } else {
@@ -2116,7 +2173,7 @@
                 // Helper function to initialize AirDatepicker
                 function initDatePicker(element, options = {}) {
                     if (!element || element._datepicker) return;
-                    
+
                     try {
                         const datepicker = new AirDatepicker(element, {
                             locale: vietnameseLocale,
@@ -2124,7 +2181,7 @@
                             minDate: minDate,
                             isMobile: window.innerWidth <= 768,
                             autoClose: true,
-                            onSelect: function({date, formattedDate, datepicker}) {
+                            onSelect: function ({ date, formattedDate, datepicker }) {
                                 // Format for backend (YYYY-MM-DD) - format directly without timezone conversion
                                 if (date) {
                                     const year = date.getFullYear();
@@ -2209,7 +2266,7 @@
             }
 
             // Initialize on page load
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 // Initialize date pickers first
                 initDatePickers();
 
@@ -2224,18 +2281,18 @@
                 loadAccommodations();
 
                 // Custom dropdown button click handlers
-                document.getElementById('busStartingPointBtn').addEventListener('click', function(e) {
+                document.getElementById('busStartingPointBtn').addEventListener('click', function (e) {
                     e.stopPropagation();
                     toggleDropdown('busStartingPointDropdown', 'busStartingPointIcon');
                 });
 
-                document.getElementById('busReturnDestinationBtn').addEventListener('click', function(e) {
+                document.getElementById('busReturnDestinationBtn').addEventListener('click', function (e) {
                     e.stopPropagation();
                     toggleDropdown('busReturnDestinationDropdown', 'busReturnDestinationIcon');
                 });
 
                 // Load bus services when starting point is selected (only if bus service is enabled)
-                document.getElementById('busStartingPoint').addEventListener('change', function() {
+                document.getElementById('busStartingPoint').addEventListener('change', function () {
                     const useBusService = document.getElementById('useBusService')?.checked;
                     if (useBusService && this.value) {
                         loadBusServices('outbound', 'outboundBusOptions');
@@ -2243,7 +2300,7 @@
                 });
 
                 // Load bus services when return destination is selected (only if bus service is enabled)
-                document.getElementById('busReturnDestination').addEventListener('change', function() {
+                document.getElementById('busReturnDestination').addEventListener('change', function () {
                     const useBusService = document.getElementById('useBusService')?.checked;
                     if (useBusService && this.value) {
                         loadBusServices('return', 'returnBusOptions');
@@ -2258,10 +2315,10 @@
             });
 
             // Match thumbnail height with detail image only (not including description)
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const thumbnailImage = document.getElementById('thumbnailImage');
                 const detailImage = document.querySelector('#detailImageContainer img');
-                
+
                 if (thumbnailImage && detailImage) {
                     const detailImageHeight = detailImage.offsetHeight;
                     thumbnailImage.style.height = detailImageHeight + 'px';

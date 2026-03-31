@@ -6,29 +6,35 @@ use Illuminate\Support\Facades\Route;
 Route::get('/language/{locale}', [App\Http\Controllers\LanguageController::class, 'switch'])->name('language.switch');
 
 Route::get('/', function () {
+    $featuredTours = App\Models\Tour::where('is_active', true)
+        ->orderBy('sort_order')
+        ->orderBy('created_at', 'desc')
+        ->limit(6)
+        ->get();
+
     $latestNews = App\Models\News::published()
         ->orderBy('sort_order')
         ->orderBy('published_at', 'desc')
         ->limit(3)
         ->get();
-    
+
     $faqs = App\Models\FAQ::where('is_active', true)
         ->orderBy('sort_order')
         ->orderBy('created_at', 'asc')
         ->get();
-    
+
     $homeSlidesRaw = App\Models\HomeSlide::active()
         ->orderBy('sort_order')
         ->orderBy('created_at', 'asc')
         ->get();
-    
+
     $defaultImage = asset('images/discovertours/model1.webp');
-    $homeSlides = $homeSlidesRaw->map(function($slide) use ($defaultImage) {
+    $homeSlides = $homeSlidesRaw->map(function ($slide) use ($defaultImage) {
         $slide->image_url = $slide->image ? \Illuminate\Support\Facades\Storage::url($slide->image) : $defaultImage;
         return $slide;
     });
-    
-    $homeSlidesArray = $homeSlides->map(function($slide) {
+
+    $homeSlidesArray = $homeSlides->map(function ($slide) {
         return [
             'id' => $slide->id,
             'title' => $slide->title,
@@ -38,8 +44,8 @@ Route::get('/', function () {
             'link_text' => $slide->link_text ?? 'Discover Tour'
         ];
     })->toArray();
-    
-    return view('home', compact('latestNews', 'faqs', 'homeSlides', 'homeSlidesArray'));
+
+    return view('home', compact('featuredTours', 'latestNews', 'faqs', 'homeSlides', 'homeSlidesArray'));
 })->name('home');
 
 // Page routes
@@ -58,7 +64,7 @@ Route::get('/gallery', [App\Http\Controllers\GalleryController::class, 'index'])
 
 // Contact routes
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->middleware('throttle:contact-form')->name('contact.send');
 
 // Booking routes
 Route::get('/booking', [App\Http\Controllers\BookingController::class, 'index'])->name('booking.index');
@@ -97,36 +103,36 @@ Route::prefix('admin')->group(function () {
 // Admin routes (require auth)
 Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'index'])->name('dashboard');
-    
+
     // Pages management
     Route::resource('pages', App\Http\Controllers\Admin\PageController::class);
-    
+
     // Tours management
     Route::resource('tours', App\Http\Controllers\Admin\TourController::class);
-    
+
     // News management
     Route::resource('news', App\Http\Controllers\Admin\NewsController::class);
-    
+
     // Gifts management
     Route::resource('gifts', App\Http\Controllers\Admin\GiftController::class);
-    
+
     // Bus Services management
     Route::resource('bus-services', App\Http\Controllers\Admin\BusServiceController::class);
-    
+
     // Accommodations management
     Route::resource('accommodations', App\Http\Controllers\Admin\AccommodationController::class);
-    
+
     // FAQs management
     Route::resource('faqs', App\Http\Controllers\Admin\FAQController::class);
-    
+
     // Home Slides management
     Route::resource('home-slides', App\Http\Controllers\Admin\HomeSlideController::class);
-    
+
     // Orders management
     Route::get('orders', [App\Http\Controllers\Admin\OrderController::class, 'index'])->name('orders.index');
     Route::get('orders/{order}', [App\Http\Controllers\Admin\OrderController::class, 'show'])->name('orders.show');
     Route::put('orders/{order}/status', [App\Http\Controllers\Admin\OrderController::class, 'updateStatus'])->name('orders.update-status');
-    
+
     // Image upload for TinyMCE
     Route::post('/upload-image', [App\Http\Controllers\Admin\ImageUploadController::class, 'upload'])->name('upload-image');
 });

@@ -28,7 +28,6 @@ class CheckoutController extends Controller
         $returnBusId = $request->get('return_bus');
         $giftId = $request->get('gift');
         $accommodationId = $request->get('accommodation');
-        $totalPrice = $request->get('total_price', 0);
         $useBusService = $request->get('use_bus') === '1' || $request->get('use_bus') === true;
 
         if (!$tourId) {
@@ -60,6 +59,7 @@ class CheckoutController extends Controller
         $returnBus = ($useBusService && $returnBusId) ? BusService::find($returnBusId) : null;
         $gift = $giftId ? Gift::find($giftId) : null;
         $accommodation = $accommodationId ? Accommodation::find($accommodationId) : null;
+        $totalPrice = $this->calculateTotalPrice($tour, (int) $adults, $outboundBus, $returnBus, $accommodation);
 
         return view('checkout', compact(
             'tour',
@@ -105,6 +105,19 @@ class CheckoutController extends Controller
                 $validated['additional_passengers'] = null;
             }
 
+            // Always recalculate total on server to avoid stale/tampered client totals.
+            $tour = Tour::findOrFail($validated['tour_id']);
+            $outboundBus = !empty($validated['outbound_bus_service_id']) ? BusService::find($validated['outbound_bus_service_id']) : null;
+            $returnBus = !empty($validated['return_bus_service_id']) ? BusService::find($validated['return_bus_service_id']) : null;
+            $accommodation = !empty($validated['accommodation_id']) ? Accommodation::find($validated['accommodation_id']) : null;
+            $validated['total_price'] = $this->calculateTotalPrice(
+                $tour,
+                (int) $validated['adults_count'],
+                $outboundBus,
+                $returnBus,
+                $accommodation
+            );
+
             // Create order
             $order = Order::create($validated);
 
@@ -142,5 +155,23 @@ class CheckoutController extends Controller
     {
         $order = Order::with(['tour', 'outboundBusService', 'returnBusService', 'gift', 'accommodation'])->findOrFail($id);
         return view('checkout-success', compact('order'));
+    }
+
+    private function calculateTotalPrice(
+        Tour $tour,
+        int $adults,
+        ?BusService $outboundBus,
+        ?BusService $returnBus,
+        ?Accommodation $accommodation
+    ): float {
+        $safeAdults = max(1, $adults);
+        $tourPrice = (float) ($tour->price ?? 0);
+        $outboundPrice = (float) ($outboundBus?->price ?? 0);
+        $returnPrice = (float) ($returnBus?->price ?? 0);
+        $tourNights = max(0, (int) ($tour->nights ?? 0));
+        $accommodationPerNight = (float) ($accommodation?->price_per_night ?? 0);
+        $accommodationTotal = $accommodationPerNight * $tourNights;
+
+        return $tourPrice * $safeAdults + $outboundPrice + $returnPrice + $accommodationTotal;
     }
 }

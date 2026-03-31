@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', __('contact.title') . ' - Ha Giang Loop Tours')
+@section('title', __('contact.title') . ' - Alley Homestay - Ha Giang Loop')
 
 @section('content')
 <section class="py-16 lg:py-20 bg-white">
