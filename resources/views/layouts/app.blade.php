@@ -9,6 +9,9 @@
     <title>@yield('title', config('app.name', 'Alley Homestay - Ha Giang Loop'))</title>
     <meta name="description"
         content="@yield('description', 'Khám phá vẻ đẹp Ha Giang với các tour du lịch chất lượng cao')">
+    <link rel="icon" type="image/png" href="{{ asset('images/alley-0.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/alley-0.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/alley-0.png') }}">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
