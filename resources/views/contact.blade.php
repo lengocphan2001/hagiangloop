@@ -136,7 +136,7 @@
                     
                     <div class="text-center break-words">
                         <strong class="text-gray-900 text-sm sm:text-base">{{ __('contact.website') }}:</strong>
-                        <span class="text-gray-700 text-sm sm:text-base break-all"> https://mamashomestay.com/</span>
+                        <span class="text-gray-700 text-sm sm:text-base break-all"> https://alleyhomestayhagiangloop.com/</span>
                     </div>
                     
                     <div class="flex items-center justify-center gap-2 min-w-0">
