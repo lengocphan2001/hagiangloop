@@ -118,7 +118,7 @@
             </a>
 
             <!-- Gmail Button (fixed position) -->
-            <a href="mailto:alleyhomestay@gmail.com"
+            <a href="https://mail.google.com/mail/?view=cm&fs=1&to=alleyhomestay@gmail.com" target="_blank" rel="noopener noreferrer"
                 class="floating-btn absolute bottom-[4rem] right-0 w-12 h-12 rounded-lg bg-white hover:bg-gray-100 flex items-center justify-center shadow-lg cursor-pointer"
                 style="transition: none !important; animation: none !important; transform: none !important;">
                 <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none">
