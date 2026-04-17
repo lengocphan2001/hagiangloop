@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&family=Quicksand:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -7,7 +7,7 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Roboto', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+    --font-sans: 'Nunito', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
     
     /* Custom Colors for Tour Website */
     --color-primary: #2563eb;
@@ -24,6 +24,12 @@
     --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+h1,
+h2,
+h3 {
+    font-family: 'Quicksand', Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
 }
 
 /* Custom Animations */
