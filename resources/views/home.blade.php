@@ -459,6 +459,49 @@
     </section>
     @endif
 
+    <!-- TripAdvisor Review Section -->
+    <section class="py-16 border-t border-gray-200 bg-gray-50" data-aos="fade-up">
+        <div class="container mx-auto px-4 lg:px-6">
+            <div class="max-w-5xl mx-auto rounded-3xl bg-white shadow-xl overflow-hidden flex flex-col md:flex-row items-stretch border border-gray-100 transform transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
+                <!-- Left: TripAdvisor Rating -->
+                <div class="w-full md:w-2/5 p-8 md:p-10 flex flex-col items-center justify-center bg-green-50/30 border-b md:border-b-0 md:border-r border-gray-100">
+                    <img src="https://static.tacdn.com/img2/brand_refresh/Tripadvisor_lockup_horizontal_secondary_registered.svg" alt="Tripadvisor Logo" class="h-10 sm:h-12 mb-6">
+                    <div class="flex items-center gap-1.5 mb-3">
+                        <svg class="w-8 h-8 text-[#00af87]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                        <svg class="w-8 h-8 text-[#00af87]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                        <svg class="w-8 h-8 text-[#00af87]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                        <svg class="w-8 h-8 text-[#00af87]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                        <svg class="w-8 h-8 text-[#00af87]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/></svg>
+                    </div>
+                    <p class="text-gray-900 font-bold text-xl mb-1">Excellent</p>
+                    <p class="text-sm text-gray-500 font-medium">Based on traveler reviews</p>
+                </div>
+                
+                <!-- Right: Call to action -->
+                <div class="w-full md:w-3/5 p-8 md:p-12 text-center md:text-left flex flex-col justify-center">
+                    <div class="inline-flex items-center justify-center md:justify-start gap-2 mb-3 text-[#00af87] font-semibold text-sm uppercase tracking-wider">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                        </svg>
+                        <span>Ha Giang Loop Tours</span>
+                    </div>
+                    <h3 class="text-2xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">Read What Our Travelers Say</h3>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        We pride ourselves on delivering unforgettable experiences. See why travelers love exploring the Ha Giang Loop with Alley Homestay on Tripadvisor!
+                    </p>
+                    <div>
+                        <a href="https://www.tripadvisor.com/Attraction_Review-g1544599-d34297942-Reviews-Ha_Giang_Loop_Tours_by_Alley_Homestay-Ha_Giang_Ha_Giang_Province.html" 
+                           target="_blank" rel="noopener noreferrer" 
+                           class="inline-flex items-center gap-3 px-8 py-4 bg-[#00af87] text-white rounded-xl font-bold text-lg hover:bg-[#008c6b] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+                            Read Tour Reviews
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Latest News Section -->
     @if(isset($latestNews) && $latestNews->count() > 0)
     <section class="pb-16 border-t border-gray-200 py-16">
